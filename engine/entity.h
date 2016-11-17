@@ -24,6 +24,7 @@ public:
 	void placeAt(const float x, const float y, const float z);
 	void rotate(const float x, const float y, const float z);
 	void update();
+	
 private:
 	const static std::string base_name;
 	static int n_entities;

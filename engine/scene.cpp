@@ -10,6 +10,11 @@ void Scene::addEntity(Entity& e) {
 }
 
 
+Entity* Scene::getCamera() {
+	return camera;
+}
+
+
 const std::map<std::string, Entity>& Scene::getEntities() const {
 	return entities;
 }
@@ -24,6 +29,11 @@ void Scene::removeEntity(std::string name) {
 	if(entities.find(name) != entities.end()) {
 		entities.erase(name);
 	}
+}
+
+
+void Scene::setCameraEntity(Entity& e) {
+	camera = &e;
 }
 
 

@@ -42,14 +42,14 @@ void cursor_pos_callback(GLFWwindow *window, double x_pos, double y_pos) {
 }
 
 
-void render(GLFWwindow* window, Entity& cam_entity) {
+void render(GLFWwindow* window) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
 		// Apply camera transform
 		
 		// Check that entity has a camera
-		Vec3 camera_position = cam_entity.position + cam_entity.components.getCamera()->getPosition();
-		Vec3 look_at = camera_position + cam_entity.forward;
+		Vec3 camera_position = demoScene.getCamera()->position + demoScene.getCamera()->components.getCamera()->getPosition();
+		Vec3 look_at = camera_position + demoScene.getCamera()->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
 		for(auto e : demoScene.getEntities()) {
@@ -198,6 +198,7 @@ int main(int argc, char **argv) {
 	player.components.getCamera()->setPosition(Vec3(0.0f, 2.0f, 0.0f));
 	player.components.add("UserInput");
 	demoScene.addEntity(player);
+	demoScene.setCameraEntity(player);
 
 	
 	// Create cubes
@@ -227,7 +228,7 @@ int main(int argc, char **argv) {
 		demoScene.update();
 		
 		// Render
-		render(window, player);
+		render(window);
 	}
 	
 	glfwTerminate();
