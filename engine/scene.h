@@ -7,24 +7,28 @@
 
 #include "entity.h"
 
-class Scene{
+class Scene {
 public:
 	Scene();
 	~Scene();
 	
+	
 	void                     addEntity(Entity& e);
-	Entity*                  getCamera();
+	static Scene*            getActiveScene();
+	Entity*                  getCameraEntity();
 	const std::map<std::string, Entity>& getEntities() const;
 	std::string              getName();
+	void                     load();
 	void                     removeEntity(std::string name);
 	void                     setCameraEntity(Entity& e);
 	void                     setName(std::string name);
-	void                     update();
+	static void                     update();
 
 private:
 	std::string name;
 	std::map<std::string, Entity> entities;
-	Entity* camera;
+	Entity* cameraEntity;
+	static Scene* activeScene;
 };
 
 #endif

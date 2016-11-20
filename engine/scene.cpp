@@ -1,5 +1,7 @@
 #include "scene.h"
 
+Scene* Scene::activeScene;
+
 
 Scene::Scene() {}
 Scene::~Scene() {}
@@ -9,9 +11,13 @@ void Scene::addEntity(Entity& e) {
 	entities.insert(std::make_pair(e.name, e));
 }
 
+Scene* Scene::getActiveScene() {
+	return activeScene;
+}
 
-Entity* Scene::getCamera() {
-	return camera;
+
+Entity* Scene::getCameraEntity() {
+	return cameraEntity;
 }
 
 
@@ -25,6 +31,12 @@ std::string Scene::getName() {
 }
 
 
+void Scene::load() {
+	//TODO: Call the load method on all scene entities
+	activeScene = this;
+}
+
+
 void Scene::removeEntity(std::string name) {
 	if(entities.find(name) != entities.end()) {
 		entities.erase(name);
@@ -33,7 +45,7 @@ void Scene::removeEntity(std::string name) {
 
 
 void Scene::setCameraEntity(Entity& e) {
-	camera = &e;
+	cameraEntity = &e;
 }
 
 
@@ -43,7 +55,7 @@ void Scene::setName(std::string name) {
 
 
 void Scene::update() {
-	for(auto entity : entities) {
+	for(auto entity : activeScene->getEntities()) {
 		entity.second.update();
 	}
 }

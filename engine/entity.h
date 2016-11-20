@@ -26,7 +26,7 @@ public:
 	void update();
 	
 private:
-	const static std::string base_name;
+	const static std::string default_name;
 	static int n_entities;
 };
 

@@ -8,11 +8,11 @@
 #include "../lib/gmath.h"
 
 
-const std::string Entity::base_name = "Entity";
+const std::string Entity::default_name = "Entity";
 int Entity::n_entities = 0;
 
 
-Entity::Entity() : name(base_name + std::to_string(n_entities++)),
+Entity::Entity() : name(default_name + std::to_string(n_entities++)),
 	position(Vec3(0, 0, 0)),
 	forward(Vec3(0, 0, 1)),
 	up(Vec3(0, 1, 0)),

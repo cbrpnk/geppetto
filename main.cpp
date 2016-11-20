@@ -11,7 +11,6 @@
 #include "lib/gmath.h"
 
 
-Scene demoScene;
 static const int window_width = 800;
 static const int window_height = 600;
 bool endGame = false;
@@ -45,14 +44,15 @@ void cursor_pos_callback(GLFWwindow *window, double x_pos, double y_pos) {
 void render(GLFWwindow* window) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
-		// Apply camera transform
 		
-		// Check that entity has a camera
-		Vec3 camera_position = demoScene.getCamera()->position + demoScene.getCamera()->components.getCamera()->getPosition();
-		Vec3 look_at = camera_position + demoScene.getCamera()->forward;
+		Scene* scene = Scene::getActiveScene();
+		Entity* cameraEntity = scene->getCameraEntity();
+		
+		Vec3 camera_position = cameraEntity->position + cameraEntity->components.getCamera()->getPosition();
+		Vec3 look_at = camera_position + cameraEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
-		for(auto e : demoScene.getEntities()) {
+		for(auto e : scene->getEntities()) {
 			
 			// Check if entity has a geometry component
 			if(e.second.components.isEnabled("Geometry")) {
@@ -186,7 +186,7 @@ int main(int argc, char **argv) {
 	glFogi(GL_FOG_MODE, GL_LINEAR);
 	
 	// Setup scene;	
-	demoScene.setName("demoScene");
+	Scene demoScene;
 	
 	Entity player;
 	player.name = "Player";
@@ -218,6 +218,8 @@ int main(int argc, char **argv) {
 	}
 	
 	
+	demoScene.load();
+	
 	// Game loop
 	while(!endGame)
 	{
@@ -225,7 +227,7 @@ int main(int argc, char **argv) {
 		glfwPollEvents();
 		
 		// Update State
-		demoScene.update();
+		Scene::update();
 		
 		// Render
 		render(window);
