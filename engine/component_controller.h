@@ -8,7 +8,6 @@
 class Component;
 class CameraComponent;
 class GeometryComponent;
-class LogicComponent;
 class PhysicsComponent;
 class UserInputComponent;
 class Entity;
@@ -27,7 +26,6 @@ public:
 	
 	std::shared_ptr<CameraComponent> getCamera();
 	std::shared_ptr<GeometryComponent> getGeometry();
-	std::shared_ptr<LogicComponent> getLogic();
 	std::shared_ptr<PhysicsComponent> getPhysics();
 	std::shared_ptr<UserInputComponent> getUserInput();
 

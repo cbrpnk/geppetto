@@ -22,7 +22,6 @@ engine/custom_class.cpp \
 engine/entity.cpp \
 engine/game.cpp \
 engine/geometry_component.cpp \
-engine/logic_component.cpp \
 engine/physics_component.cpp \
 engine/scene.cpp \
 engine/user_input_component.cpp \

@@ -14,8 +14,6 @@ void DemoScene::load() {
 	Entity* player = new Entity(this);
 	player->name = "Player";
 	player->addCustomClass(new Player());
-	//player.components.add("Logic");
-	//player.components.getLogic()->attach_update_function(playerUpdate);
 	player->components.add("Physics");
 	player->components.getPhysics()->setFrictionCoefficient(0.15f);
 	player->components.add("Camera");

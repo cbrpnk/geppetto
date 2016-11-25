@@ -5,7 +5,6 @@
 #include "component_controller.h"
 #include "camera_component.h"
 #include "geometry_component.h"
-#include "logic_component.h"
 #include "physics_component.h"
 #include "user_input_component.h"
 #include "entity.h"
@@ -20,8 +19,6 @@ void ComponentController::add(std::string name) {
 		components[name] = std::unique_ptr<Component> (new CameraComponent(entity));
 	} else if(name == "Geometry") {
 		components[name] = std::unique_ptr<Component> (new GeometryComponent(entity));
-	} else if(name == "Logic") {
-		components[name] = std::unique_ptr<Component> (new LogicComponent(entity));
 	}  else if(name == "Physics") {
 		components[name] = std::unique_ptr<Component> (new PhysicsComponent(entity));
 	} else if(name == "UserInput") {
@@ -71,15 +68,6 @@ std::shared_ptr<GeometryComponent> ComponentController::getGeometry() {
 		return nullptr;
 	}
 	return std::static_pointer_cast<GeometryComponent>(components["Geometry"]);
-}
-
-
-std::shared_ptr<LogicComponent> ComponentController::getLogic() {
-	if(components.find("Logic") == components.end()) {
-		std::cout << "This entity doesn't have a Logic component\n";
-		return nullptr;
-	}
-	return std::static_pointer_cast<LogicComponent>(components["Logic"]);
 }
 
 
