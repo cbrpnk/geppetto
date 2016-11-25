@@ -9,6 +9,7 @@
 
 #include "engine/geppetto.h"
 #include "lib/gmath.h"
+#include "demo_scene.h"
 
 
 static const int window_width = 800;
@@ -41,7 +42,7 @@ void cursor_pos_callback(GLFWwindow *window, double x_pos, double y_pos) {
 }
 
 
-void render(GLFWwindow* window) {
+int render(GLFWwindow* window) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
 		
@@ -55,15 +56,14 @@ void render(GLFWwindow* window) {
 		for(auto e : scene->getEntities()) {
 			
 			// Check if entity has a geometry component
-			if(e.second.components.isEnabled("Geometry")) {
+			if(e.second->components.isEnabled("Geometry")) {
 				
 				glPushMatrix();
-					glMultMatrixf(e.second.getReferenceFrame().toArray());
-					
+					glMultMatrixf(e.second->getReferenceFrame().toArray());
 					
 					// Select the right type of geometry
 					GLenum type;
-					switch(e.second.components.getGeometry()->getType()) {
+					switch(e.second->components.getGeometry()->getType()) {
 					case GeometryComponent::Type::Points:
 						type = GL_POINTS;
 						break;
@@ -82,16 +82,16 @@ void render(GLFWwindow* window) {
 					}
 					glBegin(type);
 						
-						for(auto vertex : e.second.components.getGeometry()->getVertices()) {
+						for(auto vertex : e.second->components.getGeometry()->getVertices()) {
 						}	
 						
 						glColor3f(0.9f, 0.1f, 0.1f);
 						for(std::size_t j=0; j<24; ++j) {
 							if(j%4 == 0) {
 							}
-							float x = e.second.components.getGeometry()->getVertices()[j*3+0];
-							float y = e.second.components.getGeometry()->getVertices()[j*3+1];
-							float z = e.second.components.getGeometry()->getVertices()[j*3+2];
+							float x = e.second->components.getGeometry()->getVertices()[j*3+0];
+							float y = e.second->components.getGeometry()->getVertices()[j*3+1];
+							float z = e.second->components.getGeometry()->getVertices()[j*3+2];
 							Vec4 point(x, y, z, 1);
 							glVertex3f(point.x, point.y, point.z);
 						}
@@ -106,6 +106,7 @@ void render(GLFWwindow* window) {
 }
 
 
+/*
 void playerUpdate(Entity& player) {
 	float movement_acceleration = 0.003f;
 	float rotation_speed = 0.09f;
@@ -130,7 +131,7 @@ void playerUpdate(Entity& player) {
 	
 	player.rotate(-input->getMouseYMovement() * rotation_speed, input->getMouseXMovement() * rotation_speed, 0.0f);
 }
-
+*/
 
 int main(int argc, char **argv) {
 	glfwSetErrorCallback(error_callback);
@@ -185,51 +186,18 @@ int main(int argc, char **argv) {
 	glFogf(GL_FOG_END, 90.0f);
 	glFogi(GL_FOG_MODE, GL_LINEAR);
 	
-	// Setup scene;	
-	Scene demoScene;
-	
-	Entity player;
-	player.name = "Player";
-	player.components.add("Logic");
-	player.components.getLogic()->attach_update_function(playerUpdate);
-	player.components.add("Physics");
-	player.components.getPhysics()->setFrictionCoefficient(0.15f);
-	player.components.add("Camera");
-	player.components.getCamera()->setPosition(Vec3(0.0f, 2.0f, 0.0f));
-	player.components.add("UserInput");
-	demoScene.addEntity(player);
-	demoScene.setCameraEntity(player);
-
-	
-	// Create cubes
-	for(int i=0; i<256; ++i) {
-		Entity entity;
-		entity.name = "Cube" + std::to_string(i);
-		entity.position.x = Gmath::randomFloat(-50.0f, 50.0f);
-		entity.position.y = Gmath::randomFloat(1.0f, 4.0f);
-		entity.position.z = Gmath::randomFloat(-50, 50);
-		entity.rotate(Gmath::randomFloat(0, 360), 0, Gmath::randomFloat(0, 360));
-		entity.components.add("Physics");
-		entity.components.getPhysics()->setFrictionCoefficient(0.15f);
-		entity.components.add("Geometry");
-		entity.components.getGeometry()->loadVertices(GeometryComponent::Cube);
-		entity.components.getGeometry()->setType(GeometryComponent::Type::Quads);
-		demoScene.addEntity(entity);
-	}
-	
-	
+	// Setup Game;	
+	Game demoGame;
+	DemoScene demoScene(demoGame);
 	demoScene.load();
 	
 	// Game loop
-	while(!endGame)
-	{
+	while(!demoGame.isShuttingDown) {
 		// User inputs
 		glfwPollEvents();
 		
-		// Update State
 		Scene::update();
 		
-		// Render
 		render(window);
 	}
 	

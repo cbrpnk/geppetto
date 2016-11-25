@@ -26,17 +26,17 @@ Vec3 PhysicsComponent::getVelocity() {
 	return velocity;
 }
 
-void  PhysicsComponent::setAcceleration(Vec3 a) {
+void PhysicsComponent::setAcceleration(Vec3 a) {
 	acceleration = a;
 }
 
 
-void  PhysicsComponent::setFrictionCoefficient(float f) {
+void PhysicsComponent::setFrictionCoefficient(float f) {
 	friction_coefficient = f;
 }
 
 
-void  PhysicsComponent::setVelocity(Vec3 v) {
+void PhysicsComponent::setVelocity(Vec3 v) {
 	velocity = v;
 }
 

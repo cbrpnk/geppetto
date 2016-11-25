@@ -3,12 +3,14 @@
 Scene* Scene::activeScene;
 
 
-Scene::Scene() {}
+Scene::Scene(Game& parentGame) : game(&parentGame) {}
+
+
 Scene::~Scene() {}
 
 
-void Scene::addEntity(Entity& e) {
-	entities.insert(std::make_pair(e.name, e));
+void Scene::addEntity(Entity* e) {
+	entities.insert(std::make_pair(e->name, e));
 }
 
 Scene* Scene::getActiveScene() {
@@ -21,8 +23,12 @@ Entity* Scene::getCameraEntity() {
 }
 
 
-const std::map<std::string, Entity>& Scene::getEntities() const {
+const std::map<std::string, Entity*>& Scene::getEntities() const {
 	return entities;
+}
+
+Game* Scene::getGame() {
+	return game;
 }
 
 
@@ -44,8 +50,8 @@ void Scene::removeEntity(std::string name) {
 }
 
 
-void Scene::setCameraEntity(Entity& e) {
-	cameraEntity = &e;
+void Scene::setCameraEntity(Entity* e) {
+	cameraEntity = e;
 }
 
 
@@ -56,6 +62,6 @@ void Scene::setName(std::string name) {
 
 void Scene::update() {
 	for(auto entity : activeScene->getEntities()) {
-		entity.second.update();
+		entity.second->update();
 	}
 }

@@ -6,9 +6,11 @@
 #include <map>
 
 #include "component_controller.h"
+#include "custom_class.h"
 #include "../lib/vec3.h"
 #include "../lib/mat4.h"
 
+class Scene;
 
 class Entity {
 public:
@@ -17,9 +19,13 @@ public:
 	Vec3 forward;
 	Vec3 up;
 	ComponentController components;
+	CustomClass* customClass;
+	Scene* scene;
 	
-	Entity();
+	Entity(Scene* parentScene);
+	~Entity();
 	
+	void addCustomClass(CustomClass* c);
 	Mat4 getReferenceFrame() const;
 	void placeAt(const float x, const float y, const float z);
 	void rotate(const float x, const float y, const float z);

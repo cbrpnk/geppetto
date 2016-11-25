@@ -38,3 +38,4 @@ void CameraComponent::setPosition(Vec3 p) {
 void CameraComponent::setUp(Vec3 u) {
 	up = u;
 }
+

@@ -1,6 +1,6 @@
 CC=g++
 
-FLAGS=-Wall -std=c++11
+FLAGS=-g -Wall -Wextra -std=c++11
 
 LINKS=-lGLEW \
 -lglfw \
@@ -15,11 +15,12 @@ OUT=geppetto
 
 OUT_TEST=test/test
 
-SOURCE=main.cpp \
-engine/camera_component.cpp \
+SOURCE=engine/camera_component.cpp \
 engine/component.cpp \
 engine/component_controller.cpp \
+engine/custom_class.cpp \
 engine/entity.cpp \
+engine/game.cpp \
 engine/geometry_component.cpp \
 engine/logic_component.cpp \
 engine/physics_component.cpp \
@@ -30,6 +31,9 @@ lib/mat3.cpp \
 lib/mat4.cpp \
 lib/vec3.cpp \
 lib/vec4.cpp \
+demo_scene.cpp \
+player.cpp \
+main.cpp \
 
 SOURCE_TEST=test/main_test.cpp \
 lib/mat3.cpp \
