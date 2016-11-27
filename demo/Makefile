@@ -23,18 +23,19 @@ $(GEPPETTO)/entity.cpp \
 $(GEPPETTO)/game.cpp \
 $(GEPPETTO)/geometry_component.cpp \
 $(GEPPETTO)/physics_component.cpp \
-$(GEPPETTO)/scene.cpp \
+$(GEPPETTO)/stage.cpp \
 $(GEPPETTO)/user_input_component.cpp \
 $(GEPPETTO)/math/gmath.cpp \
 $(GEPPETTO)/math/mat3.cpp \
 $(GEPPETTO)/math/mat4.cpp \
 $(GEPPETTO)/math/vec3.cpp \
 $(GEPPETTO)/math/vec4.cpp \
-demo_scene.cpp \
+demo_stage.cpp \
 player.cpp \
 main.cpp \
 
 default:
+	if [ -f $(OUT) ]; then mv $(OUT) $(OUT)_old; fi
 	$(CC) $(FLAGS) -o $(OUT) $(LINKS) $(SOURCE)
 	./$(OUT)
 

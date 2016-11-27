@@ -12,13 +12,13 @@ const std::string Entity::default_name = "Entity";
 int Entity::n_entities = 0;
 
 
-Entity::Entity(Scene* parentScene) : name(default_name + std::to_string(n_entities++)),
+Entity::Entity(Stage* parentStage) : name(default_name + std::to_string(n_entities++)),
 	position(Vec3(0, 0, 0)),
 	forward(Vec3(0, 0, 1)),
 	up(Vec3(0, 1, 0)),
 	components(*this),
 	customClass(nullptr),
-	scene(parentScene)
+	stage(parentStage)
 {}
 
 

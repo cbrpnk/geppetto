@@ -5,7 +5,7 @@
 #include <ctime>
 
 #include "../geppetto/geppetto.h"
-#include "demo_scene.h"
+#include "demo_stage.h"
 
 
 int main(int argc, char **argv) {
@@ -13,9 +13,9 @@ int main(int argc, char **argv) {
 	Game demoGame("Demo", 800, 600);
 	
 	if(demoGame.init()) {
-		DemoScene demoScene(demoGame);
+		DemoStage demoStage(demoGame);
 		
-		demoScene.load();
+		demoStage.load();
 		demoGame.run();
 	}
 	

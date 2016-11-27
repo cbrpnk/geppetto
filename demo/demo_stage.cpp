@@ -1,14 +1,14 @@
 #include "../geppetto/geppetto.h"
-#include "demo_scene.h"
+#include "demo_stage.h"
 #include "player.h"
 
-DemoScene::DemoScene(Game& ParentGame) : Scene(ParentGame) {}
+DemoStage::DemoStage(Game& ParentGame) : Stage(ParentGame) {}
 
 
-DemoScene::~DemoScene() {}
+DemoStage::~DemoStage() {}
 
-void DemoScene::load() {
-	Scene::load();
+void DemoStage::load() {
+	Stage::load();
 	
 	Entity* player = new Entity(this);
 	player->name = "Player";

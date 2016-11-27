@@ -6,7 +6,7 @@
 #include "camera_component.h"
 #include "game.h"
 #include "geometry_component.h"
-#include "scene.h"
+#include "stage.h"
 #include "user_input_component.h"
 
 
@@ -78,7 +78,7 @@ bool Game::init() {
 void Game::run() {
 	while(runGame) {
 		glfwPollEvents();
-		Scene::update();
+		Stage::update();
 		render();
 	}
 	
@@ -115,14 +115,14 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
 		
-		Scene* scene = Scene::getActiveScene();
-		Entity* cameraEntity = scene->getCameraEntity();
+		Stage* stage = Stage::getActiveStage();
+		Entity* cameraEntity = stage->getCameraEntity();
 		
 		Vec3 camera_position = cameraEntity->position + cameraEntity->components.getCamera()->getPosition();
 		Vec3 look_at = camera_position + cameraEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
-		for(auto e : scene->getEntities()) {
+		for(auto e : stage->getEntities()) {
 			
 			// Check if entity has a geometry component
 			if(e.second->components.isEnabled("Geometry")) {

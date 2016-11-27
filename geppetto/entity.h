@@ -10,7 +10,7 @@
 #include "math/vec3.h"
 #include "math/mat4.h"
 
-class Scene;
+class Stage;
 
 class Entity {
 public:
@@ -20,9 +20,9 @@ public:
 	Vec3 up;
 	ComponentController components;
 	CustomClass* customClass;
-	Scene* scene;
+	Stage* stage;
 	
-	Entity(Scene* parentScene);
+	Entity(Stage* parentStage);
 	~Entity();
 	
 	void addCustomClass(CustomClass* c);

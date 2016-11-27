@@ -1,5 +1,5 @@
-#ifndef _GEPPETTO_SCENE_H_
-#define _GEPPETTO_SCENE_H_
+#ifndef _GEPPETTO_STAGE_H_
+#define _GEPPETTO_STAGE_H_
 
 #include <string>
 #include <map>
@@ -9,14 +9,14 @@
 
 class Game;
 
-class Scene {
+class Stage {
 public:
-	Scene(Game& parentGame);
-	~Scene();
+	Stage(Game& parentGame);
+	~Stage();
 	
 	
 	void                                 addEntity(Entity* e);
-	static Scene*                        getActiveScene();
+	static Stage*                        getActiveStage();
 	Entity*                              getCameraEntity();
 	const std::map<std::string, Entity*>& getEntities() const;
 	Game*                                getGame();
@@ -32,7 +32,7 @@ private:
 	std::string name;
 	std::map<std::string, Entity*> entities;
 	Entity* cameraEntity;
-	static Scene* activeScene;
+	static Stage* activeStage;
 };
 
 #endif

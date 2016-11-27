@@ -26,7 +26,7 @@ void Player::update(Entity* entity) {
 		physics->setAcceleration(physics->getAcceleration() += Vec3(entity->forward).cross(Vec3(0.0f, 1.0f, 0.0f)) * movement_acceleration);
 	}
 	if(input->keyPressed(GLFW_KEY_ESCAPE)) {
-		entity->scene->getGame()->shutdown();
+		entity->stage->getGame()->shutdown();
 	}
 	
 	entity->rotate(-input->getMouseYMovement() * rotation_speed, input->getMouseXMovement() * rotation_speed, 0.0f);

@@ -9,7 +9,7 @@
 #include "game.h"
 #include "geometry_component.h"
 #include "physics_component.h"
-#include "scene.h"
+#include "stage.h"
 #include "user_input_component.h"
 
 #include "math/gmath.h"
