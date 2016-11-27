@@ -1,5 +1,5 @@
-#ifndef _ENGINE_CUSTOM_CLASS_H_
-#define _ENGINE_CUSTOM_CLASS_H_
+#ifndef _GEPPETTO_CUSTOM_CLASS_H_
+#define _GEPPETTO_CUSTOM_CLASS_H_
 
 class Entity;
 

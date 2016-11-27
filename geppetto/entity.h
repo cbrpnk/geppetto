@@ -1,5 +1,5 @@
-#ifndef _ENGINE_ENTITY_H_
-#define _ENGINE_ENTITY_H_
+#ifndef _GEPPETTO_ENTITY_H_
+#define _GEPPETTO_ENTITY_H_
 
 #include <memory>
 #include <string>
@@ -7,8 +7,8 @@
 
 #include "component_controller.h"
 #include "custom_class.h"
-#include "../lib/vec3.h"
-#include "../lib/mat4.h"
+#include "math/vec3.h"
+#include "math/mat4.h"
 
 class Scene;
 

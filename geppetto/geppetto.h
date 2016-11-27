@@ -12,4 +12,10 @@
 #include "scene.h"
 #include "user_input_component.h"
 
+#include "math/gmath.h"
+#include "math/mat3.h"
+#include "math/mat4.h"
+#include "math/vec3.h"
+#include "math/vec4.h"
+
 #endif

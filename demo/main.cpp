@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "engine/geppetto.h"
+#include "../geppetto/geppetto.h"
 #include "demo_scene.h"
 
 

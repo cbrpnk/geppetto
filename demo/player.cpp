@@ -1,5 +1,5 @@
 #include "GLFW/glfw3.h"
-#include "engine/geppetto.h"
+#include "../geppetto/geppetto.h"
 #include "player.h"
 
 Player::Player() {}

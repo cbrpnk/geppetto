@@ -1,5 +1,5 @@
-#ifndef _ENGINE_CAMERA_COMPONENT_H_
-#define _ENGINE_CAMERA_COMPONENT_H_
+#ifndef _GEPPETTO_CAMERA_COMPONENT_H_
+#define _GEPPETTO_CAMERA_COMPONENT_H_
 
 #include "component.h"
 

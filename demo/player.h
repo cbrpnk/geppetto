@@ -1,7 +1,7 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-#include "engine/geppetto.h"
+#include "../geppetto/geppetto.h"
 
 class Player : public CustomClass {
 public:

@@ -1,5 +1,5 @@
-#ifndef _ENGINE_SCENE_H_
-#define _ENGINE_SCENE_H_
+#ifndef _GEPPETTO_SCENE_H_
+#define _GEPPETTO_SCENE_H_
 
 #include <string>
 #include <map>

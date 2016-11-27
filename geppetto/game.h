@@ -1,5 +1,5 @@
-#ifndef _ENGINE_GAME_H_
-#define _ENGINE_GAME_H
+#ifndef _GEPPETTO_GAME_H_
+#define _GEPPETTO_GAME_H
 
 #include <GLFW/glfw3.h>
 #include <string>

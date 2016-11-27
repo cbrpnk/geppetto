@@ -1,8 +1,8 @@
-#ifndef _ENGINE_PHYSICS_COMPONENT_H_
-#define _ENGINE_PHYSICS_COMPONENT_H_
+#ifndef _GEPPETTO_PHYSICS_COMPONENT_H_
+#define _GEPPETTO_PHYSICS_COMPONENT_H_
 
 #include "component.h"
-#include "../lib/vec3.h"
+#include "math/vec3.h"
 
 class PhysicsComponent : public Component {
 public:

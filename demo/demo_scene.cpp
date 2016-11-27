@@ -1,5 +1,4 @@
-#include "engine/geppetto.h"
-#include "lib/gmath.h"
+#include "../geppetto/geppetto.h"
 #include "demo_scene.h"
 #include "player.h"
 

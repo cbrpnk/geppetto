@@ -5,7 +5,7 @@
 #include "entity.h"
 #include "component_controller.h"
 #include "physics_component.h"
-#include "../lib/gmath.h"
+#include "math/gmath.h"
 
 
 const std::string Entity::default_name = "Entity";
