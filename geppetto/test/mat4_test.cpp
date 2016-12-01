@@ -1,7 +1,8 @@
 #include <cmath>
 
 #include "test.h"
-#include "../lib/gmath.h"
+#include "../math/gmath.h"
+#include "../math/mat4.h"
 
 namespace TEST_MAT4 {
 	
@@ -186,15 +187,15 @@ namespace TEST_MAT4 {
 		Mat4 m2(init);
 		float epsilon = 0.001f;
 		
-		float x = degToRad(33.3f);
+		float x = Gmath::degToRad(33.3f);
 		float cosx = cos(x);    
 		float sinx = sin(x);
 		
-		float y = degToRad(0.0f);
+		float y = Gmath::degToRad(0.0f);
 		float cosy = cos(y);    
 		float siny = sin(y);
 		
-		float z = degToRad(0.0f);
+		float z = Gmath::degToRad(0.0f);
 		float cosz = cos(z);    
 		float sinz = sin(z);
 	
@@ -219,7 +220,7 @@ namespace TEST_MAT4 {
 			 0.0f, 0.0f, 0.0f, 1.0f
 		};
 		
-		m.rotate(radToDeg(x), radToDeg(y), radToDeg(z));
+		m.rotate(Gmath::radToDeg(x), Gmath::radToDeg(y), Gmath::radToDeg(z));
 		m2 *= Mat4(x_rot);
 		m2 *= Mat4(y_rot);
 		m2 *= Mat4(z_rot);

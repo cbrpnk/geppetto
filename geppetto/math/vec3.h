@@ -4,7 +4,8 @@
 class Mat3;
 class Vec4;
 
-class Vec3 {
+class Vec3
+{
 public:
 	float x;
 	float y;

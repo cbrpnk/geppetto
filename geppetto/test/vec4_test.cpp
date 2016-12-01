@@ -1,7 +1,8 @@
 #include <cmath>
 
 #include "test.h"
-#include "../lib/gmath.h"
+#include "../math/vec4.h"
+#include "../math/mat4.h"
 
 
 namespace TEST_VEC4 {

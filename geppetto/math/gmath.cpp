@@ -7,7 +7,8 @@
 #include "gmath.h"
 
 
-namespace Gmath {
+namespace Gmath
+{
 	static bool prng_seeded = false;
 
 
@@ -23,24 +24,28 @@ namespace Gmath {
 	}
 
 
-	double randomDouble(const double min, const double max) {
+	double randomDouble(const double min, const double max)
+	{
 		assert(max <= std::numeric_limits<double>::max());
 		seedPrng();
 		return std::rand() / (double) RAND_MAX * (max-min) + min;
 	}
 
 
-	float randomFloat(const float min, const float max) {
+	float randomFloat(const float min, const float max)
+	{
 		assert(max <= std::numeric_limits<float>::max());
 		return (float) randomDouble(min, max);
 	}
 
-	int randomInt(const int min, const int max) {
+	int randomInt(const int min, const int max)
+	{
 		assert(max <= std::numeric_limits<int>::max());
 		return std::round(randomDouble(min, max));
 	}
 
-	void seedPrng() {
+	void seedPrng()
+	{
 		if(!prng_seeded) {
 			std::srand(std::time(0));
 			prng_seeded = true;

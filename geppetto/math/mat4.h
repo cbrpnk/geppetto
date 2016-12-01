@@ -12,7 +12,8 @@ const float identity4x4[] = {
 	0.0f, 0.0f, 0.0f, 1.0f,
 };
 
-class Mat4 {
+class Mat4
+{
 public:
 	Mat4();
 	Mat4(const Mat4 &m);

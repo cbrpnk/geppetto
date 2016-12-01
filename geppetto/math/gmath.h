@@ -1,7 +1,8 @@
 #ifndef _GMATH_H_
 #define _GMATH_H_
 
-namespace Gmath {
+namespace Gmath
+{
 	float degToRad(const float deg);
 	float radToDeg(const float rad);
 	double randomDouble(const double min, const double max);

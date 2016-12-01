@@ -11,18 +11,18 @@ LINKS=-lGLEW \
 -lXrandr \
 -lXi
 
-OUT_TEST=test/test
+OUT_TEST=test
 
-SOURCE_TEST=test/main_test.cpp \
-geppetto/math/mat3.cpp \
-geppetto/math/mat4.cpp \
-geppetto/math/vec3.cpp \
-geppetto/math/vec4.cpp \
-geppetto/math/gmath.cpp \
-test/mat3_test.cpp \
-test/mat4_test.cpp \
-test/vec3_test.cpp \
-test/vec4_test.cpp \
+SOURCE_TEST=main_test.cpp \
+../math/mat3.cpp \
+../math/mat4.cpp \
+../math/vec3.cpp \
+../math/vec4.cpp \
+../math/gmath.cpp \
+mat3_test.cpp \
+mat4_test.cpp \
+vec3_test.cpp \
+vec4_test.cpp \
 
 tests:
 	$(CC) $(FLAGS) -o $(OUT_TEST) $(LINKS) $(SOURCE_TEST)

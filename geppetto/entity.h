@@ -15,13 +15,14 @@ class Stage;
 class Entity
 {
 public:
-	std::string name;
-	Vec3 position;
-	Vec3 forward;
-	Vec3 up;
+	bool                active;
+	std::string         name;
+	Vec3                position;
+	Vec3                forward;
+	Vec3                up;
 	ComponentController components;
-	CustomClass* customClass;
-	Stage* stage;
+	CustomClass*        customClass;
+	Stage*              stage;
 	
 	Entity(Stage* parentStage);
 	~Entity();

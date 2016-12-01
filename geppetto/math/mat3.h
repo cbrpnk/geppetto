@@ -11,7 +11,8 @@ const float identity3x3[] = {
 	0.0f, 0.0f, 1.0f,
 };
 
-class Mat3 {
+class Mat3
+{
 public:
 	Mat3();
 	Mat3(const Mat3 &m);

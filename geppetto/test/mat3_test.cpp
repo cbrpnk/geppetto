@@ -1,7 +1,7 @@
 #include <cmath>
 
 #include "test.h"
-#include "../lib/gmath.h"
+#include "../math/mat3.h"
 
 namespace TEST_MAT3 {
 	

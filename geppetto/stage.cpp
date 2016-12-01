@@ -75,6 +75,7 @@ void Stage::setName(const std::string name)
 void Stage::update()
 {
 	for(auto entity : activeStage->getEntities()) {
-		entity.second->update();
+		if(entity.second->active)
+			entity.second->update();
 	}
 }
