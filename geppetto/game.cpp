@@ -10,17 +10,20 @@
 #include "user_input_component.h"
 
 
-Game::Game() {};
+Game::Game()
+{}
 
-Game::Game(std::string title, int w, int h) : windowTitle(title),
+Game::Game(const std::string title, const int w, const int h) : windowTitle(title),
 width(w),
 height(h)
 {}
 
-Game::~Game() {};
+Game::~Game()
+{}
 
 /* Piblic */
-bool Game::init() {
+bool Game::init()
+{
 	glfwSetErrorCallback(glfw_error_callback);
 		
 	if(!glfwInit())
@@ -75,10 +78,11 @@ bool Game::init() {
 }
 
 
-void Game::run() {
+void Game::run()
+{
 	while(runGame) {
 		glfwPollEvents();
-		Stage::update();
+		Stage::getActiveStage()->update();
 		render();
 	}
 	
@@ -86,22 +90,26 @@ void Game::run() {
 }
 
 
-void Game::shutdown() {
+void Game::shutdown()
+{
 	runGame = false;
 }
 
 
-void Game::glfw_cursor_callback(GLFWwindow* window, double x_pos, double y_pos) {
+void Game::glfw_cursor_callback(GLFWwindow* window, double x_pos, double y_pos)
+{
 	UserInputComponent::moveMouse(x_pos, y_pos);
 }
 
 
-void Game::glfw_error_callback(int error, const char *desc) {
+void Game::glfw_error_callback(int error, const char *desc)
+{
 	std::cout << "GLFW error: " << desc << std::endl;
 }
 
 
-void Game::glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
+void Game::glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
 	if(action == GLFW_PRESS) {
 		UserInputComponent::pressKey(key);
 	} else if(action == GLFW_RELEASE) {
@@ -111,7 +119,8 @@ void Game::glfw_key_callback(GLFWwindow* window, int key, int scancode, int acti
 
 
 /* Private */
-void Game::render() {
+void Game::render()
+{
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
 		
@@ -125,7 +134,7 @@ void Game::render() {
 		for(auto e : stage->getEntities()) {
 			
 			// Check if entity has a geometry component
-			if(e.second->components.isEnabled("Geometry")) {
+			if(e.second->components.isEnabled(Component::Type::Geometry)) {
 				
 				glPushMatrix();
 					glMultMatrixf(e.second->getReferenceFrame().toArray());

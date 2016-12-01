@@ -6,7 +6,8 @@
 #include "component.h"
 
 
-class GeometryComponent : public Component {
+class GeometryComponent : public Component
+{
 public:
 	enum class Type {
 		Points, Lines, Triangles, Quads
@@ -18,7 +19,7 @@ public:
 	
 	Type                      getType();
 	const std::vector<float>& getVertices();
-	void                      loadVertices(std::vector<float> verts);
+	void                      loadVertices(const std::vector<float> verts);
 	void                      setType(Type t);
 private:
 	Type type;

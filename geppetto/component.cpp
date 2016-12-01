@@ -4,10 +4,13 @@
 #include "component.h"
 
 
-Component::Component(Entity& e) : entity(e) {}
+Component::Component(Entity& e) : entity(e)
+{}
 
 
-Component::~Component() {}
+Component::~Component()
+{}
 
 
-void Component::update() {}
+void Component::update()
+{}

@@ -22,22 +22,26 @@ Entity::Entity(Stage* parentStage) : name(default_name + std::to_string(n_entiti
 {}
 
 
-Entity::~Entity() {}
+Entity::~Entity()
+{}
 
 
-void Entity::addCustomClass(CustomClass* c) {
+void Entity::addCustomClass(CustomClass* const c)
+{
 	customClass = c;
 }
 
 
-void Entity::placeAt(const float x, const float y, const float z) {
+void Entity::placeAt(const float x, const float y, const float z)
+{
 	position.x = x;
 	position.y = y;
 	position.z = z;
 }
 
 
-Mat4 Entity::getReferenceFrame() const {
+Mat4 Entity::getReferenceFrame() const
+{
 	Vec4 x_axis(Vec4(up).cross(forward));
 	Vec4 y_axis(up);
 	Vec4 z_axis(forward);
@@ -55,7 +59,16 @@ Mat4 Entity::getReferenceFrame() const {
 }
 
 
-void Entity::rotate(const float x, const float y, const float z) {
+void Entity::load()
+{
+	if(customClass) {
+		customClass->load(this);
+	}
+}
+
+
+void Entity::rotate(const float x, const float y, const float z)
+{
 	Mat4 ref = getReferenceFrame();
 	ref.rotate(x, y, z);
 	
@@ -67,7 +80,8 @@ void Entity::rotate(const float x, const float y, const float z) {
 }
 
 
-void Entity::update() {
+void Entity::update()
+{
 	components.updateAll();
 	if(customClass) {
 		customClass->update(this);

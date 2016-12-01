@@ -8,7 +8,8 @@
 #include "demo_stage.h"
 
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 	// Setup Game;
 	Game demoGame("Demo", 800, 600);
 	

@@ -3,13 +3,15 @@
 
 #include "../geppetto/stage.h"
 
-class DemoStage : public Stage {
+class DemoStage : public Stage
+{
 public:
 	
 	DemoStage(Game& parentGame);
 	~DemoStage();
 	
 	void load();
+	void update();
 };
 
 #endif

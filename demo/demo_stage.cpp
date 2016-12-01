@@ -1,23 +1,20 @@
 #include "../geppetto/geppetto.h"
 #include "demo_stage.h"
 #include "player.h"
+#include "cube.h"
 
-DemoStage::DemoStage(Game& ParentGame) : Stage(ParentGame) {}
+DemoStage::DemoStage(Game& ParentGame) : Stage(ParentGame)
+{}
 
+DemoStage::~DemoStage()
+{}
 
-DemoStage::~DemoStage() {}
-
-void DemoStage::load() {
-	Stage::load();
+void DemoStage::load()
+{
 	
 	Entity* player = new Entity(this);
 	player->name = "Player";
 	player->addCustomClass(new Player());
-	player->components.add("Physics");
-	player->components.getPhysics()->setFrictionCoefficient(0.15f);
-	player->components.add("Camera");
-	player->components.getCamera()->setPosition(Vec3(0.0f, 2.0f, 0.0f));
-	player->components.add("UserInput");
 	addEntity(player);
 	setCameraEntity(player);
 	
@@ -25,15 +22,14 @@ void DemoStage::load() {
 	for(int i=0; i<100; ++i) {
 		Entity* entity = new Entity(this);
 		entity->name = "Cube" + std::to_string(i);
-		entity->position.x = Gmath::randomFloat(-50.0f, 50.0f);
-		entity->position.y = Gmath::randomFloat(-5.0f, 5.0f);
-		entity->position.z = Gmath::randomFloat(-50.0f, 50.0f);
-		entity->rotate(Gmath::randomFloat(0, 360), 0, Gmath::randomFloat(0, 360));
-		entity->components.add("Physics");
-		entity->components.getPhysics()->setFrictionCoefficient(0.15f);
-		entity->components.add("Geometry");
-		entity->components.getGeometry()->loadVertices(GeometryComponent::Cube);
-		entity->components.getGeometry()->setType(GeometryComponent::Type::Quads);
+		entity->addCustomClass(new Cube());
 		addEntity(entity);
 	}
+	
+	Stage::load();
+}
+
+void DemoStage::update()
+{
+	Stage::update();
 }

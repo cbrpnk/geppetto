@@ -1,6 +1,7 @@
 #include "string"
 
-class ShaderProgram {
+class ShaderProgram
+{
 public:
 	ShaderProgram(std::string vert_shader_path, std::string frag_shader_path) {};
 	~ShaderProgram() {};

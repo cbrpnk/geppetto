@@ -3,10 +3,15 @@
 
 #include <vector>
 
-#include "entity.h"
+class Entity;
 
-class Component {
+class Component
+{
 public:
+	enum class Type {
+		Camera, Geometry, Physics, UserInput
+	};
+	
 	Entity& entity;
 	
 	Component(Entity& e);

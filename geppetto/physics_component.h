@@ -13,9 +13,9 @@ public:
 	Vec3  getAcceleration();
 	float getFrictionCoefficient();
 	Vec3  getVelocity();
-	void  setAcceleration(Vec3 a);
-	void  setFrictionCoefficient(float f);
-	void  setVelocity(Vec3 v);
+	void  setAcceleration(const Vec3 a);
+	void  setFrictionCoefficient(const float f);
+	void  setVelocity(const Vec3 v);
 	
 	void update();
 

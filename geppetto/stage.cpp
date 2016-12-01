@@ -3,64 +3,77 @@
 Stage* Stage::activeStage;
 
 
-Stage::Stage(Game& parentGame) : game(&parentGame) {}
+Stage::Stage(Game& parentGame) : game(&parentGame)
+{}
 
+Stage::~Stage()
+{}
 
-Stage::~Stage() {}
-
-
-void Stage::addEntity(Entity* e) {
+void Stage::addEntity(Entity* const e)
+{
 	entities.insert(std::make_pair(e->name, e));
 }
 
-Stage* Stage::getActiveStage() {
+Stage* Stage::getActiveStage()
+{
 	return activeStage;
 }
 
 
-Entity* Stage::getCameraEntity() {
+Entity* Stage::getCameraEntity()
+{
 	return cameraEntity;
 }
 
 
-const std::map<std::string, Entity*>& Stage::getEntities() const {
+const std::map<std::string, Entity*>& Stage::getEntities() const
+{
 	return entities;
 }
 
-Game* Stage::getGame() {
+Game* Stage::getGame()
+{
 	return game;
 }
 
 
-std::string Stage::getName() {
+std::string Stage::getName()
+{
 	return name;
 }
 
 
-void Stage::load() {
-	//TODO: Call the load method on all stage entities
+void Stage::load()
+{
 	activeStage = this;
+	for(auto entity : activeStage->getEntities()) {
+		entity.second->load();
+	}
 }
 
 
-void Stage::removeEntity(std::string name) {
+void Stage::removeEntity(const std::string name)
+{
 	if(entities.find(name) != entities.end()) {
 		entities.erase(name);
 	}
 }
 
 
-void Stage::setCameraEntity(Entity* e) {
+void Stage::setCameraEntity(Entity* const e)
+{
 	cameraEntity = e;
 }
 
 
-void Stage::setName(std::string name) {
+void Stage::setName(const std::string name)
+{
 	this->name = name;
 }
 
 
-void Stage::update() {
+void Stage::update()
+{
 	for(auto entity : activeStage->getEntities()) {
 		entity.second->update();
 	}

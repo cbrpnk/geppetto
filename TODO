@@ -1,1 +1,4 @@
-tidy up shit
+Player update -> switch case; remove need for GLFW constants
+
+fix input system "looking down and turning" + clean it up
+

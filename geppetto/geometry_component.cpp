@@ -38,25 +38,32 @@ const std::vector<float> GeometryComponent::Cube = {
 	-0.5f, -0.5f, 0.5f,
 };
 
-GeometryComponent::GeometryComponent(Entity& e) : Component(e) {}
-GeometryComponent::~GeometryComponent() {}
+GeometryComponent::GeometryComponent(Entity& e) : Component(e)
+{}
+
+GeometryComponent::~GeometryComponent()
+{}
 
 
-GeometryComponent::Type GeometryComponent::getType() {
+GeometryComponent::Type GeometryComponent::getType()
+{
 	return type;
 }
 
 
-const std::vector<float>& GeometryComponent::getVertices() {
+const std::vector<float>& GeometryComponent::getVertices()
+{
 	return vertices;
 }
 
 
-void GeometryComponent::loadVertices(std::vector<float> verts) {
+void GeometryComponent::loadVertices(const std::vector<float> verts)
+{
 	vertices = verts;
 }
 
 
-void GeometryComponent::setType(Type t) {
+void GeometryComponent::setType(Type t)
+{
 	type = t;
 }

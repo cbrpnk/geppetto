@@ -12,7 +12,8 @@
 
 class Stage;
 
-class Entity {
+class Entity
+{
 public:
 	std::string name;
 	Vec3 position;
@@ -25,8 +26,9 @@ public:
 	Entity(Stage* parentStage);
 	~Entity();
 	
-	void addCustomClass(CustomClass* c);
+	void addCustomClass(CustomClass* const c);
 	Mat4 getReferenceFrame() const;
+	void load();
 	void placeAt(const float x, const float y, const float z);
 	void rotate(const float x, const float y, const float z);
 	void update();

@@ -1,6 +1,6 @@
 CC=g++
 
-FLAGS=-g -Wall -Wextra -std=c++11
+FLAGS=-g -Wall -std=c++11
 
 LINKS=-lGLEW \
 -lglfw \
@@ -31,6 +31,7 @@ $(GEPPETTO)/math/mat4.cpp \
 $(GEPPETTO)/math/vec3.cpp \
 $(GEPPETTO)/math/vec4.cpp \
 demo_stage.cpp \
+cube.cpp \
 player.cpp \
 main.cpp \
 

@@ -3,11 +3,12 @@
 
 class Entity;
 
-class CustomClass {
+class CustomClass
+{
 public:
 	CustomClass();
 	~CustomClass();
-	virtual void load();
+	virtual void load(Entity* entity);
 	virtual void update(Entity* entity);
 };
 
