@@ -127,21 +127,21 @@ void Game::render()
 		Stage* stage = Stage::getActiveStage();
 		Entity* cameraEntity = stage->getCameraEntity();
 		
-		Vec3 camera_position = cameraEntity->position + cameraEntity->components.getCamera()->getPosition();
+		Vec3 camera_position = cameraEntity->position + cameraEntity->getCamera()->getPosition();
 		Vec3 look_at = camera_position + cameraEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
 		for(auto e : stage->getEntities()) {
 			
 			// Check if entity has a geometry component
-			if(e.second->components.isEnabled(Component::Type::Geometry)) {
+			if(e.second->hasComponent(Component::Type::Geometry)) {
 				
 				glPushMatrix();
 					glMultMatrixf(e.second->getReferenceFrame().toArray());
 					
 					// Select the right type of geometry
 					GLenum type;
-					switch(e.second->components.getGeometry()->getType()) {
+					switch(e.second->getGeometry()->getType()) {
 					case GeometryComponent::Type::Points:
 						type = GL_POINTS;
 						break;
@@ -160,16 +160,16 @@ void Game::render()
 					}
 					glBegin(type);
 						
-						for(auto vertex : e.second->components.getGeometry()->getVertices()) {
+						for(auto vertex : e.second->getGeometry()->getVertices()) {
 						}	
 						
 						glColor3f(0.9f, 0.1f, 0.1f);
 						for(std::size_t j=0; j<24; ++j) {
 							if(j%4 == 0) {
 							}
-							float x = e.second->components.getGeometry()->getVertices()[j*3+0];
-							float y = e.second->components.getGeometry()->getVertices()[j*3+1];
-							float z = e.second->components.getGeometry()->getVertices()[j*3+2];
+							float x = e.second->getGeometry()->getVertices()[j*3+0];
+							float y = e.second->getGeometry()->getVertices()[j*3+1];
+							float z = e.second->getGeometry()->getVertices()[j*3+2];
 							Vec4 point(x, y, z, 1);
 							glVertex3f(point.x, point.y, point.z);
 						}

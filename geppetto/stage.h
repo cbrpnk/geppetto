@@ -20,7 +20,7 @@ public:
 	static Stage*                         getActiveStage();
 	Entity*                               getCameraEntity();
 	const std::map<std::string, Entity*>& getEntities() const;
-	Game*                                 getGame();
+	Game&                                 getGame();
 	std::string                           getName();
 	virtual void                          load();
 	void                                  removeEntity(const std::string name);
@@ -29,7 +29,7 @@ public:
 	virtual void                          update();
 
 protected:
-	Game* game;
+	Game& game;
 	std::string name;
 	std::map<std::string, Entity*> entities;
 	Entity* cameraEntity;

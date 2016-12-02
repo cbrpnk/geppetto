@@ -1,4 +1,3 @@
-Player update -> switch case; remove need for GLFW constants
-
 fix input system "looking down and turning" + clean it up
+make Game a friend of userInputComponent such that it can update the user inputs
 

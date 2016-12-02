@@ -18,11 +18,11 @@ void Cube::load(Entity* entity)
 	entity->position.y = Gmath::randomFloat(-5.0f, 5.0f);
 	entity->position.z = Gmath::randomFloat(-50.0f, 50.0f);
 	
-	entity->components.add(Component::Type::Physics);
-	entity->components.getPhysics()->setFrictionCoefficient(0.15f);
-	entity->components.add(Component::Type::Geometry);
-	entity->components.getGeometry()->loadVertices(GeometryComponent::Cube);
-	entity->components.getGeometry()->setType(GeometryComponent::Type::Quads);
+	entity->addComponent(Component::Type::Physics);
+	entity->getPhysics()->setFrictionCoefficient(0.15f);
+	entity->addComponent(Component::Type::Geometry);
+	entity->getGeometry()->loadVertices(GeometryComponent::Cube);
+	entity->getGeometry()->setType(GeometryComponent::Type::Quads);
 }
 
 void Cube::update(Entity* entity)

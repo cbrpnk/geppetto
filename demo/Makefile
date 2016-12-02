@@ -17,7 +17,6 @@ GEPPETTO=../geppetto
 
 SOURCE=$(GEPPETTO)/camera_component.cpp \
 $(GEPPETTO)/component.cpp \
-$(GEPPETTO)/component_controller.cpp \
 $(GEPPETTO)/custom_class.cpp \
 $(GEPPETTO)/entity.cpp \
 $(GEPPETTO)/game.cpp \

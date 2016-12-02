@@ -3,7 +3,7 @@
 Stage* Stage::activeStage;
 
 
-Stage::Stage(Game& parentGame) : game(&parentGame)
+Stage::Stage(Game& parentGame) : game(parentGame)
 {}
 
 Stage::~Stage()
@@ -31,7 +31,7 @@ const std::map<std::string, Entity*>& Stage::getEntities() const
 	return entities;
 }
 
-Game* Stage::getGame()
+Game& Stage::getGame()
 {
 	return game;
 }

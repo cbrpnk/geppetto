@@ -7,7 +7,7 @@ class CustomClass
 {
 public:
 	CustomClass();
-	~CustomClass();
+	virtual ~CustomClass();
 	virtual void load(Entity* entity);
 	virtual void update(Entity* entity);
 };

@@ -1,12 +1,11 @@
 #include "camera_component.h"
 #include "entity.h"
 
-CameraComponent::CameraComponent(Entity& e) : Component(e)
-{
-	position = e.position;
-	up = e.up;
-	forward = e.forward;
-}
+CameraComponent::CameraComponent(Entity& e) : Component(e),
+position(e.position),
+up(e.up),
+forward(e.forward)
+{}
 
 
 CameraComponent::~CameraComponent()
