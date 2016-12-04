@@ -14,9 +14,9 @@ int main(int argc, char **argv)
 	Game demoGame("Demo", 800, 600);
 	
 	if(demoGame.init()) {
-		DemoStage demoStage(demoGame);
+		demoGame.addStage(new DemoStage(demoGame, "demo_stage"));
 		
-		demoStage.load();
+		demoGame.loadStage("demo_stage");
 		demoGame.run();
 	}
 	

@@ -3,7 +3,8 @@
 Stage* Stage::activeStage;
 
 
-Stage::Stage(Game& parentGame) : game(parentGame)
+Stage::Stage(Game& parentGame, std::string stageName) : game(parentGame),
+name(stageName)
 {}
 
 Stage::~Stage()
@@ -55,6 +56,7 @@ void Stage::load()
 void Stage::removeEntity(const std::string name)
 {
 	if(entities.find(name) != entities.end()) {
+		delete(entities[name]);
 		entities.erase(name);
 	}
 }

@@ -52,7 +52,7 @@ const int UserInputComponent::KEY_RIGHT_SHIFT = GLFW_KEY_RIGHT_SHIFT;
 const int UserInputComponent::KEY_RIGHT_CONTROL = GLFW_KEY_RIGHT_CONTROL;
 const int UserInputComponent::KEY_RIGHT_ALT = GLFW_KEY_RIGHT_ALT;
 
-std::set<int> UserInputComponent::keyboard;
+std::set<unsigned int> UserInputComponent::keyboard;
 int UserInputComponent::mouse_x = 0;
 int UserInputComponent::mouse_x_move = 0;
 int UserInputComponent::mouse_y = 0;
@@ -90,24 +90,23 @@ bool UserInputComponent::keyPressed(const int key)
 }
 
 
-void UserInputComponent::moveMouse(const int x, const int y)
+void UserInputComponent::glfw_cursor_callback(GLFWwindow* window,
+	double x_pos, double y_pos)
 {
-	mouse_x_move = mouse_x - x;
-	mouse_y_move = mouse_y - y;
-	mouse_x = x;
-	mouse_y = y;
+	mouse_x_move = mouse_x - x_pos;
+	mouse_y_move = mouse_y - y_pos;
+	mouse_x = x_pos;
+	mouse_y = y_pos;
 }
 
 
-void UserInputComponent::pressKey(const int key)
+void UserInputComponent::glfw_key_callback(GLFWwindow* window,
+	int key, int scancode, int action, int mode)
 {
-	keyboard.insert(key);
-}
-
-
-void UserInputComponent::releaseKey(const int key)
-{
-	if(keyboard.find(key) != keyboard.end()) {
+	if(action == GLFW_PRESS) {
+		keyboard.insert(key);
+	} else if(action == GLFW_RELEASE &&
+		keyboard.find(key) != keyboard.end()) {
 		keyboard.erase(key);
 	}
 }

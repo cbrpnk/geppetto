@@ -1,9 +1,10 @@
+#include <string>
 #include "../geppetto/geppetto.h"
 #include "demo_stage.h"
 #include "player.h"
 #include "cube.h"
 
-DemoStage::DemoStage(Game& ParentGame) : Stage(ParentGame)
+DemoStage::DemoStage(Game& ParentGame, std::string name) : Stage(ParentGame, name)
 {}
 
 DemoStage::~DemoStage()

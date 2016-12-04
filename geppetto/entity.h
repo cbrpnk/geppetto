@@ -29,6 +29,10 @@ public:
 	Entity(Stage& parentStage);
 	~Entity();
 	
+	// TODO:
+	// removeCustomClass()
+	// getCustomClass()
+	
 	void   addCustomClass(CustomClass* const c);
 	Mat4   getReferenceFrame() const;
 	Stage& getStage() const;

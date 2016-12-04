@@ -12,9 +12,8 @@ class Game;
 class Stage
 {
 public:
-	Stage(Game& parentGame);
+	Stage(Game& parentGame, std::string stageName);
 	~Stage();
-	
 	
 	void                                  addEntity(Entity* const e);
 	static Stage*                         getActiveStage();

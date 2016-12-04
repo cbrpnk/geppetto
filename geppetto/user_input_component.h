@@ -3,7 +3,10 @@
 
 #include <set>
 
+#include "GLFW/glfw3.h"
+#include "game.h"
 #include "component.h"
+
 
 class UserInputComponent: public Component {
 public:
@@ -61,19 +64,24 @@ public:
 	static const int KEY_RIGHT_CONTROL;
 	static const int KEY_RIGHT_ALT;
 	
+	
 	int getMouseXMovement();
 	int getMouseYMovement();
 	bool keyPressed(const int key);
-	static void moveMouse(const int x, const int y);
-	static void pressKey(const int key);
-	static void releaseKey(const int key);
 
 private:
-	static std::set<int> keyboard;
+	static std::set<unsigned int> keyboard;
 	static int mouse_x;
 	static int mouse_x_move;
 	static int mouse_y;
 	static int mouse_y_move;
+	
+	// Game::init will register those callbacks through the GLFW API
+	friend bool Game::init();
+	static void glfw_cursor_callback(GLFWwindow* window,
+		double x_pos, double y_pos);
+	static void glfw_key_callback(GLFWwindow *window,
+		int key, int scancode, int action, int mode);
 };
 
 #endif

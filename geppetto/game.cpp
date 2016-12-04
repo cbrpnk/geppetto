@@ -10,10 +10,8 @@
 #include "user_input_component.h"
 
 
-Game::Game()
-{}
-
-Game::Game(const std::string title, const int w, const int h) : windowTitle(title),
+Game::Game(std::string n, const int w, const int h) :
+name(n),
 width(w),
 height(h)
 {}
@@ -21,7 +19,8 @@ height(h)
 Game::~Game()
 {}
 
-/* Piblic */
+
+/* Public */
 bool Game::init()
 {
 	glfwSetErrorCallback(glfw_error_callback);
@@ -36,7 +35,7 @@ bool Game::init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);	
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	
-	window = glfwCreateWindow(width, height, windowTitle.c_str(), nullptr, nullptr);
+	window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
 	if(window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -53,8 +52,8 @@ bool Game::init()
 	}
 	
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetKeyCallback(window, glfw_key_callback);
-	glfwSetCursorPosCallback(window, glfw_cursor_callback);
+	glfwSetKeyCallback(window, UserInputComponent::glfw_key_callback);
+	glfwSetCursorPosCallback(window, UserInputComponent::glfw_cursor_callback);
 	
 	// Viewport and projection
 	glfwGetFramebufferSize(window, &width, &height);
@@ -96,25 +95,40 @@ void Game::shutdown()
 }
 
 
-void Game::glfw_cursor_callback(GLFWwindow* window, double x_pos, double y_pos)
+void Game::addStage(Stage* stage)
 {
-	UserInputComponent::moveMouse(x_pos, y_pos);
+	stages.insert(std::make_pair(stage->getName(), stage));
+}
+
+
+Stage* Game::getActiveStage()
+{
+	return activeStage;
+}
+
+
+Stage* Game::getStage(std::string name)
+{
+	if(stages.find(name) != stages.end()) {
+		return stages[name];
+	}
+	return nullptr;
+}
+
+
+void Game::loadStage(std::string name)
+{
+	Stage* stage = getStage(name);
+	if(stage) {
+		stage->load();
+		activeStage = stage;
+	}
 }
 
 
 void Game::glfw_error_callback(int error, const char *desc)
 {
 	std::cout << "GLFW error: " << desc << std::endl;
-}
-
-
-void Game::glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-	if(action == GLFW_PRESS) {
-		UserInputComponent::pressKey(key);
-	} else if(action == GLFW_RELEASE) {
-		UserInputComponent::releaseKey(key);
-	}
 }
 
 

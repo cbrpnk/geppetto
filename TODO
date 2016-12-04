@@ -1,3 +1,16 @@
 fix input system "looking down and turning" + clean it up
-make Game a friend of userInputComponent such that it can update the user inputs
+make Game class have a list of stages, remove the static methods in stage
+make use of the new relationshitp between games and stages
 
+remove reference to Game from Stage
+make Game::render private
+make game a static class
+
+check entity names, stage names.
+make entity have a type such that you can do something like: Entity::getAllByType("cube");
+Entity: removeCustomClass ( delete ); getCustomClass()
+
+
+
+
+Load OBJ files
