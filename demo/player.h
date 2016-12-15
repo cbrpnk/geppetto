@@ -3,7 +3,7 @@
 
 #include "../geppetto/geppetto.h"
 
-class Player : public CustomClass
+class Player : public Entity
 {
 public:
 	float movement_acceleration;
@@ -12,8 +12,8 @@ public:
 	Player();
 	~Player();
 	
-	void load(Entity* entity);
-	void update(Entity* entity);
+	void load();
+	void update();
 };
 
 #endif

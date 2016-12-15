@@ -2,7 +2,8 @@
 #include "player.h"
 
 
-Player::Player()
+Player::Player() :
+Entity::Entity("Player", "Player")
 {
 	movement_acceleration = 0.003f;
 	rotation_speed = 0.09f;
@@ -12,43 +13,47 @@ Player::~Player()
 {}
 
 
-void Player::load(Entity* entity)
+void Player::load()
 {
-	entity->addComponent(Component::Type::Physics);
-	entity->getPhysics()->setFrictionCoefficient(0.15f);
-	entity->addComponent(Component::Type::Camera);
-	entity->getCamera()->setPosition(Vec3(0.0f, 2.0f, 0.0f));
-	entity->addComponent(Component::Type::UserInput);
+	addComponent(Component::Type::Physics);
+	physics->setFrictionCoefficient(0.15f);
+	
+	addComponent(Component::Type::Camera);
+	camera->setPosition(Vec3(0.0f, 2.0f, 0.0f));
+	
+	addComponent(Component::Type::UserInput);
+	
+	stage.setCameraEntity(this);
 }
 
 
-void Player::update(Entity* entity)
+void Player::update()
 {
-	if(entity->getUserInput()->keyPressed(GLFW_KEY_W)) {
-		entity->getPhysics()->setAcceleration(
-			entity->getPhysics()->getAcceleration() +
-			entity->forward *
+	if(userInput->keyPressed(GLFW_KEY_W)) {
+		physics->setAcceleration(
+			physics->getAcceleration() +
+			forward *
 			movement_acceleration);
 	}
-	if(entity->getUserInput()->keyPressed(UserInputComponent::KEY_A)) {
-		entity->getPhysics()->setAcceleration(entity->getPhysics()->getAcceleration() +
-			Vec3(entity->forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
+	if(userInput->keyPressed(UserInputComponent::KEY_A)) {
+		getPhysics()->setAcceleration(physics->getAcceleration() +
+			Vec3(forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
 			-movement_acceleration);
 	}
-	if(entity->getUserInput()->keyPressed(UserInputComponent::KEY_S)) {
-		entity->getPhysics()->setAcceleration(entity->getPhysics()->getAcceleration() +
-			entity->forward *
+	if(userInput->keyPressed(UserInputComponent::KEY_S)) {
+		getPhysics()->setAcceleration(physics->getAcceleration() +
+			forward *
 			-movement_acceleration);
 	}
-	if(entity->getUserInput()->keyPressed(UserInputComponent::KEY_D)) {
-		entity->getPhysics()->setAcceleration(entity->getPhysics()->getAcceleration() +
-			Vec3(entity->forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
+	if(userInput->keyPressed(UserInputComponent::KEY_D)) {
+		physics->setAcceleration(physics->getAcceleration() +
+			Vec3(forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
 			movement_acceleration);
 	}
-	if(entity->getUserInput()->keyPressed(UserInputComponent::KEY_ESCAPE)) {
-		entity->getStage().getGame().shutdown();
+	if(userInput->keyPressed(UserInputComponent::KEY_ESCAPE)) {
+		game.shutdown();
 	}
 	
-	entity->rotate(entity->getUserInput()->getMouseYMovement() * -rotation_speed,
-		entity->getUserInput()->getMouseXMovement() * rotation_speed, 0.0f);
+	rotate(userInput->getMouseYMovement() * -rotation_speed,
+		userInput->getMouseXMovement() * rotation_speed, 0.0f);
 }

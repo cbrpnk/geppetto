@@ -1,16 +1,7 @@
 fix input system "looking down and turning" + clean it up
-make Game class have a list of stages, remove the static methods in stage
-make use of the new relationshitp between games and stages
+looking right and left has a "wobble"
 
-remove reference to Game from Stage
-make Game::render private
-make game a static class
-
-check entity names, stage names.
-make entity have a type such that you can do something like: Entity::getAllByType("cube");
-Entity: removeCustomClass ( delete ); getCustomClass()
-
-
+Prifix every engine name with G (GEntity, GStage, GGame)
 
 
 Load OBJ files

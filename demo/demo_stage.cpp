@@ -1,36 +1,32 @@
 #include <string>
+#include <vector>
 #include "../geppetto/geppetto.h"
 #include "demo_stage.h"
 #include "player.h"
 #include "cube.h"
 
-DemoStage::DemoStage(Game& ParentGame, std::string name) : Stage(ParentGame, name)
+
+const size_t DemoStage::NCubes = 100;
+
+
+DemoStage::DemoStage() :
+Stage("Demo_Stage")
 {}
+
 
 DemoStage::~DemoStage()
 {}
 
+
 void DemoStage::load()
 {
-	
-	Entity* player = new Entity(*this);
-	player->name = "Player";
-	player->addCustomClass(new Player());
-	addEntity(player);
-	setCameraEntity(player);
+	new Player();
 	
 	// Create cubes
-	for(int i=0; i<100; ++i) {
-		Entity* entity = new Entity(*this);
-		entity->name = "Cube" + std::to_string(i);
-		entity->addCustomClass(new Cube());
-		addEntity(entity);
+	for(size_t i=0; i<DemoStage::NCubes; ++i) {
+		new Cube("Cube" + std::to_string(i));
 	}
-	
-	Stage::load();
 }
 
 void DemoStage::update()
-{
-	Stage::update();
-}
+{}

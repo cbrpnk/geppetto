@@ -1,5 +1,5 @@
 #include "camera_component.h"
-#include "entity.h"
+#include "../entity.h"
 
 CameraComponent::CameraComponent(Entity& e) : Component(e),
 position(e.position),

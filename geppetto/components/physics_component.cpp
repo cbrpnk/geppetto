@@ -1,5 +1,5 @@
-#include "entity.h"
-#include "component.h"
+#include "../entity.h"
+#include "../component.h"
 #include "physics_component.h"
 
 

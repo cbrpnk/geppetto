@@ -7,11 +7,10 @@
 
 //#include "component_controller.h"
 #include "component.h"
-#include "camera_component.h"
-#include "geometry_component.h"
-#include "physics_component.h"
-#include "user_input_component.h"
-#include "custom_class.h"
+#include "components/camera_component.h"
+#include "components/geometry_component.h"
+#include "components/physics_component.h"
+#include "components/user_input_component.h"
 #include "math/vec3.h"
 #include "math/mat4.h"
 
@@ -20,42 +19,42 @@ class Stage;
 class Entity
 {
 public:
-	bool                active;
-	std::string         name;
-	Vec3                position;
-	Vec3                forward;
-	Vec3                up;
+	bool        active;
+	std::string name;
+	std::string type;
+	Vec3        position;
+	Vec3        forward;
+	Vec3        up;
 	
-	Entity(Stage& parentStage);
-	~Entity();
+	Entity(std::string n, std::string t);
+	virtual ~Entity();
 	
-	// TODO:
-	// removeCustomClass()
-	// getCustomClass()
+	virtual void load();
+	virtual void update();
+	void loadEntity();
+	void updateEntity();
 	
-	void   addCustomClass(CustomClass* const c);
-	Mat4   getReferenceFrame() const;
+	Game&  getGame() const;
 	Stage& getStage() const;
-	void   load();
+	Mat4   getReferenceFrame() const;
 	void   placeAt(const float x, const float y, const float z);
 	void   rotate(const float x, const float y, const float z);
-	void   update();
 	
 	/* Deal With Components */
 	void addComponent(const Component::Type type);
 	bool hasComponent(const Component::Type type) const;
 	void removeComponent(const Component::Type type);
 	
-	CameraComponent*    getCamera() const;
-	GeometryComponent*  getGeometry() const;
-	PhysicsComponent*   getPhysics() const;
-	UserInputComponent* getUserInput()const ;
+	CameraComponent*    getCamera()    const;
+	GeometryComponent*  getGeometry()  const;
+	PhysicsComponent*   getPhysics()   const;
+	UserInputComponent* getUserInput() const;
 	
-private:
+protected:
 	const static        std::string default_name;
 	static int          n_entities;
 	
-	CustomClass*        customClass;
+	Game&               game;
 	Stage&              stage;
 	
 	CameraComponent*    camera;

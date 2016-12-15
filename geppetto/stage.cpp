@@ -1,27 +1,35 @@
 #include "stage.h"
 
-Stage* Stage::activeStage;
-
-
-Stage::Stage(Game& parentGame, std::string stageName) : game(parentGame),
+Stage::Stage(std::string stageName) :
+game(Game::getInstance()),
 name(stageName)
-{}
+{
+	game.addStage(this);
+}
+
 
 Stage::~Stage()
-{}
-
-void Stage::addEntity(Entity* const e)
 {
-	entities.insert(std::make_pair(e->name, e));
-}
-
-Stage* Stage::getActiveStage()
-{
-	return activeStage;
+	for(auto entity : entitiesByName) {
+		delete(entity.second);
+	}
 }
 
 
-Entity* Stage::getCameraEntity()
+void Stage::addEntity(Entity* e)
+{
+	if(entitiesByName.find(e->name) == entitiesByName.end()) {
+		entitiesByName.insert(std::make_pair(e->name, e));
+		
+		if(entitiesByType.find(e->type) == entitiesByType.end()) {
+			entitiesByType.insert(std::make_pair(e->type, std::vector<Entity*>()));
+		}
+		(entitiesByType[e->type]).push_back(e);
+	}
+}
+
+
+Entity* Stage::getCameraEntity() const
 {
 	return cameraEntity;
 }
@@ -29,35 +37,47 @@ Entity* Stage::getCameraEntity()
 
 const std::map<std::string, Entity*>& Stage::getEntities() const
 {
-	return entities;
+	return entitiesByName;
 }
 
-Game& Stage::getGame()
+
+std::vector<Entity*>* Stage::getEntitiesByType(const std::string type)
+{
+	if(entitiesByType.find(type) != entitiesByType.end()) {
+		return &(entitiesByType[type]);
+	}
+	
+	return nullptr;
+}
+
+
+Entity* Stage::getEntityByName(const std::string name)
+{
+	if(entitiesByName.find(name) != entitiesByName.end()) {
+		return entitiesByName[name];
+	}
+	
+	return nullptr;
+}
+
+
+Game& Stage::getGame() const
 {
 	return game;
 }
 
 
-std::string Stage::getName()
+std::string Stage::getName() const
 {
 	return name;
 }
 
 
-void Stage::load()
-{
-	activeStage = this;
-	for(auto entity : activeStage->getEntities()) {
-		entity.second->load();
-	}
-}
-
-
 void Stage::removeEntity(const std::string name)
 {
-	if(entities.find(name) != entities.end()) {
-		delete(entities[name]);
-		entities.erase(name);
+	if(entitiesByName.find(name) != entitiesByName.end()) {
+		delete(entitiesByName[name]);
+		entitiesByName.erase(name);
 	}
 }
 
@@ -74,10 +94,35 @@ void Stage::setName(const std::string name)
 }
 
 
-void Stage::update()
+void Stage::updateStage()
 {
-	for(auto entity : activeStage->getEntities()) {
-		if(entity.second->active)
-			entity.second->update();
+	for(auto entity : entitiesByName) {
+		if(entity.second->active) {
+			entity.second->updateEntity();
+		}
+	}
+	
+	/* Call the derived class update() */
+	update();
+}
+
+
+void Stage::loadStage()
+{
+	/* Call the derived class load() risponsible for adding
+     * and initializing entities.*/
+	load();
+	
+	/* Let's actually to the work to load those added entities */
+	for(auto entity : entitiesByName) {
+		entity.second->loadEntity();
 	}
 }
+
+
+void Stage::load()
+{}
+
+
+void Stage::update()
+{}

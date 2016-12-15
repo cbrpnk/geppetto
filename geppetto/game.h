@@ -11,7 +11,8 @@ class Stage;
 class Game
 {
 public:
-	static void glfw_error_callback(int error, const char *desc);
+	static void  glfw_error_callback(int error, const char *desc);
+	static Game& getInstance();
 	
 	Game(const std::string t, const int w, const int h);
 	~Game();
@@ -22,11 +23,12 @@ public:
 	
 	/* Stage */
 	void   addStage(Stage* stage);
-	Stage* getActiveStage();
+	Stage& getActiveStage();
 	Stage* getStage(std::string name);
-	void   loadStage(std::string name);
+	bool   loadStage(std::string name);
 	
-private:
+protected:
+	static Game* instance;
 	std::string name;
 	GLFWwindow* window;
 	int width;
@@ -37,6 +39,7 @@ private:
 	Stage* activeStage;
 	std::map<std::string, Stage*> stages;
 	
+private:	
 	void render();
 };
 

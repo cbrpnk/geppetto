@@ -4,6 +4,8 @@
 #include <vector>
 
 class Entity;
+class Game;
+class Stage;
 
 class Component
 {
@@ -12,6 +14,8 @@ public:
 		Camera, Geometry, Physics, UserInput
 	};
 	
+	Game&   game;
+	Stage&  stage;
 	Entity& entity;
 	
 	Component(Entity& e);

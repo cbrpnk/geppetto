@@ -8,8 +8,9 @@
 class DemoStage : public Stage
 {
 public:
+	static const size_t NCubes;
 	
-	DemoStage(Game& parentGame, std::string name);
+	DemoStage();
 	~DemoStage();
 	
 	void load();

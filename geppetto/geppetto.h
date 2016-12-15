@@ -1,15 +1,14 @@
 #ifndef _GEPPETTO_H_
 #define _GEPPETTO_H_
 
-#include "camera_component.h"
 #include "component.h"
-#include "custom_class.h"
+#include "components/camera_component.h"
+#include "components/geometry_component.h"
+#include "components/physics_component.h"
+#include "components/user_input_component.h"
 #include "entity.h"
 #include "game.h"
-#include "geometry_component.h"
-#include "physics_component.h"
 #include "stage.h"
-#include "user_input_component.h"
 
 #include "math/gmath.h"
 #include "math/mat3.h"

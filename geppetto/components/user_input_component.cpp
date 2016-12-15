@@ -90,8 +90,15 @@ bool UserInputComponent::keyPressed(const int key)
 }
 
 
-void UserInputComponent::glfw_cursor_callback(GLFWwindow* window,
-	double x_pos, double y_pos)
+void UserInputComponent::glfw_mouse_button_callback(GLFWwindow* window,
+    int button, int action, int mods)
+{
+
+}
+
+
+void UserInputComponent::glfw_mouse_move_callback(GLFWwindow* window,
+    double x_pos, double y_pos)
 {
 	mouse_x_move = mouse_x - x_pos;
 	mouse_y_move = mouse_y - y_pos;
@@ -101,7 +108,7 @@ void UserInputComponent::glfw_cursor_callback(GLFWwindow* window,
 
 
 void UserInputComponent::glfw_key_callback(GLFWwindow* window,
-	int key, int scancode, int action, int mode)
+    int key, int scancode, int action, int mode)
 {
 	if(action == GLFW_PRESS) {
 		keyboard.insert(key);

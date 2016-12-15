@@ -3,24 +3,43 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#include "camera_component.h"
+#include "components/camera_component.h"
+#include "components/geometry_component.h"
+#include "components/user_input_component.h"
 #include "game.h"
-#include "geometry_component.h"
 #include "stage.h"
-#include "user_input_component.h"
 
+
+Game* Game::instance = nullptr;
 
 Game::Game(std::string n, const int w, const int h) :
 name(n),
 width(w),
 height(h)
-{}
+{
+	instance = this;
+}
 
 Game::~Game()
-{}
+{
+	for(auto stage : stages) {
+		delete(stage.second);
+	}
+}
 
 
-/* Public */
+void Game::glfw_error_callback(int error, const char *desc)
+{
+	std::cout << "GLFW error: " << desc << std::endl;
+}
+
+
+Game& Game::getInstance()
+{
+	return *instance;
+}
+
+
 bool Game::init()
 {
 	glfwSetErrorCallback(glfw_error_callback);
@@ -53,7 +72,8 @@ bool Game::init()
 	
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetKeyCallback(window, UserInputComponent::glfw_key_callback);
-	glfwSetCursorPosCallback(window, UserInputComponent::glfw_cursor_callback);
+	glfwSetCursorPosCallback(window, UserInputComponent::glfw_mouse_move_callback);
+	glfwSetMouseButtonCallback(window, UserInputComponent::glfw_mouse_button_callback);
 	
 	// Viewport and projection
 	glfwGetFramebufferSize(window, &width, &height);
@@ -81,7 +101,7 @@ void Game::run()
 {
 	while(runGame) {
 		glfwPollEvents();
-		Stage::getActiveStage()->update();
+		activeStage->updateStage();
 		render();
 	}
 	
@@ -101,9 +121,9 @@ void Game::addStage(Stage* stage)
 }
 
 
-Stage* Game::getActiveStage()
+Stage& Game::getActiveStage()
 {
-	return activeStage;
+	return *activeStage;
 }
 
 
@@ -116,19 +136,15 @@ Stage* Game::getStage(std::string name)
 }
 
 
-void Game::loadStage(std::string name)
+bool Game::loadStage(std::string name)
 {
 	Stage* stage = getStage(name);
 	if(stage) {
-		stage->load();
 		activeStage = stage;
+		stage->loadStage();
+		return true;
 	}
-}
-
-
-void Game::glfw_error_callback(int error, const char *desc)
-{
-	std::cout << "GLFW error: " << desc << std::endl;
+	return false;
 }
 
 
@@ -138,17 +154,16 @@ void Game::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
 		
-		Stage* stage = Stage::getActiveStage();
-		Entity* cameraEntity = stage->getCameraEntity();
+		Entity* cameraEntity = activeStage->getCameraEntity();
 		
 		Vec3 camera_position = cameraEntity->position + cameraEntity->getCamera()->getPosition();
 		Vec3 look_at = camera_position + cameraEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
-		for(auto e : stage->getEntities()) {
+		for(auto e : activeStage->getEntities()) {
 			
 			// Check if entity has a geometry component
-			if(e.second->hasComponent(Component::Type::Geometry)) {
+			if(e.second->active && e.second->hasComponent(Component::Type::Geometry)) {
 				
 				glPushMatrix();
 					glMultMatrixf(e.second->getReferenceFrame().toArray());
@@ -172,20 +187,14 @@ void Game::render()
 						type = GL_TRIANGLES;
 						break;
 					}
+					
 					glBegin(type);
-						
-						for(auto vertex : e.second->getGeometry()->getVertices()) {
-						}	
-						
-						glColor3f(0.9f, 0.1f, 0.1f);
-						for(std::size_t j=0; j<24; ++j) {
-							if(j%4 == 0) {
-							}
-							float x = e.second->getGeometry()->getVertices()[j*3+0];
-							float y = e.second->getGeometry()->getVertices()[j*3+1];
-							float z = e.second->getGeometry()->getVertices()[j*3+2];
-							Vec4 point(x, y, z, 1);
-							glVertex3f(point.x, point.y, point.z);
+						std::vector<float> vertices = e.second->getGeometry()->getVertices();
+						Vec3* vertex;
+						for(size_t i=0; i<vertices.size(); i+=3) {
+							glColor3f(1.0f, 0.1f, 0.1f);
+							vertex = (Vec3*) &vertices[i];
+							glVertex3f(vertex->x, vertex->y, vertex->z);
 						}
 					glEnd();
 					

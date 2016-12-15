@@ -1,23 +1,19 @@
-#include <iostream>
-#include <string>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
-
 #include "../geppetto/geppetto.h"
+#include "demo_game.h"
 #include "demo_stage.h"
 
 
 int main(int argc, char **argv)
 {
 	// Setup Game;
-	Game demoGame("Demo", 800, 600);
+	DemoGame demoGame;
 	
 	if(demoGame.init()) {
-		demoGame.addStage(new DemoStage(demoGame, "demo_stage"));
+		new DemoStage();
 		
-		demoGame.loadStage("demo_stage");
-		demoGame.run();
+		if(demoGame.loadStage("Demo_Stage")) {
+			demoGame.run();
+		}
 	}
 	
 	return 0;

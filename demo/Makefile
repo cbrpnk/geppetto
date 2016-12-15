@@ -15,20 +15,20 @@ OUT=demo
 
 GEPPETTO=../geppetto
 
-SOURCE=$(GEPPETTO)/camera_component.cpp \
-$(GEPPETTO)/component.cpp \
-$(GEPPETTO)/custom_class.cpp \
+SOURCE=$(GEPPETTO)/component.cpp \
+$(GEPPETTO)/components/camera_component.cpp \
+$(GEPPETTO)/components/geometry_component.cpp \
+$(GEPPETTO)/components/physics_component.cpp \
+$(GEPPETTO)/components/user_input_component.cpp \
 $(GEPPETTO)/entity.cpp \
 $(GEPPETTO)/game.cpp \
-$(GEPPETTO)/geometry_component.cpp \
-$(GEPPETTO)/physics_component.cpp \
 $(GEPPETTO)/stage.cpp \
-$(GEPPETTO)/user_input_component.cpp \
 $(GEPPETTO)/math/gmath.cpp \
 $(GEPPETTO)/math/mat3.cpp \
 $(GEPPETTO)/math/mat4.cpp \
 $(GEPPETTO)/math/vec3.cpp \
 $(GEPPETTO)/math/vec4.cpp \
+demo_game.cpp \
 demo_stage.cpp \
 cube.cpp \
 player.cpp \

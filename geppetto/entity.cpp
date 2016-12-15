@@ -3,6 +3,8 @@
 #include <algorithm>
 
 #include "entity.h"
+#include "game.h"
+#include "stage.h"
 #include "math/gmath.h"
 
 
@@ -10,25 +12,26 @@ const std::string Entity::default_name = "Entity";
 int Entity::n_entities = 0;
 
 
-Entity::Entity(Stage& parentStage) : active(true),
-	name(default_name + std::to_string(n_entities++)),
-	position(Vec3(0, 0, 0)),
-	forward(Vec3(0, 0, 1)),
-	up(Vec3(0, 1, 0)),
-	customClass(nullptr),
-	stage(parentStage),
-	camera(nullptr),
-	geometry(nullptr),
-	physics(nullptr),
-	userInput(nullptr)
-{}
+Entity::Entity(std::string n, std::string t) :
+active(true),
+name(n),
+type(t),
+position(Vec3(0, 0, 0)),
+forward(Vec3(0, 0, 1)),
+up(Vec3(0, 1, 0)),
+game(Game::getInstance()),
+stage(Game::getInstance().getActiveStage()),
+camera(nullptr),
+geometry(nullptr),
+physics(nullptr),
+userInput(nullptr)
+{
+	stage.addEntity(this);
+}
 
 
 Entity::~Entity()
 {
-	if(customClass) {
-		delete(customClass);
-	}
 	if(camera) {
 		delete(camera);
 	}
@@ -44,9 +47,35 @@ Entity::~Entity()
 }
 
 
-void Entity::addCustomClass(CustomClass* const c)
+void Entity::load()
+{}
+
+
+void Entity::update()
+{}
+
+void Entity::loadEntity()
 {
-	customClass = c;
+	load();
+}
+
+
+void Entity::updateEntity()
+{
+	if(camera) {
+		camera->update();
+	}
+	if(geometry) {
+		geometry->update();
+	}
+	if(physics) {
+		physics->update();
+	}
+	if(userInput) {
+		userInput->update();
+	}
+	
+	update();
 }
 
 
@@ -76,17 +105,16 @@ Mat4 Entity::getReferenceFrame() const
 	return translation * rotation;
 }
 
-Stage& Entity::getStage() const
+
+Game& Entity::getGame() const
 {
-	return stage;
+	return game;
 }
 
 
-void Entity::load()
+Stage& Entity::getStage() const
 {
-	if(customClass) {
-		customClass->load(this);
-	}
+	return stage;
 }
 
 
@@ -102,26 +130,6 @@ void Entity::rotate(const float x, const float y, const float z)
 	up.normalize();
 }
 
-
-void Entity::update()
-{
-	if(customClass) {
-		customClass->update(this);
-	}
-	if(camera) {
-		camera->update();
-	}
-	if(geometry) {
-		geometry->update();
-	}
-	if(physics) {
-		physics->update();
-	}
-	if(userInput) {
-		userInput->update();
-	}
-	
-}
 
 void Entity::addComponent(const Component::Type type)
 {

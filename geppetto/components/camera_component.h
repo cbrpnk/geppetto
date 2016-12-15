@@ -1,8 +1,8 @@
 #ifndef _GEPPETTO_CAMERA_COMPONENT_H_
 #define _GEPPETTO_CAMERA_COMPONENT_H_
 
-#include "math/vec3.h"
-#include "component.h"
+#include "../math/vec3.h"
+#include "../component.h"
 
 class CameraComponent : public Component
 {

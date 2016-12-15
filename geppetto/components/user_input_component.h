@@ -4,8 +4,8 @@
 #include <set>
 
 #include "GLFW/glfw3.h"
-#include "game.h"
-#include "component.h"
+#include "../game.h"
+#include "../component.h"
 
 
 class UserInputComponent: public Component {
@@ -78,10 +78,12 @@ private:
 	
 	// Game::init will register those callbacks through the GLFW API
 	friend bool Game::init();
-	static void glfw_cursor_callback(GLFWwindow* window,
-		double x_pos, double y_pos);
+	static void glfw_mouse_move_callback(GLFWwindow* window,
+        double x_pos, double y_pos);
+	static void glfw_mouse_button_callback(GLFWwindow* window,
+        int button, int action, int mods);
 	static void glfw_key_callback(GLFWwindow *window,
-		int key, int scancode, int action, int mode);
+        int key, int scancode, int action, int mode);
 };
 
 #endif

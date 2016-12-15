@@ -12,27 +12,54 @@ class Game;
 class Stage
 {
 public:
-	Stage(Game& parentGame, std::string stageName);
-	~Stage();
+	Stage(std::string stageName);
+	virtual ~Stage();
 	
-	void                                  addEntity(Entity* const e);
-	static Stage*                         getActiveStage();
-	Entity*                               getCameraEntity();
-	const std::map<std::string, Entity*>& getEntities() const;
-	Game&                                 getGame();
-	std::string                           getName();
-	virtual void                          load();
-	void                                  removeEntity(const std::string name);
-	void                                  setCameraEntity(Entity* const e);
-	void                                  setName(const std::string name);
-	virtual void                          update();
+	Game&       getGame() const;
+	std::string getName() const;
+	void        setName(const std::string name);
+	
+	
+	//////////////////// Deal with Entities /////////////////////
+	
+	
+	void                                   addEntity(Entity* e);
+	Entity*                                getCameraEntity() const;
+	const std::map<std::string, Entity*>&  getEntities() const;
+	std::vector<Entity*>*                  getEntitiesByType(const std::string type);
+	Entity*                                getEntityByName(const std::string name);
+	void                                   removeEntity(const std::string name);
+	void                                   setCameraEntity(Entity* const e);
+	
+	
+	/////////////////// Load/Update //////////////////////////
+	
+	
+	/* loadStage() is called by Game::loadStage() */
+	void loadStage();
+	/* Called on every frame by Game::run() */
+	void updateStage();
+	
+	/* Methods meant to be defined by the derived class; are called by
+     * loadStage() and updateStage() respectively
+     */
+	virtual void load();
+	virtual void update();
+
 
 protected:
+	/* Reference to the current game */
 	Game& game;
+	/* Unique identifier to a stage */
 	std::string name;
-	std::map<std::string, Entity*> entities;
+	/* All the entities in this stage */
+	std::map<std::string, Entity*> entitiesByName;
+	/* Maps a user defined entity type to the set of entities that are of
+     * that type. Used by getEntitiesByType().
+     */
+	std::map<std::string, std::vector<Entity*>> entitiesByType;
+	/* Entity that possess a CameraComponent used by Game::render() */
 	Entity* cameraEntity;
-	static Stage* activeStage;
 };
 
 #endif
