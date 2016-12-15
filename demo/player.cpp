@@ -3,7 +3,7 @@
 
 
 Player::Player() :
-Entity::Entity("Player", "Player")
+GEntity::GEntity("Player", "Player")
 {
 	movement_acceleration = 0.003f;
 	rotation_speed = 0.09f;
@@ -23,7 +23,7 @@ void Player::load()
 	
 	addComponent(Component::Type::UserInput);
 	
-	gStage.setCameraEntity(this);
+	gStage.setCameraGEntity(this);
 }
 
 

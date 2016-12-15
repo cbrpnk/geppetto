@@ -154,15 +154,15 @@ void GGame::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
 		
-		Entity* cameraEntity = activeGStage->getCameraEntity();
+		GEntity* cameraGEntity = activeGStage->getCameraGEntity();
 		
-		Vec3 camera_position = cameraEntity->position + cameraEntity->getCamera()->getPosition();
-		Vec3 look_at = camera_position + cameraEntity->forward;
+		Vec3 camera_position = cameraGEntity->position + cameraGEntity->getCamera()->getPosition();
+		Vec3 look_at = camera_position + cameraGEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
-		for(auto e : activeGStage->getEntities()) {
+		for(auto e : activeGStage->getGEntities()) {
 			
-			// Check if entity has a geometry component
+			// Check if GEntity has a geometry component
 			if(e.second->active && e.second->hasComponent(Component::Type::Geometry)) {
 				
 				glPushMatrix();

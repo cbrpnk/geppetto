@@ -2,13 +2,13 @@
 #include <vector>
 
 #include "component.h"
-#include "entity.h"
+#include "gentity.h"
 
 
-Component::Component(Entity& e) :
+Component::Component(GEntity& e) :
 gGame(e.getGGame()),
 gStage(e.getGStage()),
-entity(e)
+gEntity(e)
 {}
 
 

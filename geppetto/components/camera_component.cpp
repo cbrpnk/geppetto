@@ -1,7 +1,7 @@
 #include "camera_component.h"
-#include "../entity.h"
+#include "../gentity.h"
 
-CameraComponent::CameraComponent(Entity& e) : Component(e),
+CameraComponent::CameraComponent(GEntity& e) : Component(e),
 position(e.position),
 up(e.up),
 forward(e.forward)

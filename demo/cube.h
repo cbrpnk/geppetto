@@ -5,7 +5,7 @@
 
 #include "../geppetto/geppetto.h"
 
-class Cube : public Entity
+class Cube : public GEntity
 {
 public:
 	float xRotationSpeed;

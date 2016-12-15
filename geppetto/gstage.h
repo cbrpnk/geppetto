@@ -5,7 +5,7 @@
 #include <map>
 #include <iterator>
 
-#include "entity.h"
+#include "gentity.h"
 
 class GGame;
 
@@ -20,16 +20,16 @@ public:
 	void        setName(const std::string name);
 	
 	
-	//////////////////// Deal with Entities /////////////////////
+	//////////////////// Deal with GEntities /////////////////////
 	
 	
-	void                                   addEntity(Entity* e);
-	Entity*                                getCameraEntity() const;
-	const std::map<std::string, Entity*>&  getEntities() const;
-	std::vector<Entity*>*                  getEntitiesByType(const std::string type);
-	Entity*                                getEntityByName(const std::string name);
-	void                                   removeEntity(const std::string name);
-	void                                   setCameraEntity(Entity* const e);
+	void                                    addGEntity(GEntity* e);
+	GEntity*                                getCameraGEntity() const;
+	const std::map<std::string, GEntity*>&  getGEntities() const;
+	std::vector<GEntity*>*                  getGEntitiesByType(const std::string type);
+	GEntity*                                getGEntityByName(const std::string name);
+	void                                    removeGEntity(const std::string name);
+	void                                    setCameraGEntity(GEntity* const e);
 	
 	
 	/////////////////// Load/Update //////////////////////////
@@ -52,14 +52,14 @@ protected:
 	GGame& gGame;
 	/* Unique identifier to a GStage */
 	std::string name;
-	/* All the entities in this GStage */
-	std::map<std::string, Entity*> entitiesByName;
-	/* Maps a user defined entity type to the set of entities that are of
-     * that type. Used by getEntitiesByType().
+	/* All the GEntities in this GStage */
+	std::map<std::string, GEntity*> gEntitiesByName;
+	/* Maps a user defined GEntity type to the set of GEntities that are of
+     * that type. Used by getGEntitiesByType().
      */
-	std::map<std::string, std::vector<Entity*>> entitiesByType;
-	/* Entity that possess a CameraComponent used by GGame::render() */
-	Entity* cameraEntity;
+	std::map<std::string, std::vector<GEntity*>> gEntitiesByType;
+	/* GEntity that possess a CameraComponent used by GGame::render() */
+	GEntity* cameraGEntity;
 };
 
 #endif

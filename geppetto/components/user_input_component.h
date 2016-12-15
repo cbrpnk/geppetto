@@ -10,7 +10,7 @@
 
 class UserInputComponent: public Component {
 public:
-	UserInputComponent(Entity& e);
+	UserInputComponent(GEntity& e);
 	~UserInputComponent();
 	
 	static const int KEY_SPACE;

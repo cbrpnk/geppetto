@@ -38,7 +38,7 @@ const std::vector<float> GeometryComponent::Cube = {
 	-0.5f, -0.5f, 0.5f,
 };
 
-GeometryComponent::GeometryComponent(Entity& e) : Component(e)
+GeometryComponent::GeometryComponent(GEntity& e) : Component(e)
 {}
 
 GeometryComponent::~GeometryComponent()

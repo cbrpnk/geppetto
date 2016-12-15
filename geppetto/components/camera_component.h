@@ -8,7 +8,7 @@ class CameraComponent : public Component
 {
 public:
 	
-	CameraComponent(Entity& e);
+	CameraComponent(GEntity& e);
 	~CameraComponent();
 	
 	Vec3 getForward();
@@ -19,7 +19,7 @@ public:
 	void setUp(const Vec3 u);
 	
 private:
-	// position is relative to the position of the entity
+	// position is relative to the position of the GEntity
 	Vec3 position;
 	Vec3 up;
 	Vec3 forward;

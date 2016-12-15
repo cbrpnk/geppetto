@@ -2,17 +2,17 @@
 #include <string>
 #include <algorithm>
 
-#include "entity.h"
+#include "gentity.h"
 #include "ggame.h"
 #include "gstage.h"
 #include "math/gmath.h"
 
 
-const std::string Entity::default_name = "Entity";
-int Entity::n_entities = 0;
+const std::string GEntity::default_name = "GEntity";
+int GEntity::n_gEntities = 0;
 
 
-Entity::Entity(std::string n, std::string t) :
+GEntity::GEntity(std::string n, std::string t) :
 active(true),
 name(n),
 type(t),
@@ -26,11 +26,11 @@ geometry(nullptr),
 physics(nullptr),
 userInput(nullptr)
 {
-	gStage.addEntity(this);
+	gStage.addGEntity(this);
 }
 
 
-Entity::~Entity()
+GEntity::~GEntity()
 {
 	if(camera) {
 		delete(camera);
@@ -47,20 +47,20 @@ Entity::~Entity()
 }
 
 
-void Entity::load()
+void GEntity::load()
 {}
 
 
-void Entity::update()
+void GEntity::update()
 {}
 
-void Entity::loadEntity()
+void GEntity::loadGEntity()
 {
 	load();
 }
 
 
-void Entity::updateEntity()
+void GEntity::updateGEntity()
 {
 	if(camera) {
 		camera->update();
@@ -79,7 +79,7 @@ void Entity::updateEntity()
 }
 
 
-void Entity::placeAt(const float x, const float y, const float z)
+void GEntity::placeAt(const float x, const float y, const float z)
 {
 	position.x = x;
 	position.y = y;
@@ -87,7 +87,7 @@ void Entity::placeAt(const float x, const float y, const float z)
 }
 
 
-Mat4 Entity::getReferenceFrame() const
+Mat4 GEntity::getReferenceFrame() const
 {
 	Vec4 x_axis(Vec4(up).cross(forward));
 	Vec4 y_axis(up);
@@ -106,19 +106,19 @@ Mat4 Entity::getReferenceFrame() const
 }
 
 
-GGame& Entity::getGGame() const
+GGame& GEntity::getGGame() const
 {
 	return gGame;
 }
 
 
-GStage& Entity::getGStage() const
+GStage& GEntity::getGStage() const
 {
 	return gStage;
 }
 
 
-void Entity::rotate(const float x, const float y, const float z)
+void GEntity::rotate(const float x, const float y, const float z)
 {
 	Mat4 ref = getReferenceFrame();
 	ref.rotate(x, y, z);
@@ -131,7 +131,7 @@ void Entity::rotate(const float x, const float y, const float z)
 }
 
 
-void Entity::addComponent(const Component::Type type)
+void GEntity::addComponent(const Component::Type type)
 {
 	if(!hasComponent(type)) {
 		if(type == Component::Type::Camera) {
@@ -147,7 +147,7 @@ void Entity::addComponent(const Component::Type type)
 }
 
 
-bool Entity::hasComponent(const Component::Type type) const
+bool GEntity::hasComponent(const Component::Type type) const
 {
 	if(type == Component::Type::Camera && camera) {
 		return true;
@@ -163,7 +163,7 @@ bool Entity::hasComponent(const Component::Type type) const
 }
 
 
-void Entity::removeComponent(const Component::Type type)
+void GEntity::removeComponent(const Component::Type type)
 {
 	if(type == Component::Type::Camera && camera) {
 		delete(camera);
@@ -181,25 +181,25 @@ void Entity::removeComponent(const Component::Type type)
 }
 
 
-CameraComponent* Entity::getCamera() const
+CameraComponent* GEntity::getCamera() const
 {
 	return camera;
 }
 
 
-GeometryComponent* Entity::getGeometry() const
+GeometryComponent* GEntity::getGeometry() const
 {
 	return geometry;
 }
 
 
-PhysicsComponent* Entity::getPhysics() const
+PhysicsComponent* GEntity::getPhysics() const
 {
 	return physics;
 }
 	
 
-UserInputComponent* Entity::getUserInput()const
+UserInputComponent* GEntity::getUserInput()const
 {
 	return userInput;
 }

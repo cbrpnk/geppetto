@@ -10,51 +10,51 @@ name(gStageName)
 
 GStage::~GStage()
 {
-	for(auto entity : entitiesByName) {
-		delete(entity.second);
+	for(auto gEntity : gEntitiesByName) {
+		delete(gEntity.second);
 	}
 }
 
 
-void GStage::addEntity(Entity* e)
+void GStage::addGEntity(GEntity* e)
 {
-	if(entitiesByName.find(e->name) == entitiesByName.end()) {
-		entitiesByName.insert(std::make_pair(e->name, e));
+	if(gEntitiesByName.find(e->name) == gEntitiesByName.end()) {
+		gEntitiesByName.insert(std::make_pair(e->name, e));
 		
-		if(entitiesByType.find(e->type) == entitiesByType.end()) {
-			entitiesByType.insert(std::make_pair(e->type, std::vector<Entity*>()));
+		if(gEntitiesByType.find(e->type) == gEntitiesByType.end()) {
+			gEntitiesByType.insert(std::make_pair(e->type, std::vector<GEntity*>()));
 		}
-		(entitiesByType[e->type]).push_back(e);
+		(gEntitiesByType[e->type]).push_back(e);
 	}
 }
 
 
-Entity* GStage::getCameraEntity() const
+GEntity* GStage::getCameraGEntity() const
 {
-	return cameraEntity;
+	return cameraGEntity;
 }
 
 
-const std::map<std::string, Entity*>& GStage::getEntities() const
+const std::map<std::string, GEntity*>& GStage::getGEntities() const
 {
-	return entitiesByName;
+	return gEntitiesByName;
 }
 
 
-std::vector<Entity*>* GStage::getEntitiesByType(const std::string type)
+std::vector<GEntity*>* GStage::getGEntitiesByType(const std::string type)
 {
-	if(entitiesByType.find(type) != entitiesByType.end()) {
-		return &(entitiesByType[type]);
+	if(gEntitiesByType.find(type) != gEntitiesByType.end()) {
+		return &(gEntitiesByType[type]);
 	}
 	
 	return nullptr;
 }
 
 
-Entity* GStage::getEntityByName(const std::string name)
+GEntity* GStage::getGEntityByName(const std::string name)
 {
-	if(entitiesByName.find(name) != entitiesByName.end()) {
-		return entitiesByName[name];
+	if(gEntitiesByName.find(name) != gEntitiesByName.end()) {
+		return gEntitiesByName[name];
 	}
 	
 	return nullptr;
@@ -73,18 +73,18 @@ std::string GStage::getName() const
 }
 
 
-void GStage::removeEntity(const std::string name)
+void GStage::removeGEntity(const std::string name)
 {
-	if(entitiesByName.find(name) != entitiesByName.end()) {
-		delete(entitiesByName[name]);
-		entitiesByName.erase(name);
+	if(gEntitiesByName.find(name) != gEntitiesByName.end()) {
+		delete(gEntitiesByName[name]);
+		gEntitiesByName.erase(name);
 	}
 }
 
 
-void GStage::setCameraEntity(Entity* const e)
+void GStage::setCameraGEntity(GEntity* const e)
 {
-	cameraEntity = e;
+	cameraGEntity = e;
 }
 
 
@@ -96,9 +96,9 @@ void GStage::setName(const std::string name)
 
 void GStage::updateGStage()
 {
-	for(auto entity : entitiesByName) {
-		if(entity.second->active) {
-			entity.second->updateEntity();
+	for(auto gEntity : gEntitiesByName) {
+		if(gEntity.second->active) {
+			gEntity.second->updateGEntity();
 		}
 	}
 	
@@ -110,12 +110,12 @@ void GStage::updateGStage()
 void GStage::loadGStage()
 {
 	/* Call the derived class load() risponsible for adding
-     * and initializing entities.*/
+     * and initializing GEntities.*/
 	load();
 	
-	/* Let's actually to the work to load those added entities */
-	for(auto entity : entitiesByName) {
-		entity.second->loadEntity();
+	/* Let's actually to the work to load those added GEntities */
+	for(auto gEntity : gEntitiesByName) {
+		gEntity.second->loadGEntity();
 	}
 }
 

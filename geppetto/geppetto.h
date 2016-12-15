@@ -6,7 +6,7 @@
 #include "components/geometry_component.h"
 #include "components/physics_component.h"
 #include "components/user_input_component.h"
-#include "entity.h"
+#include "gentity.h"
 #include "ggame.h"
 #include "gstage.h"
 

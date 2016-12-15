@@ -58,7 +58,7 @@ int UserInputComponent::mouse_x_move = 0;
 int UserInputComponent::mouse_y = 0;
 int UserInputComponent::mouse_y_move = 0;
 
-UserInputComponent::UserInputComponent(Entity& e) : Component(e)
+UserInputComponent::UserInputComponent(GEntity& e) : Component(e)
 {}
 
 UserInputComponent::~UserInputComponent()

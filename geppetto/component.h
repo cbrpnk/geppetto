@@ -3,7 +3,7 @@
 
 #include <vector>
 
-class Entity;
+class GEntity;
 class GGame;
 class GStage;
 
@@ -16,9 +16,9 @@ public:
 	
 	GGame&   gGame;
 	GStage&  gStage;
-	Entity& entity;
+	GEntity& gEntity;
 	
-	Component(Entity& e);
+	Component(GEntity& e);
 	virtual ~Component();
 	virtual void update();
 };

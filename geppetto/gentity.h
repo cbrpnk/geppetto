@@ -1,5 +1,5 @@
-#ifndef _GEPPETTO_ENTITY_H_
-#define _GEPPETTO_ENTITY_H_
+#ifndef _GENTITY_H_
+#define _GENTITY_H_
 
 #include <memory>
 #include <string>
@@ -16,7 +16,7 @@
 
 class GStage;
 
-class Entity
+class GEntity
 {
 public:
 	bool        active;
@@ -26,13 +26,13 @@ public:
 	Vec3        forward;
 	Vec3        up;
 	
-	Entity(std::string n, std::string t);
-	virtual ~Entity();
+	GEntity(std::string n, std::string t);
+	virtual ~GEntity();
 	
 	virtual void load();
 	virtual void update();
-	void loadEntity();
-	void updateEntity();
+	void loadGEntity();
+	void updateGEntity();
 	
 	GGame&  getGGame() const;
 	GStage& getGStage() const;
@@ -52,7 +52,7 @@ public:
 	
 protected:
 	const static        std::string default_name;
-	static int          n_entities;
+	static int          n_gEntities;
 	
 	GGame&               gGame;
 	GStage&              gStage;

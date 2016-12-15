@@ -20,7 +20,7 @@ $(GEPPETTO)/components/camera_component.cpp \
 $(GEPPETTO)/components/geometry_component.cpp \
 $(GEPPETTO)/components/physics_component.cpp \
 $(GEPPETTO)/components/user_input_component.cpp \
-$(GEPPETTO)/entity.cpp \
+$(GEPPETTO)/gentity.cpp \
 $(GEPPETTO)/ggame.cpp \
 $(GEPPETTO)/gstage.cpp \
 $(GEPPETTO)/math/gmath.cpp \

@@ -1,9 +1,9 @@
-#include "../entity.h"
+#include "../gentity.h"
 #include "../component.h"
 #include "physics_component.h"
 
 
-PhysicsComponent::PhysicsComponent(Entity& e) : Component(e)
+PhysicsComponent::PhysicsComponent(GEntity& e) : Component(e)
 {
 	acceleration = Vec3(0.0f, 0.0f, 0.0f);
 	velocity = Vec3(0.0f, 0.0f, 0.0f);
@@ -54,5 +54,5 @@ void PhysicsComponent::update()
 {
 	acceleration *= 1 - friction_coefficient;
 	velocity += acceleration - (velocity * friction_coefficient);
-	entity.position += velocity;
+	gEntity.position += velocity;
 }

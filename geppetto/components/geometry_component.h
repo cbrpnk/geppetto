@@ -14,7 +14,7 @@ public:
 	};
 	static const std::vector<float> Cube;
 	
-	GeometryComponent(Entity& e);
+	GeometryComponent(GEntity& e);
 	~GeometryComponent();
 	
 	Type                      getType();

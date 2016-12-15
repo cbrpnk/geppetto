@@ -2,7 +2,7 @@
 
 
 Cube::Cube(std::string name) :
-Entity(name, "Cube"),
+GEntity::GEntity(name, "Cube"),
 xRotationSpeed(0),
 yRotationSpeed(0),
 zRotationSpeed(0)

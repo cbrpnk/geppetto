@@ -7,7 +7,7 @@
 class PhysicsComponent : public Component {
 public:
 	
-	PhysicsComponent(Entity& e);
+	PhysicsComponent(GEntity& e);
 	~PhysicsComponent();
 	
 	Vec3  getAcceleration();
