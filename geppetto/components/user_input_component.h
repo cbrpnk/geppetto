@@ -4,7 +4,7 @@
 #include <set>
 
 #include "GLFW/glfw3.h"
-#include "../game.h"
+#include "../ggame.h"
 #include "../component.h"
 
 
@@ -76,8 +76,8 @@ private:
 	static int mouse_y;
 	static int mouse_y_move;
 	
-	// Game::init will register those callbacks through the GLFW API
-	friend bool Game::init();
+	// GGame::init will register those callbacks through the GLFW API
+	friend bool GGame::init();
 	static void glfw_mouse_move_callback(GLFWwindow* window,
         double x_pos, double y_pos);
 	static void glfw_mouse_button_callback(GLFWwindow* window,

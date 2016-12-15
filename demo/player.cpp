@@ -23,7 +23,7 @@ void Player::load()
 	
 	addComponent(Component::Type::UserInput);
 	
-	stage.setCameraEntity(this);
+	gStage.setCameraEntity(this);
 }
 
 
@@ -51,7 +51,7 @@ void Player::update()
 			movement_acceleration);
 	}
 	if(userInput->keyPressed(UserInputComponent::KEY_ESCAPE)) {
-		game.shutdown();
+		gGame.shutdown();
 	}
 	
 	rotate(userInput->getMouseYMovement() * -rotation_speed,

@@ -1,5 +1,5 @@
-#ifndef _GEPPETTO_STAGE_H_
-#define _GEPPETTO_STAGE_H_
+#ifndef _GSTAGE_H_
+#define _GSTAGE_H_
 
 #include <string>
 #include <map>
@@ -7,15 +7,15 @@
 
 #include "entity.h"
 
-class Game;
+class GGame;
 
-class Stage
+class GStage
 {
 public:
-	Stage(std::string stageName);
-	virtual ~Stage();
+	GStage(std::string gStageName);
+	virtual ~GStage();
 	
-	Game&       getGame() const;
+	GGame&       getGGame() const;
 	std::string getName() const;
 	void        setName(const std::string name);
 	
@@ -35,30 +35,30 @@ public:
 	/////////////////// Load/Update //////////////////////////
 	
 	
-	/* loadStage() is called by Game::loadStage() */
-	void loadStage();
-	/* Called on every frame by Game::run() */
-	void updateStage();
+	/* loadGStage() is called by GGame::loadGStage() */
+	void loadGStage();
+	/* Called on every frame by GGame::run() */
+	void updateGStage();
 	
 	/* Methods meant to be defined by the derived class; are called by
-     * loadStage() and updateStage() respectively
+     * loadGStage() and updateGStage() respectively
      */
 	virtual void load();
 	virtual void update();
 
 
 protected:
-	/* Reference to the current game */
-	Game& game;
-	/* Unique identifier to a stage */
+	/* Reference to the current GGame */
+	GGame& gGame;
+	/* Unique identifier to a GStage */
 	std::string name;
-	/* All the entities in this stage */
+	/* All the entities in this GStage */
 	std::map<std::string, Entity*> entitiesByName;
 	/* Maps a user defined entity type to the set of entities that are of
      * that type. Used by getEntitiesByType().
      */
 	std::map<std::string, std::vector<Entity*>> entitiesByType;
-	/* Entity that possess a CameraComponent used by Game::render() */
+	/* Entity that possess a CameraComponent used by GGame::render() */
 	Entity* cameraEntity;
 };
 

@@ -7,8 +7,8 @@
 #include "components/physics_component.h"
 #include "components/user_input_component.h"
 #include "entity.h"
-#include "game.h"
-#include "stage.h"
+#include "ggame.h"
+#include "gstage.h"
 
 #include "math/gmath.h"
 #include "math/mat3.h"

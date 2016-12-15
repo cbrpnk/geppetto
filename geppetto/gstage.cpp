@@ -1,14 +1,14 @@
-#include "stage.h"
+#include "gstage.h"
 
-Stage::Stage(std::string stageName) :
-game(Game::getInstance()),
-name(stageName)
+GStage::GStage(std::string gStageName) :
+gGame(GGame::getInstance()),
+name(gStageName)
 {
-	game.addStage(this);
+	gGame.addGStage(this);
 }
 
 
-Stage::~Stage()
+GStage::~GStage()
 {
 	for(auto entity : entitiesByName) {
 		delete(entity.second);
@@ -16,7 +16,7 @@ Stage::~Stage()
 }
 
 
-void Stage::addEntity(Entity* e)
+void GStage::addEntity(Entity* e)
 {
 	if(entitiesByName.find(e->name) == entitiesByName.end()) {
 		entitiesByName.insert(std::make_pair(e->name, e));
@@ -29,19 +29,19 @@ void Stage::addEntity(Entity* e)
 }
 
 
-Entity* Stage::getCameraEntity() const
+Entity* GStage::getCameraEntity() const
 {
 	return cameraEntity;
 }
 
 
-const std::map<std::string, Entity*>& Stage::getEntities() const
+const std::map<std::string, Entity*>& GStage::getEntities() const
 {
 	return entitiesByName;
 }
 
 
-std::vector<Entity*>* Stage::getEntitiesByType(const std::string type)
+std::vector<Entity*>* GStage::getEntitiesByType(const std::string type)
 {
 	if(entitiesByType.find(type) != entitiesByType.end()) {
 		return &(entitiesByType[type]);
@@ -51,7 +51,7 @@ std::vector<Entity*>* Stage::getEntitiesByType(const std::string type)
 }
 
 
-Entity* Stage::getEntityByName(const std::string name)
+Entity* GStage::getEntityByName(const std::string name)
 {
 	if(entitiesByName.find(name) != entitiesByName.end()) {
 		return entitiesByName[name];
@@ -61,19 +61,19 @@ Entity* Stage::getEntityByName(const std::string name)
 }
 
 
-Game& Stage::getGame() const
+GGame& GStage::getGGame() const
 {
-	return game;
+	return gGame;
 }
 
 
-std::string Stage::getName() const
+std::string GStage::getName() const
 {
 	return name;
 }
 
 
-void Stage::removeEntity(const std::string name)
+void GStage::removeEntity(const std::string name)
 {
 	if(entitiesByName.find(name) != entitiesByName.end()) {
 		delete(entitiesByName[name]);
@@ -82,19 +82,19 @@ void Stage::removeEntity(const std::string name)
 }
 
 
-void Stage::setCameraEntity(Entity* const e)
+void GStage::setCameraEntity(Entity* const e)
 {
 	cameraEntity = e;
 }
 
 
-void Stage::setName(const std::string name)
+void GStage::setName(const std::string name)
 {
 	this->name = name;
 }
 
 
-void Stage::updateStage()
+void GStage::updateGStage()
 {
 	for(auto entity : entitiesByName) {
 		if(entity.second->active) {
@@ -107,7 +107,7 @@ void Stage::updateStage()
 }
 
 
-void Stage::loadStage()
+void GStage::loadGStage()
 {
 	/* Call the derived class load() risponsible for adding
      * and initializing entities.*/
@@ -120,9 +120,9 @@ void Stage::loadStage()
 }
 
 
-void Stage::load()
+void GStage::load()
 {}
 
 
-void Stage::update()
+void GStage::update()
 {}

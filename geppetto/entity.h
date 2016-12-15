@@ -14,7 +14,7 @@
 #include "math/vec3.h"
 #include "math/mat4.h"
 
-class Stage;
+class GStage;
 
 class Entity
 {
@@ -34,8 +34,8 @@ public:
 	void loadEntity();
 	void updateEntity();
 	
-	Game&  getGame() const;
-	Stage& getStage() const;
+	GGame&  getGGame() const;
+	GStage& getGStage() const;
 	Mat4   getReferenceFrame() const;
 	void   placeAt(const float x, const float y, const float z);
 	void   rotate(const float x, const float y, const float z);
@@ -54,8 +54,8 @@ protected:
 	const static        std::string default_name;
 	static int          n_entities;
 	
-	Game&               game;
-	Stage&              stage;
+	GGame&               gGame;
+	GStage&              gStage;
 	
 	CameraComponent*    camera;
 	GeometryComponent*  geometry;

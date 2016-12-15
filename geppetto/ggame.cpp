@@ -6,13 +6,13 @@
 #include "components/camera_component.h"
 #include "components/geometry_component.h"
 #include "components/user_input_component.h"
-#include "game.h"
-#include "stage.h"
+#include "ggame.h"
+#include "gstage.h"
 
 
-Game* Game::instance = nullptr;
+GGame* GGame::instance = nullptr;
 
-Game::Game(std::string n, const int w, const int h) :
+GGame::GGame(std::string n, const int w, const int h) :
 name(n),
 width(w),
 height(h)
@@ -20,27 +20,27 @@ height(h)
 	instance = this;
 }
 
-Game::~Game()
+GGame::~GGame()
 {
-	for(auto stage : stages) {
-		delete(stage.second);
+	for(auto gStage : gStages) {
+		delete(gStage.second);
 	}
 }
 
 
-void Game::glfw_error_callback(int error, const char *desc)
+void GGame::glfw_error_callback(int error, const char *desc)
 {
 	std::cout << "GLFW error: " << desc << std::endl;
 }
 
 
-Game& Game::getInstance()
+GGame& GGame::getInstance()
 {
 	return *instance;
 }
 
 
-bool Game::init()
+bool GGame::init()
 {
 	glfwSetErrorCallback(glfw_error_callback);
 		
@@ -97,11 +97,11 @@ bool Game::init()
 }
 
 
-void Game::run()
+void GGame::run()
 {
-	while(runGame) {
+	while(runGGame) {
 		glfwPollEvents();
-		activeStage->updateStage();
+		activeGStage->updateGStage();
 		render();
 	}
 	
@@ -109,39 +109,39 @@ void Game::run()
 }
 
 
-void Game::shutdown()
+void GGame::shutdown()
 {
-	runGame = false;
+	runGGame = false;
 }
 
 
-void Game::addStage(Stage* stage)
+void GGame::addGStage(GStage* gStage)
 {
-	stages.insert(std::make_pair(stage->getName(), stage));
+	gStages.insert(std::make_pair(gStage->getName(), gStage));
 }
 
 
-Stage& Game::getActiveStage()
+GStage& GGame::getActiveGStage()
 {
-	return *activeStage;
+	return *activeGStage;
 }
 
 
-Stage* Game::getStage(std::string name)
+GStage* GGame::getGStage(std::string name)
 {
-	if(stages.find(name) != stages.end()) {
-		return stages[name];
+	if(gStages.find(name) != gStages.end()) {
+		return gStages[name];
 	}
 	return nullptr;
 }
 
 
-bool Game::loadStage(std::string name)
+bool GGame::loadGStage(std::string name)
 {
-	Stage* stage = getStage(name);
-	if(stage) {
-		activeStage = stage;
-		stage->loadStage();
+	GStage* gStage = getGStage(name);
+	if(gStage) {
+		activeGStage = gStage;
+		gStage->loadGStage();
 		return true;
 	}
 	return false;
@@ -149,18 +149,18 @@ bool Game::loadStage(std::string name)
 
 
 /* Private */
-void Game::render()
+void GGame::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	glPushMatrix();
 		
-		Entity* cameraEntity = activeStage->getCameraEntity();
+		Entity* cameraEntity = activeGStage->getCameraEntity();
 		
 		Vec3 camera_position = cameraEntity->position + cameraEntity->getCamera()->getPosition();
 		Vec3 look_at = camera_position + cameraEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
-		for(auto e : activeStage->getEntities()) {
+		for(auto e : activeGStage->getEntities()) {
 			
 			// Check if entity has a geometry component
 			if(e.second->active && e.second->hasComponent(Component::Type::Geometry)) {

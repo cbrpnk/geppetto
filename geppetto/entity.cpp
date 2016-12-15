@@ -3,8 +3,8 @@
 #include <algorithm>
 
 #include "entity.h"
-#include "game.h"
-#include "stage.h"
+#include "ggame.h"
+#include "gstage.h"
 #include "math/gmath.h"
 
 
@@ -19,14 +19,14 @@ type(t),
 position(Vec3(0, 0, 0)),
 forward(Vec3(0, 0, 1)),
 up(Vec3(0, 1, 0)),
-game(Game::getInstance()),
-stage(Game::getInstance().getActiveStage()),
+gGame(GGame::getInstance()),
+gStage(GGame::getInstance().getActiveGStage()),
 camera(nullptr),
 geometry(nullptr),
 physics(nullptr),
 userInput(nullptr)
 {
-	stage.addEntity(this);
+	gStage.addEntity(this);
 }
 
 
@@ -106,15 +106,15 @@ Mat4 Entity::getReferenceFrame() const
 }
 
 
-Game& Entity::getGame() const
+GGame& Entity::getGGame() const
 {
-	return game;
+	return gGame;
 }
 
 
-Stage& Entity::getStage() const
+GStage& Entity::getGStage() const
 {
-	return stage;
+	return gStage;
 }
 
 

@@ -6,8 +6,8 @@
 
 
 Component::Component(Entity& e) :
-game(e.getGame()),
-stage(e.getStage()),
+gGame(e.getGGame()),
+gStage(e.getGStage()),
 entity(e)
 {}
 

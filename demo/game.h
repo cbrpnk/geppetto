@@ -3,11 +3,11 @@
 
 #include "../geppetto/geppetto.h"
 
-class DemoGame : public Game
+class Game : public GGame
 {
 public:
-	DemoGame();
-	~DemoGame();
+	Game();
+	~Game();
 	
 	void load();
 	void update();

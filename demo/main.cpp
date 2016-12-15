@@ -1,18 +1,18 @@
 #include "../geppetto/geppetto.h"
-#include "demo_game.h"
-#include "demo_stage.h"
+#include "game.h"
+#include "stage.h"
 
 
 int main(int argc, char **argv)
 {
 	// Setup Game;
-	DemoGame demoGame;
+	Game game;
 	
-	if(demoGame.init()) {
-		new DemoStage();
+	if(game.init()) {
+		new Stage();
 		
-		if(demoGame.loadStage("Demo_Stage")) {
-			demoGame.run();
+		if(game.loadGStage("Stage")) {
+			game.run();
 		}
 	}
 	
