@@ -21,10 +21,10 @@ forward(Vec3(0, 0, 1)),
 up(Vec3(0, 1, 0)),
 gGame(GGame::getInstance()),
 gStage(GGame::getInstance().getActiveGStage()),
-camera(nullptr),
-geometry(nullptr),
-physics(nullptr),
-userInput(nullptr)
+gCamera(nullptr),
+gGeometry(nullptr),
+gPhysics(nullptr),
+gUserInput(nullptr)
 {
 	gStage.addGEntity(this);
 }
@@ -32,17 +32,17 @@ userInput(nullptr)
 
 GEntity::~GEntity()
 {
-	if(camera) {
-		delete(camera);
+	if(gCamera) {
+		delete(gCamera);
 	}
-	if(geometry) {
-		delete(geometry);
+	if(gGeometry) {
+		delete(gGeometry);
 	}
-	if(physics) {
-		delete(physics);
+	if(gPhysics) {
+		delete(gPhysics);
 	}
-	if(userInput) {
-		delete(userInput);
+	if(gUserInput) {
+		delete(gUserInput);
 	}
 }
 
@@ -62,17 +62,17 @@ void GEntity::loadGEntity()
 
 void GEntity::updateGEntity()
 {
-	if(camera) {
-		camera->update();
+	if(gCamera) {
+		gCamera->update();
 	}
-	if(geometry) {
-		geometry->update();
+	if(gGeometry) {
+		gGeometry->update();
 	}
-	if(physics) {
-		physics->update();
+	if(gPhysics) {
+		gPhysics->update();
 	}
-	if(userInput) {
-		userInput->update();
+	if(gUserInput) {
+		gUserInput->update();
 	}
 	
 	update();
@@ -131,31 +131,31 @@ void GEntity::rotate(const float x, const float y, const float z)
 }
 
 
-void GEntity::addComponent(const Component::Type type)
+void GEntity::addGComponent(const GComponent::Type type)
 {
-	if(!hasComponent(type)) {
-		if(type == Component::Type::Camera) {
-			camera = new CameraComponent(*this);
-		} else if(type == Component::Type::Geometry) {
-			geometry = new GeometryComponent(*this);
-		} else if(type == Component::Type::Physics) {
-			physics = new PhysicsComponent(*this);
-		} else if(type == Component::Type::UserInput) {
-			userInput = new UserInputComponent(*this);
+	if(!hasGComponent(type)) {
+		if(type == GComponent::Type::GCamera) {
+			gCamera = new GCameraComponent(*this);
+		} else if(type == GComponent::Type::GGeometry) {
+			gGeometry = new GGeometryComponent(*this);
+		} else if(type == GComponent::Type::GPhysics) {
+			gPhysics = new GPhysicsComponent(*this);
+		} else if(type == GComponent::Type::GUserInput) {
+			gUserInput = new GUserInputComponent(*this);
 		}
 	}
 }
 
 
-bool GEntity::hasComponent(const Component::Type type) const
+bool GEntity::hasGComponent(const GComponent::Type type) const
 {
-	if(type == Component::Type::Camera && camera) {
+	if(type == GComponent::Type::GCamera && gCamera) {
 		return true;
-	} else if(type == Component::Type::Geometry && geometry) {
+	} else if(type == GComponent::Type::GGeometry && gGeometry) {
 		return true;
-	} else if(type == Component::Type::Physics && physics) {
+	} else if(type == GComponent::Type::GPhysics && gPhysics) {
 		return true;
-	} else if(type == Component::Type::UserInput && userInput) {
+	} else if(type == GComponent::Type::GUserInput && gUserInput) {
 		return true;
 	}
 	
@@ -163,43 +163,43 @@ bool GEntity::hasComponent(const Component::Type type) const
 }
 
 
-void GEntity::removeComponent(const Component::Type type)
+void GEntity::removeGComponent(const GComponent::Type type)
 {
-	if(type == Component::Type::Camera && camera) {
-		delete(camera);
-		camera = nullptr;
-	} else if(type == Component::Type::Geometry && geometry) {
-		delete(geometry);
-		geometry = nullptr;
-	} else if(type == Component::Type::Physics && physics) {
-		delete(physics);
-		physics = nullptr;
-	} else if(type == Component::Type::UserInput && userInput) {
-		delete(userInput);
-		userInput = nullptr;
+	if(type == GComponent::Type::GCamera && gCamera) {
+		delete(gCamera);
+		gCamera = nullptr;
+	} else if(type == GComponent::Type::GGeometry && gGeometry) {
+		delete(gGeometry);
+		gGeometry = nullptr;
+	} else if(type == GComponent::Type::GPhysics && gPhysics) {
+		delete(gPhysics);
+		gPhysics = nullptr;
+	} else if(type == GComponent::Type::GUserInput && gUserInput) {
+		delete(gUserInput);
+		gUserInput = nullptr;
 	}
 }
 
 
-CameraComponent* GEntity::getCamera() const
+GCameraComponent* GEntity::getGCamera() const
 {
-	return camera;
+	return gCamera;
 }
 
 
-GeometryComponent* GEntity::getGeometry() const
+GGeometryComponent* GEntity::getGGeometry() const
 {
-	return geometry;
+	return gGeometry;
 }
 
 
-PhysicsComponent* GEntity::getPhysics() const
+GPhysicsComponent* GEntity::getGPhysics() const
 {
-	return physics;
+	return gPhysics;
 }
 	
 
-UserInputComponent* GEntity::getUserInput()const
+GUserInputComponent* GEntity::getGUserInput()const
 {
-	return userInput;
+	return gUserInput;
 }

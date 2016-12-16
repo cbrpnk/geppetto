@@ -15,11 +15,11 @@ OUT=demo
 
 GEPPETTO=../geppetto
 
-SOURCE=$(GEPPETTO)/component.cpp \
-$(GEPPETTO)/components/camera_component.cpp \
-$(GEPPETTO)/components/geometry_component.cpp \
-$(GEPPETTO)/components/physics_component.cpp \
-$(GEPPETTO)/components/user_input_component.cpp \
+SOURCE=$(GEPPETTO)/gcomponent.cpp \
+$(GEPPETTO)/gcomponents/g_camera.cpp \
+$(GEPPETTO)/gcomponents/g_geometry.cpp \
+$(GEPPETTO)/gcomponents/g_physics.cpp \
+$(GEPPETTO)/gcomponents/g_user_input.cpp \
 $(GEPPETTO)/gentity.cpp \
 $(GEPPETTO)/ggame.cpp \
 $(GEPPETTO)/gstage.cpp \

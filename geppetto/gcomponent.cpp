@@ -1,20 +1,20 @@
 #include <string>
 #include <vector>
 
-#include "component.h"
+#include "gcomponent.h"
 #include "gentity.h"
 
 
-Component::Component(GEntity& e) :
+GComponent::GComponent(GEntity& e) :
 gGame(e.getGGame()),
 gStage(e.getGStage()),
 gEntity(e)
 {}
 
 
-Component::~Component()
+GComponent::~GComponent()
 {}
 
 
-void Component::update()
+void GComponent::update()
 {}

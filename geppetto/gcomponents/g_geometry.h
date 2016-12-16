@@ -1,12 +1,12 @@
-#ifndef _GEPPETTO_GEOMETRY_COMPONENT
-#define _GEPPETTO_GEOMETRY_COMPONENT
+#ifndef _G_GEOMETRY_H_
+#define _G_GEOMETRY_H_
 
 #include <vector>
 
-#include "../component.h"
+#include "../gcomponent.h"
 
 
-class GeometryComponent : public Component
+class GGeometryComponent : public GComponent
 {
 public:
 	enum class Type {
@@ -14,8 +14,8 @@ public:
 	};
 	static const std::vector<float> Cube;
 	
-	GeometryComponent(GEntity& e);
-	~GeometryComponent();
+	GGeometryComponent(GEntity& e);
+	~GGeometryComponent();
 	
 	Type                      getType();
 	const std::vector<float>& getVertices();

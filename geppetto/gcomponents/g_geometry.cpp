@@ -1,6 +1,6 @@
-#include "geometry_component.h"
+#include "g_geometry.h"
 
-const std::vector<float> GeometryComponent::Cube = {
+const std::vector<float> GGeometryComponent::Cube = {
 	// Front
 	-0.5f,  0.5f,  0.5f,
 	-0.5f, -0.5f,  0.5f,
@@ -38,32 +38,32 @@ const std::vector<float> GeometryComponent::Cube = {
 	-0.5f, -0.5f, 0.5f,
 };
 
-GeometryComponent::GeometryComponent(GEntity& e) : Component(e)
+GGeometryComponent::GGeometryComponent(GEntity& e) : GComponent(e)
 {}
 
-GeometryComponent::~GeometryComponent()
+GGeometryComponent::~GGeometryComponent()
 {}
 
 
-GeometryComponent::Type GeometryComponent::getType()
+GGeometryComponent::Type GGeometryComponent::getType()
 {
 	return type;
 }
 
 
-const std::vector<float>& GeometryComponent::getVertices()
+const std::vector<float>& GGeometryComponent::getVertices()
 {
 	return vertices;
 }
 
 
-void GeometryComponent::loadVertices(const std::vector<float> verts)
+void GGeometryComponent::loadVertices(const std::vector<float> verts)
 {
 	vertices = verts;
 }
 
 
-void GeometryComponent::setType(Type t)
+void GGeometryComponent::setType(Type t)
 {
 	type = t;
 }

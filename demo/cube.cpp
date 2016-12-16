@@ -23,11 +23,11 @@ void Cube::load()
 	position.y = Gmath::randomFloat(-5.0f, 5.0f);
 	position.z = Gmath::randomFloat(-50.0f, 50.0f);
 	
-	addComponent(Component::Type::Physics);
-	getPhysics()->setFrictionCoefficient(0.15f);
-	addComponent(Component::Type::Geometry);
-	getGeometry()->loadVertices(GeometryComponent::Cube);
-	getGeometry()->setType(GeometryComponent::Type::Quads);
+	addGComponent(GComponent::Type::GPhysics);
+	getGPhysics()->setFrictionCoefficient(0.15f);
+	addGComponent(GComponent::Type::GGeometry);
+	getGGeometry()->loadVertices(GGeometryComponent::Cube);
+	getGGeometry()->setType(GGeometryComponent::Type::Quads);
 }
 
 

@@ -1,7 +1,7 @@
 fix input system "looking down and turning" + clean it up
 looking right and left has a "wobble"
 
-Prifix every engine name with G (GEntity, GStage, GGame)
+Prifix math lib with G and make sure the tests pass
 
 
 Load OBJ files

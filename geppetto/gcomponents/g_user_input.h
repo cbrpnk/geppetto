@@ -1,17 +1,17 @@
-#ifndef _ENGINE_USER_INPUT_COMPONENT_H_
-#define _ENGINE_USER_INPUT_COMPONENT_H_
+#ifndef _G_USER_INPUT_H_
+#define _G_USER_INPUT_H_
 
 #include <set>
 
 #include "GLFW/glfw3.h"
 #include "../ggame.h"
-#include "../component.h"
+#include "../gcomponent.h"
 
 
-class UserInputComponent: public Component {
+class GUserInputComponent: public GComponent {
 public:
-	UserInputComponent(GEntity& e);
-	~UserInputComponent();
+	GUserInputComponent(GEntity& e);
+	~GUserInputComponent();
 	
 	static const int KEY_SPACE;
 	static const int KEY_0;

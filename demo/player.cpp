@@ -15,13 +15,13 @@ Player::~Player()
 
 void Player::load()
 {
-	addComponent(Component::Type::Physics);
-	physics->setFrictionCoefficient(0.15f);
+	addGComponent(GComponent::Type::GPhysics);
+	gPhysics->setFrictionCoefficient(0.15f);
 	
-	addComponent(Component::Type::Camera);
-	camera->setPosition(Vec3(0.0f, 2.0f, 0.0f));
+	addGComponent(GComponent::Type::GCamera);
+	gCamera->setPosition(Vec3(0.0f, 2.0f, 0.0f));
 	
-	addComponent(Component::Type::UserInput);
+	addGComponent(GComponent::Type::GUserInput);
 	
 	gStage.setCameraGEntity(this);
 }
@@ -29,31 +29,31 @@ void Player::load()
 
 void Player::update()
 {
-	if(userInput->keyPressed(GLFW_KEY_W)) {
-		physics->setAcceleration(
-			physics->getAcceleration() +
+	if(gUserInput->keyPressed(GLFW_KEY_W)) {
+		gPhysics->setAcceleration(
+			gPhysics->getAcceleration() +
 			forward *
 			movement_acceleration);
 	}
-	if(userInput->keyPressed(UserInputComponent::KEY_A)) {
-		getPhysics()->setAcceleration(physics->getAcceleration() +
+	if(gUserInput->keyPressed(GUserInputComponent::KEY_A)) {
+		getGPhysics()->setAcceleration(gPhysics->getAcceleration() +
 			Vec3(forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
 			-movement_acceleration);
 	}
-	if(userInput->keyPressed(UserInputComponent::KEY_S)) {
-		getPhysics()->setAcceleration(physics->getAcceleration() +
+	if(gUserInput->keyPressed(GUserInputComponent::KEY_S)) {
+		getGPhysics()->setAcceleration(gPhysics->getAcceleration() +
 			forward *
 			-movement_acceleration);
 	}
-	if(userInput->keyPressed(UserInputComponent::KEY_D)) {
-		physics->setAcceleration(physics->getAcceleration() +
+	if(gUserInput->keyPressed(GUserInputComponent::KEY_D)) {
+		gPhysics->setAcceleration(gPhysics->getAcceleration() +
 			Vec3(forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
 			movement_acceleration);
 	}
-	if(userInput->keyPressed(UserInputComponent::KEY_ESCAPE)) {
+	if(gUserInput->keyPressed(GUserInputComponent::KEY_ESCAPE)) {
 		gGame.shutdown();
 	}
 	
-	rotate(userInput->getMouseYMovement() * -rotation_speed,
-		userInput->getMouseXMovement() * rotation_speed, 0.0f);
+	rotate(gUserInput->getMouseYMovement() * -rotation_speed,
+		gUserInput->getMouseXMovement() * rotation_speed, 0.0f);
 }

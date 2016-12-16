@@ -54,11 +54,11 @@ protected:
 	std::string name;
 	/* All the GEntities in this GStage */
 	std::map<std::string, GEntity*> gEntitiesByName;
-	/* Maps a user defined GEntity type to the set of GEntities that are of
+	/* Maps a GUser defined GEntity type to the set of GEntities that are of
      * that type. Used by getGEntitiesByType().
      */
 	std::map<std::string, std::vector<GEntity*>> gEntitiesByType;
-	/* GEntity that possess a CameraComponent used by GGame::render() */
+	/* GEntity that possess a CameraGComponent used by GGame::render() */
 	GEntity* cameraGEntity;
 };
 

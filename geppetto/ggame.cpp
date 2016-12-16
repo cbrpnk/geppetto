@@ -3,9 +3,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#include "components/camera_component.h"
-#include "components/geometry_component.h"
-#include "components/user_input_component.h"
+#include "gcomponents/g_camera.h"
+#include "gcomponents/g_geometry.h"
+#include "gcomponents/g_user_input.h"
 #include "ggame.h"
 #include "gstage.h"
 
@@ -71,9 +71,9 @@ bool GGame::init()
 	}
 	
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetKeyCallback(window, UserInputComponent::glfw_key_callback);
-	glfwSetCursorPosCallback(window, UserInputComponent::glfw_mouse_move_callback);
-	glfwSetMouseButtonCallback(window, UserInputComponent::glfw_mouse_button_callback);
+	glfwSetKeyCallback(window, GUserInputComponent::glfw_key_callback);
+	glfwSetCursorPosCallback(window, GUserInputComponent::glfw_mouse_move_callback);
+	glfwSetMouseButtonCallback(window, GUserInputComponent::glfw_mouse_button_callback);
 	
 	// Viewport and projection
 	glfwGetFramebufferSize(window, &width, &height);
@@ -156,31 +156,31 @@ void GGame::render()
 		
 		GEntity* cameraGEntity = activeGStage->getCameraGEntity();
 		
-		Vec3 camera_position = cameraGEntity->position + cameraGEntity->getCamera()->getPosition();
+		Vec3 camera_position = cameraGEntity->position + cameraGEntity->getGCamera()->getPosition();
 		Vec3 look_at = camera_position + cameraGEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
 		for(auto e : activeGStage->getGEntities()) {
 			
-			// Check if GEntity has a geometry component
-			if(e.second->active && e.second->hasComponent(Component::Type::Geometry)) {
+			// Check if GEntity has a GGeometry component
+			if(e.second->active && e.second->hasGComponent(GComponent::Type::GGeometry)) {
 				
 				glPushMatrix();
 					glMultMatrixf(e.second->getReferenceFrame().toArray());
 					
-					// Select the right type of geometry
+					// Select the right type of GGeometry
 					GLenum type;
-					switch(e.second->getGeometry()->getType()) {
-					case GeometryComponent::Type::Points:
+					switch(e.second->getGGeometry()->getType()) {
+					case GGeometryComponent::Type::Points:
 						type = GL_POINTS;
 						break;
-					case GeometryComponent::Type::Lines:
+					case GGeometryComponent::Type::Lines:
 						type = GL_LINES;
 						break;
-					case GeometryComponent::Type::Triangles:
+					case GGeometryComponent::Type::Triangles:
 						type = GL_TRIANGLES;
 						break;
-					case GeometryComponent::Type::Quads:
+					case GGeometryComponent::Type::Quads:
 						type = GL_QUADS;
 						break;
 					default:
@@ -189,7 +189,7 @@ void GGame::render()
 					}
 					
 					glBegin(type);
-						std::vector<float> vertices = e.second->getGeometry()->getVertices();
+						std::vector<float> vertices = e.second->getGGeometry()->getVertices();
 						Vec3* vertex;
 						for(size_t i=0; i<vertices.size(); i+=3) {
 							glColor3f(1.0f, 0.1f, 0.1f);

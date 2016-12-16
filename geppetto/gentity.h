@@ -5,12 +5,11 @@
 #include <string>
 #include <map>
 
-//#include "component_controller.h"
-#include "component.h"
-#include "components/camera_component.h"
-#include "components/geometry_component.h"
-#include "components/physics_component.h"
-#include "components/user_input_component.h"
+#include "gcomponent.h"
+#include "gcomponents/g_camera.h"
+#include "gcomponents/g_geometry.h"
+#include "gcomponents/g_physics.h"
+#include "gcomponents/g_user_input.h"
 #include "math/vec3.h"
 #include "math/mat4.h"
 
@@ -40,15 +39,15 @@ public:
 	void   placeAt(const float x, const float y, const float z);
 	void   rotate(const float x, const float y, const float z);
 	
-	/* Deal With Components */
-	void addComponent(const Component::Type type);
-	bool hasComponent(const Component::Type type) const;
-	void removeComponent(const Component::Type type);
+	/* Deal With GComponents */
+	void addGComponent(const GComponent::Type type);
+	bool hasGComponent(const GComponent::Type type) const;
+	void removeGComponent(const GComponent::Type type);
 	
-	CameraComponent*    getCamera()    const;
-	GeometryComponent*  getGeometry()  const;
-	PhysicsComponent*   getPhysics()   const;
-	UserInputComponent* getUserInput() const;
+	GCameraComponent*    getGCamera()    const;
+	GGeometryComponent*  getGGeometry()  const;
+	GPhysicsComponent*   getGPhysics()   const;
+	GUserInputComponent* getGUserInput() const;
 	
 protected:
 	const static        std::string default_name;
@@ -57,10 +56,10 @@ protected:
 	GGame&               gGame;
 	GStage&              gStage;
 	
-	CameraComponent*    camera;
-	GeometryComponent*  geometry;
-	PhysicsComponent*   physics;
-	UserInputComponent* userInput;
+	GCameraComponent*    gCamera;
+	GGeometryComponent*  gGeometry;
+	GPhysicsComponent*   gPhysics;
+	GUserInputComponent* gUserInput;
 };
 
 #endif

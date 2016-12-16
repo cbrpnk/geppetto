@@ -1,15 +1,15 @@
-#ifndef _GEPPETTO_CAMERA_COMPONENT_H_
-#define _GEPPETTO_CAMERA_COMPONENT_H_
+#ifndef _G_CAMERA_H_
+#define _G_CAMERA_H_
 
 #include "../math/vec3.h"
-#include "../component.h"
+#include "../gcomponent.h"
 
-class CameraComponent : public Component
+class GCameraComponent : public GComponent
 {
 public:
 	
-	CameraComponent(GEntity& e);
-	~CameraComponent();
+	GCameraComponent(GEntity& e);
+	~GCameraComponent();
 	
 	Vec3 getForward();
 	Vec3 getPosition();

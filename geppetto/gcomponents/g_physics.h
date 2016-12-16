@@ -1,14 +1,14 @@
-#ifndef _GEPPETTO_PHYSICS_COMPONENT_H_
-#define _GEPPETTO_PHYSICS_COMPONENT_H_
+#ifndef _G_PHYSICS_H_
+#define _G_PHYSICS_H_
 
-#include "../component.h"
+#include "../gcomponent.h"
 #include "../math/vec3.h"
 
-class PhysicsComponent : public Component {
+class GPhysicsComponent : public GComponent {
 public:
 	
-	PhysicsComponent(GEntity& e);
-	~PhysicsComponent();
+	GPhysicsComponent(GEntity& e);
+	~GPhysicsComponent();
 	
 	Vec3  getAcceleration();
 	float getFrictionCoefficient();
