@@ -1,9 +1,9 @@
 #include <cmath>
 
 #include "test.h"
-#include "../math/mat3.h"
+#include "../gmath/gmat3.h"
 
-namespace TEST_MAT3 {
+namespace TEST_GMAT3 {
 	
 	const float init[] = {
 	    2.0f,  3.0f,  4.0f,
@@ -12,41 +12,41 @@ namespace TEST_MAT3 {
 	};
 	
 	void OPERATOR_SUBSCRIPT() {
-		Mat3 m(init);
+		GMat3 m(init);
 		
-		ASSERT_EQUAL(m[0], Vec3(2.0f, 3.0f, 4.0f));
-		ASSERT_EQUAL(m[1], Vec3(5.0f, 6.0f, 7.0f));
-		ASSERT_EQUAL(m[2], Vec3(8.0f, 9.0f, 10.0f));
+		ASSERT_EQUAL(m[0], GVec3(2.0f, 3.0f, 4.0f));
+		ASSERT_EQUAL(m[1], GVec3(5.0f, 6.0f, 7.0f));
+		ASSERT_EQUAL(m[2], GVec3(8.0f, 9.0f, 10.0f));
 		
 		// Const subscript
-		const Mat3 m2(init);
+		const GMat3 m2(init);
 		
-		ASSERT_EQUAL(m2[0], Vec3(2.0f, 3.0f, 4.0f));
-		ASSERT_EQUAL(m2[1], Vec3(5.0f, 6.0f, 7.0f));
-		ASSERT_EQUAL(m2[2], Vec3(8.0f, 9.0f, 10.0f));
+		ASSERT_EQUAL(m2[0], GVec3(2.0f, 3.0f, 4.0f));
+		ASSERT_EQUAL(m2[1], GVec3(5.0f, 6.0f, 7.0f));
+		ASSERT_EQUAL(m2[2], GVec3(8.0f, 9.0f, 10.0f));
 	}
 	
 	
 	void OPERATOR_ASIGN() {
-		Mat3 m(init);
-		Mat3 m2 = m;
+		GMat3 m(init);
+		GMat3 m2 = m;
 		
-		ASSERT_EQUAL(m2, Mat3(init));
+		ASSERT_EQUAL(m2, GMat3(init));
 	}
 	
 	
 	void OPERATOR_PLUS_ASIGN() {
-		Mat3 m(init);
-		Mat3 m2(init);
+		GMat3 m(init);
+		GMat3 m2(init);
 		m += m2;
 		
-		ASSERT_EQUAL(m, Mat3(init)*2);
+		ASSERT_EQUAL(m, GMat3(init)*2);
 	}
 	
 	
 	void OPERATOR_MINUS_ASIGN() {
-		Mat3 m(init);
-		Mat3 m2(init);
+		GMat3 m(init);
+		GMat3 m2(init);
 		m -= m2;
 		m2.zero();
 			
@@ -56,16 +56,16 @@ namespace TEST_MAT3 {
 	
 	void OPERATOR_TIMES_ASIGN() {
 		// Scalar multiplication
-		Mat3 m(init);
-		Mat3 m2(init);
+		GMat3 m(init);
+		GMat3 m2(init);
 		m *= 2;
 		m2 = m2 * 2;
 		
 		ASSERT_EQUAL(m, m2);
 		
 		// Matrix multiplication
-		Mat3 m3(init);
-		Mat3 m4(init);
+		GMat3 m3(init);
+		GMat3 m4(init);
 		m3 *= m3;
 		m4 = m4*m4;
 		
@@ -74,8 +74,8 @@ namespace TEST_MAT3 {
 	
 	
 	void OPERATOR_PLUS() {
-		Mat3 m(init);
-		Mat3 m2 = m + m;
+		GMat3 m(init);
+		GMat3 m2 = m + m;
 		
 		for(int i=0; i<3; ++i) {
 			for(int j=0; j<3; ++j) {
@@ -86,8 +86,8 @@ namespace TEST_MAT3 {
 	
 	
 	void OPERATOR_MINUS() {
-		Mat3 m(init);
-		Mat3 m2 = m - m*2;
+		GMat3 m(init);
+		GMat3 m2 = m - m*2;
 		
 		for(int i=0; i<3; ++i) {
 			for(int j=0; j<3; ++j) {
@@ -99,19 +99,19 @@ namespace TEST_MAT3 {
 	
 	void OPERATOR_TIMES() {
 		// Scalar multiplicationj
-		Mat3 m(init);
-		Mat3 m2 = m * 2;
+		GMat3 m(init);
+		GMat3 m2 = m * 2;
 		
-		ASSERT_EQUAL(m2[0], Mat3(init)[0]*2);
-		ASSERT_EQUAL(m2[1], Mat3(init)[1]*2);
-		ASSERT_EQUAL(m2[2], Mat3(init)[2]*2);
+		ASSERT_EQUAL(m2[0], GMat3(init)[0]*2);
+		ASSERT_EQUAL(m2[1], GMat3(init)[1]*2);
+		ASSERT_EQUAL(m2[2], GMat3(init)[2]*2);
 		
 		// Vector multiplication
-		Mat3 m3(init);
-		Vec3 v(2.0f, 3.0f, 4.0f);
-		Vec3 v2 = m3 * v;
+		GMat3 m3(init);
+		GVec3 v(2.0f, 3.0f, 4.0f);
+		GVec3 v2 = m3 * v;
 		
-		ASSERT_EQUAL(v2, Vec3(51.0f, 60.0f, 69.0f));
+		ASSERT_EQUAL(v2, GVec3(51.0f, 60.0f, 69.0f));
 		
 		// Matrix multiplication
 		const float answer[] = {
@@ -119,8 +119,8 @@ namespace TEST_MAT3 {
 		    96.0f, 114.0f, 132.0f,
 		    141.0f, 168.0f, 195.0f
 		};
-		Mat3 m4(init);
-		Mat3 m5 = m4 * m4;
+		GMat3 m4(init);
+		GMat3 m5 = m4 * m4;
 		
 		for(int i=0; i<3; ++i) {
 			for(int j=0; j<3; ++j) {
@@ -131,13 +131,13 @@ namespace TEST_MAT3 {
 	
 	
 	void OPERATOR_EQUAL() {
-		Mat3 m(init);
-		Mat3 m2(init);
+		GMat3 m(init);
+		GMat3 m2(init);
 		
 		ASSERT_TRUE(m == m2);
 		for(int i=0; i<3; ++i) {
 			for(int j=0; j<3; ++j) {
-				m2 = Mat3(init);
+				m2 = GMat3(init);
 				m2[i][j]++;
 				ASSERT_FALSE(m == m2);
 			}
@@ -146,13 +146,13 @@ namespace TEST_MAT3 {
 	
 	
 	void OPERATOR_NOT_EQUAL() {
-		Mat3 m(init);
-		Mat3 m2(init);
+		GMat3 m(init);
+		GMat3 m2(init);
 		
 		ASSERT_FALSE(m != m2);
 		for(int i=0; i<3; ++i) {
 			for(int j=0; j<3; ++j) {
-				m2 = Mat3(init);
+				m2 = GMat3(init);
 				m2[i][j]++;
 				ASSERT_TRUE(m != m2);
 			}
@@ -161,7 +161,7 @@ namespace TEST_MAT3 {
 	
 	
 	void IDENTITY() {
-		Mat3 m;
+		GMat3 m;
 		m.identity();
 		
 		for(int i=0; i<3; ++i) {
@@ -177,8 +177,8 @@ namespace TEST_MAT3 {
 	
 	
 	void TRANSPOSE() {
-		Mat3 m(init);
-		Mat3 m2(init);
+		GMat3 m(init);
+		GMat3 m2(init);
 		m.transpose();
 		
 		for(int i=0; i<3; ++i) {
@@ -191,8 +191,8 @@ namespace TEST_MAT3 {
 	
 	
 	void ZERO() {
-		Mat3 m;
-		Vec3 v;
+		GMat3 m;
+		GVec3 v;
 		m.zero();
 		v.zero();
 		

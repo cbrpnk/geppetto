@@ -1,4 +1,4 @@
-#include "g_geometry.h"
+#include "ggeometry.h"
 
 const std::vector<float> GGeometryComponent::Cube = {
 	// Front

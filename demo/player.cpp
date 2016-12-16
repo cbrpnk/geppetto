@@ -19,7 +19,7 @@ void Player::load()
 	gPhysics->setFrictionCoefficient(0.15f);
 	
 	addGComponent(GComponent::Type::GCamera);
-	gCamera->setPosition(Vec3(0.0f, 2.0f, 0.0f));
+	gCamera->setPosition(GVec3(0.0f, 2.0f, 0.0f));
 	
 	addGComponent(GComponent::Type::GUserInput);
 	
@@ -37,7 +37,7 @@ void Player::update()
 	}
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_A)) {
 		getGPhysics()->setAcceleration(gPhysics->getAcceleration() +
-			Vec3(forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
+			GVec3(forward).cross(GVec3(0.0f, 1.0f, 0.0f)) *
 			-movement_acceleration);
 	}
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_S)) {
@@ -47,7 +47,7 @@ void Player::update()
 	}
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_D)) {
 		gPhysics->setAcceleration(gPhysics->getAcceleration() +
-			Vec3(forward).cross(Vec3(0.0f, 1.0f, 0.0f)) *
+			GVec3(forward).cross(GVec3(0.0f, 1.0f, 0.0f)) *
 			movement_acceleration);
 	}
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_ESCAPE)) {

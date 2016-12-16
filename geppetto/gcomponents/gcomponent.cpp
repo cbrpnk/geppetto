@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "gcomponent.h"
-#include "gentity.h"
+#include "../gentity.h"
 
 
 GComponent::GComponent(GEntity& e) :

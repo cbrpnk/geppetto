@@ -1,5 +1,5 @@
 #include "GLFW/glfw3.h"
-#include "g_user_input.h"
+#include "guserinput.h"
 
 const int GUserInputComponent::KEY_SPACE = GLFW_KEY_SPACE;
 const int GUserInputComponent::KEY_0 = GLFW_KEY_0;

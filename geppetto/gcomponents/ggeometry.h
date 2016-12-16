@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "../gcomponent.h"
+#include "gcomponent.h"
 
 
 class GGeometryComponent : public GComponent

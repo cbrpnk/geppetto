@@ -1,4 +1,4 @@
-#include "g_camera.h"
+#include "gcamera.h"
 #include "../gentity.h"
 
 GCameraComponent::GCameraComponent(GEntity& e) : GComponent(e),
@@ -12,37 +12,37 @@ GCameraComponent::~GCameraComponent()
 {}
 
 
-Vec3 GCameraComponent::getForward()
+GVec3 GCameraComponent::getForward()
 {
 	return forward;
 }
 
 
-Vec3 GCameraComponent::getPosition()
+GVec3 GCameraComponent::getPosition()
 {
 	return position;
 }
 
 
-Vec3 GCameraComponent::getUp()
+GVec3 GCameraComponent::getUp()
 {
 	return up;
 }
 
 
-void GCameraComponent::setForward(const Vec3 f)
+void GCameraComponent::setForward(const GVec3 f)
 {
 	forward = f;
 }
 
 
-void GCameraComponent::setPosition(const Vec3 p)
+void GCameraComponent::setPosition(const GVec3 p)
 {
 	position = p;
 }
 
 
-void GCameraComponent::setUp(const Vec3 u)
+void GCameraComponent::setUp(const GVec3 u)
 {
 	up = u;
 }

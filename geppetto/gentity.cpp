@@ -5,7 +5,7 @@
 #include "gentity.h"
 #include "ggame.h"
 #include "gstage.h"
-#include "math/gmath.h"
+#include "gmath/gmath.h"
 
 
 const std::string GEntity::default_name = "GEntity";
@@ -16,9 +16,9 @@ GEntity::GEntity(std::string n, std::string t) :
 active(true),
 name(n),
 type(t),
-position(Vec3(0, 0, 0)),
-forward(Vec3(0, 0, 1)),
-up(Vec3(0, 1, 0)),
+position(GVec3(0, 0, 0)),
+forward(GVec3(0, 0, 1)),
+up(GVec3(0, 1, 0)),
 gGame(GGame::getInstance()),
 gStage(GGame::getInstance().getActiveGStage()),
 gCamera(nullptr),
@@ -87,20 +87,20 @@ void GEntity::placeAt(const float x, const float y, const float z)
 }
 
 
-Mat4 GEntity::getReferenceFrame() const
+GMat4 GEntity::getReferenceFrame() const
 {
-	Vec4 x_axis(Vec4(up).cross(forward));
-	Vec4 y_axis(up);
-	Vec4 z_axis(forward);
-	Mat4 rotation;
+	GVec4 x_axis(GVec4(up).cross(forward));
+	GVec4 y_axis(up);
+	GVec4 z_axis(forward);
+	GMat4 rotation;
 	rotation.identity();
 	rotation[0] = x_axis;
 	rotation[1] = y_axis;
 	rotation[2] = z_axis;
 	
-	Mat4 translation;
+	GMat4 translation;
 	translation.identity();
-	translation[3] = Vec4(position.x, position.y, position.z, 1);
+	translation[3] = GVec4(position.x, position.y, position.z, 1);
 	
 	return translation * rotation;
 }
@@ -120,11 +120,11 @@ GStage& GEntity::getGStage() const
 
 void GEntity::rotate(const float x, const float y, const float z)
 {
-	Mat4 ref = getReferenceFrame();
+	GMat4 ref = getReferenceFrame();
 	ref.rotate(x, y, z);
 	
-	forward = Vec3(ref[2].x, ref[2].y, ref[2].z);
-	up      = Vec3(ref[1].x, ref[1].y, ref[1].z);
+	forward = GVec3(ref[2].x, ref[2].y, ref[2].z);
+	up      = GVec3(ref[1].x, ref[1].y, ref[1].z);
 	
 	forward.normalize();
 	up.normalize();

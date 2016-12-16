@@ -1,11 +1,11 @@
 #include "../gentity.h"
-#include "g_physics.h"
+#include "gphysics.h"
 
 
 GPhysicsComponent::GPhysicsComponent(GEntity& e) : GComponent(e)
 {
-	acceleration = Vec3(0.0f, 0.0f, 0.0f);
-	velocity = Vec3(0.0f, 0.0f, 0.0f);
+	acceleration = GVec3(0.0f, 0.0f, 0.0f);
+	velocity = GVec3(0.0f, 0.0f, 0.0f);
 	friction_coefficient = 0.0f;
 }
 
@@ -14,7 +14,7 @@ GPhysicsComponent::~GPhysicsComponent()
 {}
 
 
-Vec3 GPhysicsComponent::getAcceleration()
+GVec3 GPhysicsComponent::getAcceleration()
 {
 	return acceleration;
 }
@@ -26,12 +26,12 @@ float GPhysicsComponent::getFrictionCoefficient()
 }
 
 
-Vec3 GPhysicsComponent::getVelocity()
+GVec3 GPhysicsComponent::getVelocity()
 {
 	return velocity;
 }
 
-void GPhysicsComponent::setAcceleration(const Vec3 a)
+void GPhysicsComponent::setAcceleration(const GVec3 a)
 {
 	acceleration = a;
 }
@@ -43,7 +43,7 @@ void GPhysicsComponent::setFrictionCoefficient(const float f)
 }
 
 
-void GPhysicsComponent::setVelocity(const Vec3 v)
+void GPhysicsComponent::setVelocity(const GVec3 v)
 {
 	velocity = v;
 }

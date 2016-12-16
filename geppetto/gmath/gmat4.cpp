@@ -1,16 +1,16 @@
 #include <cassert>
 #include <cmath>
 
-#include "mat3.h"
-#include "mat4.h"
-#include "vec4.h"
+#include "gmat3.h"
+#include "gmat4.h"
+#include "gvec4.h"
 #include "gmath.h"
 
-Mat4::Mat4()
+GMat4::GMat4()
 {}
 
 
-Mat4::Mat4(const Mat4 &m)
+GMat4::GMat4(const GMat4 &m)
 {
 	mat[0] = m[0];
 	mat[1] = m[1];
@@ -19,24 +19,24 @@ Mat4::Mat4(const Mat4 &m)
 }
 
 
-Mat4::Mat4(const Mat3 &m)
+GMat4::GMat4(const GMat3 &m)
 {
-	mat[0] = Vec4(m[0]);
-	mat[1] = Vec4(m[1]);
-	mat[2] = Vec4(m[2]);
-	mat[3] = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	mat[0] = GVec4(m[0]);
+	mat[1] = GVec4(m[1]);
+	mat[2] = GVec4(m[2]);
+	mat[3] = GVec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 
-Mat4::Mat4(const float *a)
+GMat4::GMat4(const float *a)
 {
 	for(int i=0; i<4; ++i) {
-		mat[i] = Vec4(a[i*4+0], a[i*4+1], a[i*4+2], a[i*4+3]);
+		mat[i] = GVec4(a[i*4+0], a[i*4+1], a[i*4+2], a[i*4+3]);
 	}
 }
 
 
-Mat4::Mat4(const Vec4 x, const Vec4 y, const Vec4 z, const Vec4 w)
+GMat4::GMat4(const GVec4 x, const GVec4 y, const GVec4 z, const GVec4 w)
 {
 	mat[0] = x;
 	mat[1] = y;
@@ -45,7 +45,7 @@ Mat4::Mat4(const Vec4 x, const Vec4 y, const Vec4 z, const Vec4 w)
 }
 
 
-Mat4 &Mat4::operator=(const Mat4 &m)
+GMat4 &GMat4::operator=(const GMat4 &m)
 {
 	mat[0] = m[0];
 	mat[1] = m[1];
@@ -56,106 +56,106 @@ Mat4 &Mat4::operator=(const Mat4 &m)
 }
 
 
-const Vec4 &Mat4::operator[](const int i) const
+const GVec4 &GMat4::operator[](const int i) const
 {
 	assert(i>=0 && i<4);
 	return mat[i];
 }
 
 
-Vec4 &Mat4::operator[](const int i)
+GVec4 &GMat4::operator[](const int i)
 {
 	assert(i>=0 && i<4);
 	return mat[i];
 }
 
 
-Mat4 &Mat4::operator+=(Mat4 &m)
+GMat4 &GMat4::operator+=(GMat4 &m)
 {
 	*this = *this + m;
 	return *this;
 }
 
 
-Mat4 &Mat4::operator-=(const Mat4 &m)
+GMat4 &GMat4::operator-=(const GMat4 &m)
 {
 	*this = *this - m;
 	return *this;
 }
 
 
-Mat4 &Mat4::operator*=(const float s)
+GMat4 &GMat4::operator*=(const float s)
 {
 	*this = *this * s;
 	return *this;
 }
 
 
-Mat4 &Mat4::operator*=(const Mat4 &m)
+GMat4 &GMat4::operator*=(const GMat4 &m)
 {
 	*this = *this * m;
 	return *this;
 }
 
 
-Mat4 Mat4::operator+(const Mat4 &m) const
+GMat4 GMat4::operator+(const GMat4 &m) const
 {
-	Mat4 tmp = *this;
+	GMat4 tmp = *this;
 	
 	for(int i=0; i<4; ++i) {
 		tmp[i] += m[i];
 	}
 	
-	return Mat4(tmp);
+	return GMat4(tmp);
 }
 
 
-Mat4 Mat4::operator-(const Mat4 &m) const
+GMat4 GMat4::operator-(const GMat4 &m) const
 {
-	Mat4 tmp = *this;
+	GMat4 tmp = *this;
 	
 	for(int i=0; i<4; ++i) {
 		tmp[i] -= m[i];
 	}
 	
-	return Mat4(tmp);
+	return GMat4(tmp);
 }
 
 
-Mat4 Mat4::operator*(const Mat4 &m) const
+GMat4 GMat4::operator*(const GMat4 &m) const
 {
-	return Mat4(*this*m[0], *this*m[1], *this*m[2], *this*m[3]);
+	return GMat4(*this*m[0], *this*m[1], *this*m[2], *this*m[3]);
 }
 
 
-Vec4 Mat4::operator*(const Vec4 &v) const
+GVec4 GMat4::operator*(const GVec4 &v) const
 {
-	Mat4 tmp = *this;
+	GMat4 tmp = *this;
 	tmp.transpose();
 	
-	return Vec4(tmp[0]*v, tmp[1]*v, tmp[2]*v, tmp[3]*v);
+	return GVec4(tmp[0]*v, tmp[1]*v, tmp[2]*v, tmp[3]*v);
 }
 
 
-Mat4 Mat4::operator*(const float s) const
+GMat4 GMat4::operator*(const float s) const
 {
-	return Mat4(mat[0]*s, mat[1]*s, mat[2]*s, mat[3]*s);
+	return GMat4(mat[0]*s, mat[1]*s, mat[2]*s, mat[3]*s);
 }
 
 
-bool Mat4::operator==(const Mat4 &m) const
+bool GMat4::operator==(const GMat4 &m) const
 {
 	return mat[0] == m[0] && mat[1] == m[1] && mat[2] == m[2] && mat[3] == m[3];
 }
 
 
-bool Mat4::operator!=(const Mat4 &m) const
+bool GMat4::operator!=(const GMat4 &m) const
 {
 	return mat[0] != m[0] || mat[1] != m[1] || mat[2] != m[2] || mat[3] != m[3];
 }
 
 
-void Mat4::debug()
+void GMat4::debug()
 {
 	mat[0].debug();
 	mat[1].debug();
@@ -164,19 +164,19 @@ void Mat4::debug()
 }
 
 
-void Mat4::identity()
+void GMat4::identity()
 {
-	*this = Mat4(identity4x4);
+	*this = GMat4(identity4x4);
 }
 
 
-void Mat4::inverse()
+void GMat4::inverse()
 {}
 
 
-void Mat4::rotate(const float x, const float y, const float z)
+void GMat4::rotate(const float x, const float y, const float z)
 {
-	Mat4 tmp;
+	GMat4 tmp;
 	float rad_x = Gmath::degToRad(x);
 	float rad_y = Gmath::degToRad(y);
 	float rad_z = Gmath::degToRad(z);
@@ -210,13 +210,13 @@ void Mat4::rotate(const float x, const float y, const float z)
 }
 
 
-const float *Mat4::toArray() const
+const float *GMat4::toArray() const
 {
 	return &(mat[0][0]);
 }
 
 
-void Mat4::translate(const float x, const float y, const float z)
+void GMat4::translate(const float x, const float y, const float z)
 {
 	mat[3].x = x;
 	mat[3].y = y;
@@ -224,9 +224,9 @@ void Mat4::translate(const float x, const float y, const float z)
 }
 
 
-void Mat4::transpose()
+void GMat4::transpose()
 {
-	Mat4 tmp;
+	GMat4 tmp;
 	
 	for(int i=0; i<4; ++i) {
 		for(int j=0; j<4; ++j) {
@@ -238,7 +238,7 @@ void Mat4::transpose()
 }
 
 
-void Mat4::zero()
+void GMat4::zero()
 {
 	for(int i=0; i<4; ++i) {
 		mat[i].zero();

@@ -5,7 +5,7 @@
 
 #include "GLFW/glfw3.h"
 #include "../ggame.h"
-#include "../gcomponent.h"
+#include "gcomponent.h"
 
 
 class GUserInputComponent: public GComponent {

@@ -3,9 +3,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#include "gcomponents/g_camera.h"
-#include "gcomponents/g_geometry.h"
-#include "gcomponents/g_user_input.h"
+#include "gcomponents/gcamera.h"
+#include "gcomponents/ggeometry.h"
+#include "gcomponents/guserinput.h"
 #include "ggame.h"
 #include "gstage.h"
 
@@ -156,8 +156,8 @@ void GGame::render()
 		
 		GEntity* cameraGEntity = activeGStage->getCameraGEntity();
 		
-		Vec3 camera_position = cameraGEntity->position + cameraGEntity->getGCamera()->getPosition();
-		Vec3 look_at = camera_position + cameraGEntity->forward;
+		GVec3 camera_position = cameraGEntity->position + cameraGEntity->getGCamera()->getPosition();
+		GVec3 look_at = camera_position + cameraGEntity->forward;
 		gluLookAt(camera_position.x, camera_position.y, camera_position.z, look_at.x, look_at.y, look_at.z, 0.0f, 1.0f, 0.0f);
 		
 		for(auto e : activeGStage->getGEntities()) {
@@ -190,10 +190,10 @@ void GGame::render()
 					
 					glBegin(type);
 						std::vector<float> vertices = e.second->getGGeometry()->getVertices();
-						Vec3* vertex;
+						GVec3* vertex;
 						for(size_t i=0; i<vertices.size(); i+=3) {
 							glColor3f(1.0f, 0.1f, 0.1f);
-							vertex = (Vec3*) &vertices[i];
+							vertex = (GVec3*) &vertices[i];
 							glVertex3f(vertex->x, vertex->y, vertex->z);
 						}
 					glEnd();

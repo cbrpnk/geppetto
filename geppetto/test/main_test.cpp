@@ -5,14 +5,14 @@
 
 int main(int argc, char **argv) {
 
-	TEST_VEC3::TEST();
-	std::cout << "Vec3 TEST PASSED\n"; 
-	TEST_VEC4::TEST();
-	std::cout << "Vec4 TEST PASSED\n"; 
-	TEST_MAT3::TEST();
-	std::cout << "Mat3 TEST PASSED\n"; 
-	TEST_MAT4::TEST();
-	std::cout << "Mat4 TEST PASSED\n"; 
+	TEST_GVEC3::TEST();
+	std::cout << "GVec3 TEST PASSED\n"; 
+	TEST_GVEC4::TEST();
+	std::cout << "GVec4 TEST PASSED\n"; 
+	TEST_GMAT3::TEST();
+	std::cout << "GMat3 TEST PASSED\n"; 
+	TEST_GMAT4::TEST();
+	std::cout << "GMat4 TEST PASSED\n"; 
 	
 	std::cout << "\nALL TESTS PASSED\n\n";
 	
