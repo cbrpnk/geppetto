@@ -14,6 +14,7 @@ GGame* GGame::instance = nullptr;
 
 GGame::GGame(std::string n, const int w, const int h) :
 name(n),
+window(nullptr),
 width(w),
 height(h)
 {
@@ -73,6 +74,7 @@ bool GGame::init()
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetKeyCallback(window, GUserInputComponent::glfw_key_callback);
 	glfwSetCursorPosCallback(window, GUserInputComponent::glfw_mouse_move_callback);
+	glfwSetScrollCallback(window, GUserInputComponent::glfw_mouse_scroll_callback);
 	glfwSetMouseButtonCallback(window, GUserInputComponent::glfw_mouse_button_callback);
 	
 	// Viewport and projection

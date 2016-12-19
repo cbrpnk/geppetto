@@ -57,6 +57,8 @@ int GUserInputComponent::mouse_x = 0;
 int GUserInputComponent::mouse_x_move = 0;
 int GUserInputComponent::mouse_y = 0;
 int GUserInputComponent::mouse_y_move = 0;
+int GUserInputComponent::xscroll = 0;
+int GUserInputComponent::yscroll = 0;
 
 GUserInputComponent::GUserInputComponent(GEntity& e) : GComponent(e)
 {}
@@ -104,6 +106,14 @@ void GUserInputComponent::glfw_mouse_move_callback(GLFWwindow* window,
 	mouse_y_move = mouse_y - y_pos;
 	mouse_x = x_pos;
 	mouse_y = y_pos;
+}
+
+
+void GUserInputComponent::glfw_mouse_scroll_callback(GLFWwindow* window,
+    double xoffset, double yoffset)
+{
+	xscroll += xoffset;
+	yscroll += yoffset;
 }
 
 

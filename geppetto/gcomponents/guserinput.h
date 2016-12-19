@@ -75,6 +75,8 @@ private:
 	static int mouse_x_move;
 	static int mouse_y;
 	static int mouse_y_move;
+	static int xscroll;
+	static int yscroll;
 	
 	// GGame::init will register those callbacks through the GLFW API
 	friend bool GGame::init();
@@ -82,6 +84,8 @@ private:
         double x_pos, double y_pos);
 	static void glfw_mouse_button_callback(GLFWwindow* window,
         int button, int action, int mods);
+	static void glfw_mouse_scroll_callback(GLFWwindow* window,
+        double xoffset, double yoffset);
 	static void glfw_key_callback(GLFWwindow *window,
         int key, int scancode, int action, int mode);
 };

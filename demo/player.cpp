@@ -15,6 +15,9 @@ Player::~Player()
 
 void Player::load()
 {
+	position.y = 25;
+	rotate(45.0f, 0.0f, 0.0f);
+	
 	addGComponent(GComponent::Type::GPhysics);
 	gPhysics->setFrictionCoefficient(0.15f);
 	
@@ -29,31 +32,36 @@ void Player::load()
 
 void Player::update()
 {
+	// Keyboard movement (WASD)
 	if(gUserInput->keyPressed(GLFW_KEY_W)) {
 		gPhysics->setAcceleration(
 			gPhysics->getAcceleration() +
-			forward *
+			GVec3(0.0f, 0.0f, 5.0f) *
 			movement_acceleration);
 	}
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_A)) {
 		getGPhysics()->setAcceleration(gPhysics->getAcceleration() +
-			GVec3(forward).cross(GVec3(0.0f, 1.0f, 0.0f)) *
+			GVec3(forward).cross(GVec3(0.0f, 5.0f, 0.0f)) *
 			-movement_acceleration);
 	}
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_S)) {
 		getGPhysics()->setAcceleration(gPhysics->getAcceleration() +
-			forward *
+			GVec3(0.0f, 0.0f, 5.0f) *
 			-movement_acceleration);
 	}
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_D)) {
 		gPhysics->setAcceleration(gPhysics->getAcceleration() +
-			GVec3(forward).cross(GVec3(0.0f, 1.0f, 0.0f)) *
+			GVec3(forward).cross(GVec3(0.0f, 5.0f, 0.0f)) *
 			movement_acceleration);
 	}
+	
+	// Mouse zoom
+	
+	
+	// Close the game
 	if(gUserInput->keyPressed(GUserInputComponent::KEY_ESCAPE)) {
 		gGame.shutdown();
 	}
-	
-	rotate(gUserInput->getMouseYMovement() * -rotation_speed,
-		gUserInput->getMouseXMovement() * rotation_speed, 0.0f);
 }
+
+
