@@ -1,19 +1,20 @@
 #ifndef _GEPPETTO_H_
 #define _GEPPETTO_H_
 
-#include "gcomponents/gcomponent.h"
-#include "gcomponents/gcamera.h"
-#include "gcomponents/ggeometry.h"
-#include "gcomponents/gphysics.h"
-#include "gcomponents/guserinput.h"
-#include "gentity.h"
-#include "ggame.h"
-#include "gstage.h"
+#include "game.h"
+#include "stage.h"
+#include "entity.h"
 
-#include "gmath/gmath.h"
-#include "gmath/gmat3.h"
-#include "gmath/gmat4.h"
-#include "gmath/gvec3.h"
-#include "gmath/gvec4.h"
+#include "components/component_base.h"
+#include "components/camera.h"
+#include "components/geometry.h"
+#include "components/physics.h"
+#include "components/userinput.h"
+
+#include "math/math.h"
+#include "math/mat3.h"
+#include "math/mat4.h"
+#include "math/vec3.h"
+#include "math/vec4.h"
 
 #endif

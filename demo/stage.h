@@ -3,9 +3,9 @@
 
 #include <string>
 
-#include "../geppetto/gstage.h"
+#include "../geppetto/geppetto.h"
 
-class Stage : public GStage
+class Stage : public Geppetto::Stage
 {
 public:
 	static const size_t NCubes;
@@ -13,8 +13,8 @@ public:
 	Stage();
 	~Stage();
 	
-	void load();
-	void update();
+	void Load();
+	void Update();
 };
 
 #endif

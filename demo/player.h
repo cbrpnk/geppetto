@@ -3,17 +3,18 @@
 
 #include "../geppetto/geppetto.h"
 
-class Player : public GEntity
+class Player : public Geppetto::Entity
 {
 public:
 	float movement_acceleration;
 	float rotation_speed;
+	int zoomLevel;
 	
 	Player();
 	~Player();
 	
-	void load();
-	void update();
+	void Load();
+	void Update();
 };
 
 #endif

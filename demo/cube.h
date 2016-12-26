@@ -5,7 +5,7 @@
 
 #include "../geppetto/geppetto.h"
 
-class Cube : public GEntity
+class Cube : public Geppetto::Entity
 {
 public:
 	float xRotationSpeed;
@@ -15,8 +15,8 @@ public:
 	Cube(std::string name);
 	~Cube();
 	
-	void load();
-	void update();
+	void Load();
+	void Update();
 };
 
 #endif

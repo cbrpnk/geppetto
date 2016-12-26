@@ -3,65 +3,71 @@
 
 
 Player::Player() :
-GEntity::GEntity("Player", "Player")
+Entity::Entity("Player", "Player")
 {
 	movement_acceleration = 0.003f;
 	rotation_speed = 0.09f;
+	zoomLevel = 0;
 }
 
 Player::~Player()
 {}
 
 
-void Player::load()
+void Player::Load()
 {
 	position.y = 25;
-	rotate(45.0f, 0.0f, 0.0f);
+	Rotate(45.0f, 0.0f, 0.0f);
 	
-	addGComponent(GComponent::Type::GPhysics);
-	gPhysics->setFrictionCoefficient(0.15f);
+	AddComponent(Geppetto::Component::Type::Physics);
+	physics->SetFrictionCoefficient(0.15f);
 	
-	addGComponent(GComponent::Type::GCamera);
-	gCamera->setPosition(GVec3(0.0f, 2.0f, 0.0f));
+	AddComponent(Geppetto::Component::Type::Camera);
+	camera->SetPosition(Geppetto::Math::Vec3(0.0f, 2.0f, 0.0f));
 	
-	addGComponent(GComponent::Type::GUserInput);
+	AddComponent(Geppetto::Component::Type::UserInput);
 	
-	gStage.setCameraGEntity(this);
+	stage.SetCameraEntity(this);
 }
 
 
-void Player::update()
+#include <iostream>
+void Player::Update()
 {
-	// Keyboard movement (WASD)
-	if(gUserInput->keyPressed(GLFW_KEY_W)) {
-		gPhysics->setAcceleration(
-			gPhysics->getAcceleration() +
-			GVec3(0.0f, 0.0f, 5.0f) *
-			movement_acceleration);
-	}
-	if(gUserInput->keyPressed(GUserInputComponent::KEY_A)) {
-		getGPhysics()->setAcceleration(gPhysics->getAcceleration() +
-			GVec3(forward).cross(GVec3(0.0f, 5.0f, 0.0f)) *
-			-movement_acceleration);
-	}
-	if(gUserInput->keyPressed(GUserInputComponent::KEY_S)) {
-		getGPhysics()->setAcceleration(gPhysics->getAcceleration() +
-			GVec3(0.0f, 0.0f, 5.0f) *
-			-movement_acceleration);
-	}
-	if(gUserInput->keyPressed(GUserInputComponent::KEY_D)) {
-		gPhysics->setAcceleration(gPhysics->getAcceleration() +
-			GVec3(forward).cross(GVec3(0.0f, 5.0f, 0.0f)) *
+	// Keyboard movement [WASD]
+	if(userInput->KeyPressed(Geppetto::Component::UserInput::KEY_W)) {
+		physics->SetAcceleration(
+			physics->GetAcceleration() +
+			Geppetto::Math::Vec3(0.0f, 0.0f, 5.0f) *
 			movement_acceleration);
 	}
 	
-	// Mouse zoom
-	
-	
-	// Close the game
-	if(gUserInput->keyPressed(GUserInputComponent::KEY_ESCAPE)) {
-		gGame.shutdown();
+	if(userInput->KeyPressed(Geppetto::Component::UserInput::KEY_A)) {
+		physics->SetAcceleration(physics->GetAcceleration() +
+			Geppetto::Math::Vec3(forward).Cross(Geppetto::Math::Vec3(0.0f, 5.0f, 0.0f)) *
+			-movement_acceleration);
 	}
+	
+	if(userInput->KeyPressed(Geppetto::Component::UserInput::KEY_S)) {
+		physics->SetAcceleration(physics->GetAcceleration() +
+			Geppetto::Math::Vec3(0.0f, 0.0f, 5.0f) *
+			-movement_acceleration);
+	}
+	
+	if(userInput->KeyPressed(Geppetto::Component::UserInput::KEY_D)) {
+		physics->SetAcceleration(physics->GetAcceleration() +
+			Geppetto::Math::Vec3(forward).Cross(Geppetto::Math::Vec3(0.0f, 5.0f, 0.0f)) *
+			movement_acceleration);
+	}
+	
+	// Close the game [ESCAPE]
+	if(userInput->KeyPressed(Geppetto::Component::UserInput::KEY_ESCAPE)) {
+		game.Shutdown();
+	}
+	
+	// Zoom on scene [Mouse Scroll]
+	int scroll = userInput->mouseState.yScroll;
+	float zoom = (zoomLevel - scroll) * 0.1;
+	zoomLevel = scroll;
+	physics->SetAcceleration(physics->GetAcceleration() + (forward * -zoom));
 }
-
-

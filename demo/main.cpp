@@ -8,11 +8,11 @@ int main(int argc, char **argv)
 	// Setup Game;
 	Game game;
 	
-	if(game.init()) {
+	if(game.Init()) {
 		new Stage();
 		
-		if(game.loadGStage("Stage")) {
-			game.run();
+		if(game.LoadStage("Stage")) {
+			game.Run();
 		}
 	}
 	

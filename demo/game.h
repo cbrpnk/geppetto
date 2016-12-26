@@ -3,14 +3,14 @@
 
 #include "../geppetto/geppetto.h"
 
-class Game : public GGame
+class Game : public Geppetto::Game
 {
 public:
 	Game();
 	~Game();
 	
-	void load();
-	void update();
+	void Load();
+	void Update();
 };
 
 #endif
