@@ -9,6 +9,7 @@
 #include "components/camera.h"
 #include "components/geometry.h"
 #include "components/physics.h"
+#include "components/shader.h"
 #include "components/userinput.h"
 #include "math/vec3.h"
 #include "math/mat4.h"
@@ -49,6 +50,7 @@ public:
 	Component::Camera*    GetCamera()    const;
 	Component::Geometry*  GetGeometry()  const;
 	Component::Physics*   GetPhysics()   const;
+	Component::Shader*    GetShader()    const;
 	Component::UserInput* GetUserInput() const;
 	
 protected:
@@ -61,6 +63,7 @@ protected:
 	Component::Camera*    camera;
 	Component::Geometry*  geometry;
 	Component::Physics*   physics;
+	Component::Shader*    shader;
 	Component::UserInput* userInput;
 };
 

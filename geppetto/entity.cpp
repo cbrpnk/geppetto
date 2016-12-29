@@ -25,6 +25,7 @@ stage(Game::GetInstance().GetActiveStage()),
 camera(nullptr),
 geometry(nullptr),
 physics(nullptr),
+shader(nullptr),
 userInput(nullptr)
 {
 	stage.AddEntity(this);
@@ -34,17 +35,22 @@ userInput(nullptr)
 Entity::~Entity()
 {
 	if(camera) {
-		delete(camera);
+		RemoveComponent(Component::Type::Camera);
 	}
 	if(geometry) {
-		delete(geometry);
+		RemoveComponent(Component::Type::Geometry);
 	}
 	if(physics) {
-		delete(physics);
+		RemoveComponent(Component::Type::Physics);
+	}
+	if(shader) {
+		RemoveComponent(Component::Type::Shader);
 	}
 	if(userInput) {
-		delete(userInput);
+		RemoveComponent(Component::Type::UserInput);
 	}
+	
+	stage.RemoveEntity(name);
 }
 
 
@@ -72,6 +78,9 @@ void Entity::UpdateEntity()
 	}
 	if(physics) {
 		physics->Update();
+	}
+	if(shader) {
+		shader->Update();
 	}
 	if(userInput) {
 		userInput->Update();
@@ -142,6 +151,8 @@ void Entity::AddComponent(const Component::Type type)
 			geometry = new Component::Geometry(*this);
 		} else if(type == Component::Type::Physics) {
 			physics = new Component::Physics(*this);
+		} else if(type == Component::Type::Shader) {
+			shader = new Component::Shader(*this);
 		} else if(type == Component::Type::UserInput) {
 			userInput = new Component::UserInput(*this);
 		}
@@ -156,6 +167,8 @@ bool Entity::HasComponent(const Component::Type type) const
 	} else if(type == Component::Type::Geometry && geometry) {
 		return true;
 	} else if(type == Component::Type::Physics && physics) {
+		return true;
+	} else if(type == Component::Type::Shader && shader) {
 		return true;
 	} else if(type == Component::Type::UserInput && userInput) {
 		return true;
@@ -176,6 +189,9 @@ void Entity::RemoveComponent(const Component::Type type)
 	} else if(type == Component::Type::Physics && physics) {
 		delete(physics);
 		physics = nullptr;
+	} else if(type == Component::Type::Shader && shader) {
+		delete(shader);
+		shader = nullptr;
 	} else if(type == Component::Type::UserInput && userInput) {
 		delete(userInput);
 		userInput = nullptr;
@@ -205,6 +221,14 @@ Component::Physics* Entity::GetPhysics() const
 {
 	if(physics) {
 		return physics;
+	}
+	return nullptr;
+}
+
+Component::Shader* Entity::GetShader() const
+{
+	if(shader) {
+		return shader;
 	}
 	return nullptr;
 }

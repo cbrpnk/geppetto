@@ -78,7 +78,6 @@ std::string Stage::GetName() const
 void Stage::RemoveEntity(const std::string name)
 {
 	if(gEntitiesByName.find(name) != gEntitiesByName.end()) {
-		delete(gEntitiesByName[name]);
 		gEntitiesByName.erase(name);
 	}
 }

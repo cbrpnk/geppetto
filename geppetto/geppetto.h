@@ -9,6 +9,7 @@
 #include "components/camera.h"
 #include "components/geometry.h"
 #include "components/physics.h"
+#include "components/shader.h"
 #include "components/userinput.h"
 
 #include "math/math.h"

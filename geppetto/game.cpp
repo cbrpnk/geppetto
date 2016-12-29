@@ -1,4 +1,6 @@
+#ifndef GLEW_STATIC
 #define GLEW_STATIC
+#endif
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -91,10 +93,6 @@ bool Game::Init()
 	glShadeModel(GL_FLAT);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_FOG);
-	glFogf(GL_FOG_START, 40.0f);
-	glFogf(GL_FOG_END, 90.0f);
-	glFogi(GL_FOG_MODE, GL_LINEAR);
 	
 	return true;
 }
@@ -167,7 +165,10 @@ void Game::Render()
 		for(auto e : activeStage->GetGEntities()) {
 			
 			// Check if Entity has a Geometry component
-			if(e.second->active && e.second->HasComponent(Component::Type::Geometry)) {
+			if(e.second->active && e.second->HasComponent(Component::Type::Shader) &&
+                                   e.second->HasComponent(Component::Type::Geometry)) {
+					
+				glUseProgram(e.second->GetShader()->GetShader());
 				
 				glPushMatrix();
 					glMultMatrixf(e.second->GetReferenceFrame().ToArray());
@@ -196,7 +197,6 @@ void Game::Render()
 						std::vector<float> vertices = e.second->GetGeometry()->GetVertices();
 						Math::Vec3* vertex;
 						for(size_t i=0; i<vertices.size(); i+=3) {
-							glColor3f(1.0f, 0.1f, 0.1f);
 							vertex = (Math::Vec3*) &vertices[i];
 							glVertex3f(vertex->x, vertex->y, vertex->z);
 						}

@@ -24,10 +24,14 @@ void Cube::Load()
 	position.z = Geppetto::Math::RandomFloat(-50.0f, 50.0f);
 	
 	AddComponent(Geppetto::Component::Type::Physics);
-	GetPhysics()->SetFrictionCoefficient(0.15f);
+	physics->SetFrictionCoefficient(0.15f);
+	
 	AddComponent(Geppetto::Component::Type::Geometry);
-	GetGeometry()->LoadVertices(Geppetto::Component::Geometry::Cube);
-	GetGeometry()->SetType(Geppetto::Component::Geometry::Type::Quads);
+	geometry->LoadVertices(Geppetto::Component::Geometry::Cube);
+	geometry->SetType(Geppetto::Component::Geometry::Type::Quads);
+	
+	AddComponent(Geppetto::Component::Type::Shader);
+	shader->CreateShader("shaders/cube.vertex", "shaders/cube.fragment");
 }
 
 
