@@ -21,48 +21,48 @@ class Stage;
 class Entity
 {
 public:
-	bool        active;
-	std::string name;
-	std::string type;
-	Math::Vec3  position;
-	Math::Vec3  forward;
-	Math::Vec3  up;
-	
-	Entity(std::string n, std::string t);
-	virtual ~Entity();
-	
-	virtual void Update();
-	void UpdateEntity();
-	
-	Game&      GetGame() const;
-	Stage&     GetStage() const;
-	Math::Mat4 GetReferenceFrame() const;
-	void       PlaceAt(const float x, const float y, const float z);
-	void       Rotate(const float x, const float y, const float z);
-	
-	/* Deal With Components */
-	void AddComponent(const Component::Type type);
-	bool HasComponent(const Component::Type type) const;
-	void RemoveComponent(const Component::Type type);
-	
-	Component::Camera*    GetCamera()    const;
-	Component::Geometry*  GetGeometry()  const;
-	Component::Physics*   GetPhysics()   const;
-	Component::Shader*    GetShader()    const;
-	Component::UserInput* GetUserInput() const;
-	
+    bool        active;
+    std::string name;
+    std::string type;
+    Math::Vec3  position;
+    Math::Vec3  forward;
+    Math::Vec3  up;
+    
+    Entity(std::string n, std::string t);
+    virtual ~Entity();
+    
+    virtual void Update();
+    void UpdateEntity();
+    
+    Game&      GetGame() const;
+    Stage&     GetStage() const;
+    Math::Mat4 GetReferenceFrame() const;
+    void       PlaceAt(const float x, const float y, const float z);
+    void       Rotate(const float x, const float y, const float z);
+    
+    /* Deal With Components */
+    void AddComponent(const Component::Type type);
+    bool HasComponent(const Component::Type type) const;
+    void RemoveComponent(const Component::Type type);
+    
+    Component::Camera*    GetCamera()    const;
+    Component::Geometry*  GetGeometry()  const;
+    Component::Physics*   GetPhysics()   const;
+    Component::Shader*    GetShader()    const;
+    Component::UserInput* GetUserInput() const;
+    
 protected:
-	const static        std::string defaultName;
-	static int          nEntities;
-	
-	Game&               game;
-	Stage&              stage;
-	
-	Component::Camera*    camera;
-	Component::Geometry*  geometry;
-	Component::Physics*   physics;
-	Component::Shader*    shader;
-	Component::UserInput* userInput;
+    const static        std::string defaultName;
+    static int          nEntities;
+    
+    Game&               game;
+    Stage&              stage;
+    
+    Component::Camera*    camera;
+    Component::Geometry*  geometry;
+    Component::Physics*   physics;
+    Component::Shader*    shader;
+    Component::UserInput* userInput;
 };
 
 } // namespace Geppetto

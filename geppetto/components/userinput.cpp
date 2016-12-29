@@ -71,45 +71,45 @@ UserInput::~UserInput()
 
 bool UserInput::KeyPressed(const int key)
 {
-	if(keyboardState.find(key) != keyboardState.end()) {
-		return true;
-	}
-	return false;
+    if(keyboardState.find(key) != keyboardState.end()) {
+        return true;
+    }
+    return false;
 }
 
 
 void UserInput::GlfwMouseButtonCallback(GLFWwindow* window,
     int button, int action, int mods)
 {
-	// TODO
+    // TODO
 }
 
 
 void UserInput::GlfwMouseMoveCallback(GLFWwindow* window,
     double xPos, double yPos)
 {
-	mouseState.xPos = xPos;
-	mouseState.yPos = yPos;
+    mouseState.xPos = xPos;
+    mouseState.yPos = yPos;
 }
 
 
 void UserInput::GlfwMouseScrollCallback(GLFWwindow* window,
     double xScroll, double yScroll)
 {
-	mouseState.xScroll += xScroll;
-	mouseState.yScroll += yScroll;
+    mouseState.xScroll += xScroll;
+    mouseState.yScroll += yScroll;
 }
 
 
 void UserInput::GlfwKeyCallback(GLFWwindow* window,
     int key, int scancode, int action, int mode)
 {
-	if(action == GLFW_PRESS) {
-		keyboardState.insert(key);
-	} else if(action == GLFW_RELEASE &&
-		keyboardState.find(key) != keyboardState.end()) {
-		keyboardState.erase(key);
-	}
+    if(action == GLFW_PRESS) {
+        keyboardState.insert(key);
+    } else if(action == GLFW_RELEASE &&
+        keyboardState.find(key) != keyboardState.end()) {
+        keyboardState.erase(key);
+    }
 }
 
 

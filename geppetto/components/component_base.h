@@ -14,21 +14,21 @@ namespace Component {
 
 enum class Type
 {
-	Camera, Geometry, Physics, Shader, UserInput
+    Camera, Geometry, Physics, Shader, UserInput
 };
 
 
 class ComponentBase
 {
 public:
-	
-	Game&   game;
-	Stage&  stage;
-	Entity& entity;
-	
-	ComponentBase(Geppetto::Entity& e);
-	virtual ~ComponentBase();
-	virtual void Update();
+    
+    Game&   game;
+    Stage&  stage;
+    Entity& entity;
+    
+    ComponentBase(Geppetto::Entity& e);
+    virtual ~ComponentBase();
+    virtual void Update();
 };
 
 } // namespace Component

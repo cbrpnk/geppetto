@@ -1,11 +1,5 @@
 :retab every file
 
-remove update() from the public section of components
-put it in the protected section with a friend function
-
-make entity constructor call the load method, or remove load entirely
-and use only constructor
-
 VBOs
 
 Load OBJ files

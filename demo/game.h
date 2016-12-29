@@ -6,11 +6,11 @@
 class Game : public Geppetto::Game
 {
 public:
-	Game();
-	~Game();
-	
-	void Load();
-	void Update();
+    Game();
+    ~Game();
+    
+    void Load();
+    void Update();
 };
 
 #endif

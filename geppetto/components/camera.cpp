@@ -17,37 +17,37 @@ Camera::~Camera()
 
 Math::Vec3 Camera::GetForward()
 {
-	return forward;
+    return forward;
 }
 
 
 Math::Vec3 Camera::GetPosition()
 {
-	return position;
+    return position;
 }
 
 
 Math::Vec3 Camera::GetUp()
 {
-	return up;
+    return up;
 }
 
 
 void Camera::SetForward(const Math::Vec3 f)
 {
-	forward = f;
+    forward = f;
 }
 
 
 void Camera::SetPosition(const Math::Vec3 p)
 {
-	position = p;
+    position = p;
 }
 
 
 void Camera::SetUp(const Math::Vec3 u)
 {
-	up = u;
+    up = u;
 }
 
 } // namespace Component

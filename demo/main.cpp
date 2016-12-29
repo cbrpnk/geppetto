@@ -5,13 +5,13 @@
 
 int main(int argc, char **argv)
 {
-	// Setup Game;
-	Game game;
-	
-	if(game.Init()) {
-		new Stage();
-		game.Run();
-	}
-	
-	return 0;
+    // Setup Game;
+    Game game;
+    
+    if(game.Init()) {
+        new Stage();
+        game.Run();
+    }
+    
+    return 0;
 }

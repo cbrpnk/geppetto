@@ -8,14 +8,14 @@
 class Cube : public Geppetto::Entity
 {
 public:
-	float xRotationSpeed;
-	float yRotationSpeed;
-	float zRotationSpeed;
-	
-	Cube(std::string name);
-	~Cube();
-	
-	void Update();
+    float xRotationSpeed;
+    float yRotationSpeed;
+    float zRotationSpeed;
+    
+    Cube(std::string name);
+    ~Cube();
+    
+    void Update();
 };
 
 #endif

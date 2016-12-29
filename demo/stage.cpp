@@ -11,12 +11,12 @@ const size_t Stage::NCubes = 100;
 
 Stage::Stage() : Geppetto::Stage("Stage")
 {
-	new Player();
-	
-	// Create cubes
-	for(size_t i=0; i<Stage::NCubes; ++i) {
-		new Cube("Cube" + std::to_string(i));
-	}
+    new Player();
+    
+    // Create cubes
+    for(size_t i=0; i<Stage::NCubes; ++i) {
+        new Cube("Cube" + std::to_string(i));
+    }
 }
 
 

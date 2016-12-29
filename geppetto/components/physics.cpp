@@ -6,9 +6,9 @@ namespace Component {
 
 Physics::Physics(Entity& e) : ComponentBase(e)
 {
-	acceleration = Math::Vec3(0.0f, 0.0f, 0.0f);
-	velocity = Math::Vec3(0.0f, 0.0f, 0.0f);
-	frictionCoefficient = 0.0f;
+    acceleration = Math::Vec3(0.0f, 0.0f, 0.0f);
+    velocity = Math::Vec3(0.0f, 0.0f, 0.0f);
+    frictionCoefficient = 0.0f;
 }
 
 
@@ -18,44 +18,44 @@ Physics::~Physics()
 
 Math::Vec3 Physics::GetAcceleration()
 {
-	return acceleration;
+    return acceleration;
 }
 
 
 float Physics::GetFrictionCoefficient()
 {
-	return frictionCoefficient;
+    return frictionCoefficient;
 }
 
 
 Math::Vec3 Physics::GetVelocity()
 {
-	return velocity;
+    return velocity;
 }
 
 void Physics::SetAcceleration(const Math::Vec3 a)
 {
-	acceleration = a;
+    acceleration = a;
 }
 
 
 void Physics::SetFrictionCoefficient(const float f)
 {
-	frictionCoefficient = f;
+    frictionCoefficient = f;
 }
 
 
 void Physics::SetVelocity(const Math::Vec3 v)
 {
-	velocity = v;
+    velocity = v;
 }
 
 
 void Physics::Update()
 {
-	acceleration *= 1 - frictionCoefficient;
-	velocity += acceleration - (velocity * frictionCoefficient);
-	entity.position += velocity;
+    acceleration *= 1 - frictionCoefficient;
+    velocity += acceleration - (velocity * frictionCoefficient);
+    entity.position += velocity;
 }
 
 } // namespace Component
