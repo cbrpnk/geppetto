@@ -6,7 +6,11 @@ Stage::Stage(std::string stageName) :
 game(Game::GetInstance()),
 name(stageName)
 {
-	game.AddStage(this);
+	Stage* activeStage = Game::GetInstance().GetActiveStage();
+	if(activeStage != nullptr) {
+		delete activeStage;
+	}
+	Game::GetInstance().SetActiveStage(this);
 }
 
 
@@ -106,23 +110,6 @@ void Stage::UpdateStage()
 	/* Call the derived class update() */
 	Update();
 }
-
-
-void Stage::LoadStage()
-{
-	/* Call the derived class load() risponsible for adding
-     * and initializing GEntities.*/
-	Load();
-	
-	/* Let's actually to the work to load those added GEntities */
-	for(auto entity : gEntitiesByName) {
-		entity.second->LoadEntity();
-	}
-}
-
-
-void Stage::Load()
-{}
 
 
 void Stage::Update()

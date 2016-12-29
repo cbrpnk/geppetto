@@ -9,16 +9,7 @@
 const size_t Stage::NCubes = 100;
 
 
-Stage::Stage() :
-Geppetto::Stage("Stage")
-{}
-
-
-Stage::~Stage()
-{}
-
-
-void Stage::Load()
+Stage::Stage() : Geppetto::Stage("Stage")
 {
 	new Player();
 	
@@ -28,6 +19,10 @@ void Stage::Load()
 	}
 }
 
+
+Stage::~Stage()
+{}
+
+
 void Stage::Update()
-{
-}
+{}

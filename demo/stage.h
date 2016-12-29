@@ -13,7 +13,6 @@ public:
 	Stage();
 	~Stage();
 	
-	void Load();
 	void Update();
 };
 

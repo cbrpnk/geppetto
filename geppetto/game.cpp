@@ -19,16 +19,15 @@ Game::Game(std::string n, const int w, const int h) :
 name(n),
 window(nullptr),
 width(w),
-height(h)
+height(h),
+activeStage(nullptr)
 {
 	instance = this;
 }
 
 Game::~Game()
 {
-	for(auto stage : stages) {
-		delete(stage.second);
-	}
+	delete activeStage;
 }
 
 
@@ -116,36 +115,15 @@ void Game::Shutdown()
 }
 
 
-void Game::AddStage(Stage* stage)
+void Game::SetActiveStage(Stage* stage)
 {
-	stages.insert(std::make_pair(stage->GetName(), stage));
+	activeStage = stage;
 }
 
 
-Stage& Game::GetActiveStage()
+Stage* Game::GetActiveStage()
 {
-	return *activeStage;
-}
-
-
-Stage* Game::GetStage(std::string name)
-{
-	if(stages.find(name) != stages.end()) {
-		return stages[name];
-	}
-	return nullptr;
-}
-
-
-bool Game::LoadStage(std::string name)
-{
-	Stage* stage = GetStage(name);
-	if(stage) {
-		activeStage = stage;
-		stage->LoadStage();
-		return true;
-	}
-	return false;
+	return activeStage;
 }
 
 

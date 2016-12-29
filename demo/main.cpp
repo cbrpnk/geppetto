@@ -10,10 +10,7 @@ int main(int argc, char **argv)
 	
 	if(game.Init()) {
 		new Stage();
-		
-		if(game.LoadStage("Stage")) {
-			game.Run();
-		}
+		game.Run();
 	}
 	
 	return 0;

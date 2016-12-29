@@ -21,7 +21,7 @@ position(Math::Vec3(0, 0, 0)),
 forward(Math::Vec3(0, 0, 1)),
 up(Math::Vec3(0, 1, 0)),
 game(Game::GetInstance()),
-stage(Game::GetInstance().GetActiveStage()),
+stage(*(Game::GetInstance().GetActiveStage())),
 camera(nullptr),
 geometry(nullptr),
 physics(nullptr),
@@ -54,18 +54,8 @@ Entity::~Entity()
 }
 
 
-void Entity::Load()
-{}
-
-
 void Entity::Update()
 {}
-
-
-void Entity::LoadEntity()
-{
-	Load();
-}
 
 
 void Entity::UpdateEntity()

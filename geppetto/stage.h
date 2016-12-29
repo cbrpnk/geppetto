@@ -35,17 +35,13 @@ public:
 	void                                  SetCameraEntity(Entity* const e);
 	
 	
-	/////////////////// Load/Update //////////////////////////
+	///////////////////////// Update ////////////////////////////
 	
 	
-	// loadStage() is called by Game::loadStage()
-	void LoadStage();
 	// Called on every frame by Game::run()
 	void UpdateStage();
 	
-	// Methods meant to be defined by the derived class are called by
-    // loadStage() and updateStage() respectively
-	virtual void Load();
+	// Methods meant to be defined by the derived and called by UpdateStage()
 	virtual void Update();
 
 

@@ -6,14 +6,6 @@ Entity::Entity(name, "Cube"),
 xRotationSpeed(0),
 yRotationSpeed(0),
 zRotationSpeed(0)
-{}
-
-
-Cube::~Cube()
-{}
-
-
-void Cube::Load()
 {
 	xRotationSpeed = Geppetto::Math::RandomFloat(-5.0f, 5.0f);
 	yRotationSpeed = Geppetto::Math::RandomFloat(-5.0f, 5.0f);
@@ -33,6 +25,10 @@ void Cube::Load()
 	AddComponent(Geppetto::Component::Type::Shader);
 	shader->CreateShader("shaders/cube.vertex", "shaders/cube.fragment");
 }
+
+
+Cube::~Cube()
+{}
 
 
 void Cube::Update()

@@ -1,3 +1,5 @@
+:retab every file
+
 remove update() from the public section of components
 put it in the protected section with a friend function
 

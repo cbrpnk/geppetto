@@ -9,9 +9,5 @@ Game::~Game()
 {}
 
 
-void Game::Load()
-{}
-
-
 void Game::Update()
 {}

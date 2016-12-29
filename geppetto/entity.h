@@ -24,23 +24,21 @@ public:
 	bool        active;
 	std::string name;
 	std::string type;
-	Math::Vec3        position;
-	Math::Vec3        forward;
-	Math::Vec3        up;
+	Math::Vec3  position;
+	Math::Vec3  forward;
+	Math::Vec3  up;
 	
 	Entity(std::string n, std::string t);
 	virtual ~Entity();
 	
-	virtual void Load();
 	virtual void Update();
-	void LoadEntity();
 	void UpdateEntity();
 	
-	Game&  GetGame() const;
-	Stage& GetStage() const;
-	Math::Mat4   GetReferenceFrame() const;
-	void   PlaceAt(const float x, const float y, const float z);
-	void   Rotate(const float x, const float y, const float z);
+	Game&      GetGame() const;
+	Stage&     GetStage() const;
+	Math::Mat4 GetReferenceFrame() const;
+	void       PlaceAt(const float x, const float y, const float z);
+	void       Rotate(const float x, const float y, const float z);
 	
 	/* Deal With Components */
 	void AddComponent(const Component::Type type);

@@ -15,7 +15,6 @@ public:
 	Cube(std::string name);
 	~Cube();
 	
-	void Load();
 	void Update();
 };
 

@@ -8,14 +8,7 @@ Entity::Entity("Player", "Player")
 	movement_acceleration = 0.003f;
 	rotation_speed = 0.09f;
 	zoomLevel = 0;
-}
-
-Player::~Player()
-{}
-
-
-void Player::Load()
-{
+	
 	position.y = 25;
 	Rotate(45.0f, 0.0f, 0.0f);
 	
@@ -31,7 +24,10 @@ void Player::Load()
 }
 
 
-#include <iostream>
+Player::~Player()
+{}
+
+
 void Player::Update()
 {
 	// Keyboard movement [WASD]

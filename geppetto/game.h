@@ -23,10 +23,8 @@ public:
 	void Shutdown();
 	
 	/* Stage */
-	void   AddStage(Stage* stage);
-	Stage& GetActiveStage();
-	Stage* GetStage(std::string name);
-	bool   LoadStage(std::string name);
+	void   SetActiveStage(Stage* stage);
+	Stage* GetActiveStage();
 	
 protected:
 	static Game* instance;
@@ -35,10 +33,7 @@ protected:
 	int width;
 	int height;
 	bool runGame = true;
-	
-	/* Stages */
 	Stage* activeStage;
-	std::map<std::string, Stage*> stages;
 	
 private:	
 	void Render();

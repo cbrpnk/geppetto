@@ -13,7 +13,6 @@ public:
 	Player();
 	~Player();
 	
-	void Load();
 	void Update();
 };
 
