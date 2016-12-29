@@ -10,7 +10,7 @@
 namespace Geppetto {
 
 const std::string Entity::defaultName = "Entity";
-int Entity::nGEntities = 0;
+int Entity::nEntities = 0;
 
 
 Entity::Entity(std::string n, std::string t) :

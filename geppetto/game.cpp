@@ -140,7 +140,7 @@ void Game::Render()
 		Math::Vec3 lookAt = cameraPosition + cameraEntity->forward;
 		gluLookAt(cameraPosition.x, cameraPosition.y, cameraPosition.z, lookAt.x, lookAt.y, lookAt.z, 0.0f, 1.0f, 0.0f);
 		
-		for(auto e : activeStage->GetGEntities()) {
+		for(auto e : activeStage->GetEntities()) {
 			
 			// Check if Entity has a Geometry component
 			if(e.second->active && e.second->HasComponent(Component::Type::Shader) &&

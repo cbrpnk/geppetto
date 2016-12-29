@@ -85,6 +85,9 @@ bool Shader::DestroyShader()
 	
 	if(isInDB(shaderName)) {
 		if(refCount[shader] == 1) {
+            // edit refcount + shader db
+            shaderDB.erase(shaderName);
+            refCount.erase(shader);
 			glDeleteProgram(shader);
 		} else {
 			refCount[shader]--;

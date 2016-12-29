@@ -53,7 +53,7 @@ public:
 	
 protected:
 	const static        std::string defaultName;
-	static int          nGEntities;
+	static int          nEntities;
 	
 	Game&               game;
 	Stage&              stage;

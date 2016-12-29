@@ -16,7 +16,7 @@ name(stageName)
 
 Stage::~Stage()
 {
-	for(auto entity : gEntitiesByName) {
+	for(auto entity : entitiesByName) {
 		delete(entity.second);
 	}
 }
@@ -24,13 +24,13 @@ Stage::~Stage()
 
 void Stage::AddEntity(Entity* e)
 {
-	if(gEntitiesByName.find(e->name) == gEntitiesByName.end()) {
-		gEntitiesByName.insert(std::make_pair(e->name, e));
+	if(entitiesByName.find(e->name) == entitiesByName.end()) {
+		entitiesByName.insert(std::make_pair(e->name, e));
 		
-		if(gEntitiesByType.find(e->type) == gEntitiesByType.end()) {
-			gEntitiesByType.insert(std::make_pair(e->type, std::vector<Entity*>()));
+		if(entitiesByType.find(e->type) == entitiesByType.end()) {
+			entitiesByType.insert(std::make_pair(e->type, std::vector<Entity*>()));
 		}
-		(gEntitiesByType[e->type]).push_back(e);
+		(entitiesByType[e->type]).push_back(e);
 	}
 }
 
@@ -41,16 +41,16 @@ Entity* Stage::GetCameraEntity() const
 }
 
 
-const std::map<std::string, Entity*>& Stage::GetGEntities() const
+const std::map<std::string, Entity*>& Stage::GetEntities() const
 {
-	return gEntitiesByName;
+	return entitiesByName;
 }
 
 
-std::vector<Entity*>* Stage::GetGEntitiesByType(const std::string type)
+std::vector<Entity*>* Stage::GetEntitiesByType(const std::string type)
 {
-	if(gEntitiesByType.find(type) != gEntitiesByType.end()) {
-		return &(gEntitiesByType[type]);
+	if(entitiesByType.find(type) != entitiesByType.end()) {
+		return &(entitiesByType[type]);
 	}
 	
 	return nullptr;
@@ -59,8 +59,8 @@ std::vector<Entity*>* Stage::GetGEntitiesByType(const std::string type)
 
 Entity* Stage::GetEntityByName(const std::string name)
 {
-	if(gEntitiesByName.find(name) != gEntitiesByName.end()) {
-		return gEntitiesByName[name];
+	if(entitiesByName.find(name) != entitiesByName.end()) {
+		return entitiesByName[name];
 	}
 	
 	return nullptr;
@@ -81,8 +81,8 @@ std::string Stage::GetName() const
 
 void Stage::RemoveEntity(const std::string name)
 {
-	if(gEntitiesByName.find(name) != gEntitiesByName.end()) {
-		gEntitiesByName.erase(name);
+	if(entitiesByName.find(name) != entitiesByName.end()) {
+		entitiesByName.erase(name);
 	}
 }
 
@@ -101,7 +101,7 @@ void Stage::SetName(const std::string name)
 
 void Stage::UpdateStage()
 {
-	for(auto entity : gEntitiesByName) {
+	for(auto entity : entitiesByName) {
 		if(entity.second->active) {
 			entity.second->UpdateEntity();
 		}

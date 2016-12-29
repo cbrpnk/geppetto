@@ -23,13 +23,13 @@ public:
 	void        SetName(const std::string name);
 	
 	
-	//////////////////// Deal with GEntities /////////////////////
+	//////////////////// Deal with Entities /////////////////////
 	
 	
 	void                                  AddEntity(Entity* e);
 	Entity*                               GetCameraEntity() const;
-	const std::map<std::string, Entity*>& GetGEntities() const;
-	std::vector<Entity*>*                 GetGEntitiesByType(const std::string type);
+	const std::map<std::string, Entity*>& GetEntities() const;
+	std::vector<Entity*>*                 GetEntitiesByType(const std::string type);
 	Entity*                               GetEntityByName(const std::string name);
 	void                                  RemoveEntity(const std::string name);
 	void                                  SetCameraEntity(Entity* const e);
@@ -50,11 +50,11 @@ protected:
 	Game& game;
 	// Unique identifier to a Stage
 	std::string name;
-	// All the GEntities in this Stage
-	std::map<std::string, Entity*> gEntitiesByName;
-	// Maps a User defined Entity type to the set of GEntities that are of
-    // that type. Used by getGEntitiesByType().
-	std::map<std::string, std::vector<Entity*>> gEntitiesByType;
+	// All the Entities in this Stage
+	std::map<std::string, Entity*> entitiesByName;
+	// Maps a User defined Entity type to the set of Entities that are of
+    // that type. Used by getEntitiesByType().
+	std::map<std::string, std::vector<Entity*>> entitiesByType;
 	// Entity that possess a CameraComponent used by Game::render()
 	Entity* cameraEntity;
 };
