@@ -9,7 +9,7 @@ class Stage : public Geppetto::Stage
 {
 public:
     static const size_t NCubes;
-    
+
     Stage();
     ~Stage();
     
