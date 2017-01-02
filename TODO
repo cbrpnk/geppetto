@@ -1,5 +1,8 @@
 Implement some shaders
 
-VBOs
+clean up the shader component + game render
+
+
+VAOs / VBOs
 
 Load OBJ files

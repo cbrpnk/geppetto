@@ -24,6 +24,7 @@ zRotationSpeed(0)
     
     AddComponent(Geppetto::Component::Type::Shader);
     shader->CreateShader("shaders/cube.vertex", "shaders/cube.fragment");
+    shader->addUniform(&position, Geppetto::Component::Shader::UniformType::Float3, "pos");
 }
 
 

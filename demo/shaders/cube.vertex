@@ -1,5 +1,18 @@
+uniform vec3 pos;
+
+float PI = 3.141592658979;
+vec3 lightPos = vec3(0.0, 100.0, 0.0);
+
 void main(void)
 {
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-    gl_FrontColor = gl_Color;
+    
+    vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
+    float lightAngle = dot(normalize(lightPos), normal);
+    
+    float red = (pos.x + 50.0) / 100.0;
+    float green = (pos.y + 5.0) / 10.0;
+    float blue = (pos.z + 50.0) / 100.0;
+    
+    gl_FrontColor = vec4(red, 0.0, blue, 1.0);
 }

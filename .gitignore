@@ -1,2 +1,4 @@
+*.o
+*.refs
 demo/demo
 demo/demo_old

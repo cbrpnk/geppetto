@@ -1,4 +1,12 @@
 void main(void)
 {
-    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    gl_FragColor = gl_Color;
+
+    /*gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);*/
+    /*vec4 c = vec4(gl_FragCoord.x, gl_FragCoord.y, 1.0, 1.0);*/
+    float red = gl_Color.r * 0.5 + (gl_FragCoord.x/800.0) * 0.5;
+    float green = gl_Color.g * 0.5 + (gl_FragCoord.y/600.0) * 0.5;
+    float blue = gl_Color.b;
+    
+    /*gl_FragColor = vec4(red, green, blue, 1.0);*/
 }

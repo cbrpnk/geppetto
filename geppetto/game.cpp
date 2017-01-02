@@ -140,20 +140,21 @@ void Game::Render()
         Math::Vec3 lookAt = cameraPosition + cameraEntity->forward;
         gluLookAt(cameraPosition.x, cameraPosition.y, cameraPosition.z, lookAt.x, lookAt.y, lookAt.z, 0.0f, 1.0f, 0.0f);
         
-        for(auto e : activeStage->GetEntities()) {
+        for(auto entityPair : activeStage->GetEntities()) {
+            Entity* e = entityPair.second;
             
             // Check if Entity has a Geometry component
-            if(e.second->active && e.second->HasComponent(Component::Type::Shader) &&
-                                   e.second->HasComponent(Component::Type::Geometry)) {
-                    
-                glUseProgram(e.second->GetShader()->GetShader());
+            if(e->active && e->HasComponent(Component::Type::Shader) &&
+                                   e->HasComponent(Component::Type::Geometry)) {
+                
+                e->GetShader()->Use();
                 
                 glPushMatrix();
-                    glMultMatrixf(e.second->GetReferenceFrame().ToArray());
+                    glMultMatrixf(e->GetReferenceFrame().ToArray());
                     
                     // Select the right type of Geometry
                     GLenum type;
-                    switch(e.second->GetGeometry()->GetType()) {
+                    switch(e->GetGeometry()->GetType()) {
                     case Component::Geometry::Type::Points:
                         type = GL_POINTS;
                         break;
@@ -172,7 +173,7 @@ void Game::Render()
                     }
                     
                     glBegin(type);
-                        std::vector<float> vertices = e.second->GetGeometry()->GetVertices();
+                        std::vector<float> vertices = e->GetGeometry()->GetVertices();
                         Math::Vec3* vertex;
                         for(size_t i=0; i<vertices.size(); i+=3) {
                             vertex = (Math::Vec3*) &vertices[i];

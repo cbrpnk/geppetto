@@ -105,6 +105,60 @@ unsigned int Shader::GetShader()
 }
 
 
+void Shader::Use()
+{
+    glUseProgram(shader);
+    for(auto uniform : dataForShader) {
+        switch(uniform.type) {
+        case UniformType::Float1:
+            glUniform1f(glGetUniformLocation(shader, uniform.name.c_str()),
+                        *((GLfloat*) uniform.data));
+            break;
+        case UniformType::Float2:
+            glUniform2f(glGetUniformLocation(shader, uniform.name.c_str()),
+                        ((GLfloat*) uniform.data)[0],
+                        ((GLfloat*) uniform.data)[1]);
+            break;
+        case UniformType::Float3:
+            glUniform3f(glGetUniformLocation(shader, uniform.name.c_str()),
+                        ((GLfloat*) uniform.data)[0],
+                        ((GLfloat*) uniform.data)[1],
+                        ((GLfloat*) uniform.data)[2]);
+            break;
+        case UniformType::Float4:
+            glUniform4f(glGetUniformLocation(shader, uniform.name.c_str()),
+                        ((GLfloat*) uniform.data)[0],
+                        ((GLfloat*) uniform.data)[1],
+                        ((GLfloat*) uniform.data)[2],
+                        ((GLfloat*) uniform.data)[3]);
+            break;
+        case UniformType::Int1:
+            glUniform1i(glGetUniformLocation(shader, uniform.name.c_str()),
+                        *((GLint*) uniform.data));
+            break;
+        case UniformType::Int2:
+            glUniform2i(glGetUniformLocation(shader, uniform.name.c_str()),
+                        ((GLint*) uniform.data)[0],
+                        ((GLint*) uniform.data)[1]);
+            break;
+        case UniformType::Int3:
+            glUniform3i(glGetUniformLocation(shader, uniform.name.c_str()),
+                        ((GLint*) uniform.data)[0],
+                        ((GLint*) uniform.data)[1],
+                        ((GLint*) uniform.data)[2]);
+            break;
+        case UniformType::Int4:
+            glUniform4i(glGetUniformLocation(shader, uniform.name.c_str()),
+                        ((GLint*) uniform.data)[0],
+                        ((GLint*) uniform.data)[1],
+                        ((GLint*) uniform.data)[2],
+                        ((GLint*) uniform.data)[3]);
+            break;
+        }
+    }
+}
+
+
 void Shader::Update()
 {}
 
@@ -140,6 +194,19 @@ bool Shader::removeFromDB(std::string& vertexPath,
         return true;
     }
     return false;
+}
+
+
+void Shader::addUniform(void* data, UniformType type, std::string name)
+{
+    UniformData u = {.data = data, .type = type, .name = name};
+    dataForShader.push_back(u);
+}
+
+
+std::vector<Shader::UniformData> Shader::GetUniforms()
+{
+    return dataForShader;
 }
 
 
