@@ -7,7 +7,7 @@
 
 #include "components/component_base.h"
 #include "components/camera.h"
-#include "components/geometry.h"
+#include "components/mesh.h"
 #include "components/physics.h"
 #include "components/shader.h"
 #include "components/userinput.h"

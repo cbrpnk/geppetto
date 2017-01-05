@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "components/camera.h"
-#include "components/geometry.h"
+#include "components/mesh.h"
 #include "components/userinput.h"
 #include "game.h"
 #include "stage.h"
@@ -143,28 +143,28 @@ void Game::Render()
         for(auto entityPair : activeStage->GetEntities()) {
             Entity* e = entityPair.second;
             
-            // Check if Entity has a Geometry component
+            // Check if Entity has a Mesh component
             if(e->active && e->HasComponent(Component::Type::Shader) &&
-                                   e->HasComponent(Component::Type::Geometry)) {
+                                   e->HasComponent(Component::Type::Mesh)) {
                 
                 e->GetShader()->Use();
                 
                 glPushMatrix();
                     glMultMatrixf(e->GetReferenceFrame().ToArray());
                     
-                    // Select the right type of Geometry
+                    // Select the right type of Mesh
                     GLenum type;
-                    switch(e->GetGeometry()->GetType()) {
-                    case Component::Geometry::Type::Points:
+                    switch(e->GetMesh()->GetType()) {
+                    case Component::Mesh::Type::Points:
                         type = GL_POINTS;
                         break;
-                    case Component::Geometry::Type::Lines:
+                    case Component::Mesh::Type::Lines:
                         type = GL_LINES;
                         break;
-                    case Component::Geometry::Type::Triangles:
+                    case Component::Mesh::Type::Triangles:
                         type = GL_TRIANGLES;
                         break;
-                    case Component::Geometry::Type::Quads:
+                    case Component::Mesh::Type::Quads:
                         type = GL_QUADS;
                         break;
                     default:
@@ -172,14 +172,22 @@ void Game::Render()
                         break;
                     }
                     
-                    glBegin(type);
-                        std::vector<float> vertices = e->GetGeometry()->GetVertices();
-                        Math::Vec3* vertex;
-                        for(size_t i=0; i<vertices.size(); i+=3) {
-                            vertex = (Math::Vec3*) &vertices[i];
-                            glVertex3f(vertex->x, vertex->y, vertex->z);
-                        }
-                    glEnd();
+                    glEnableClientState(GL_VERTEX_ARRAY);
+                    glEnableClientState(GL_NORMAL_ARRAY);
+                    
+                    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint) e->GetMesh()->GetIndexBuffer());
+                    
+                    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) e->GetMesh()->GetVertexBuffer());
+                    glVertexPointer(3, GL_FLOAT, 0, 0);
+                    
+                    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) e->GetMesh()->GetNormalBuffer());
+                    glNormalPointer(GL_FLOAT, 0, 0);
+                    
+                    glDrawElements(type, e->GetMesh()->GetVertexCount(), GL_UNSIGNED_SHORT, 0);
+                    glBindBuffer(GL_ARRAY_BUFFER, 0);
+                    
+                    glDisableClientState(GL_NORMAL_ARRAY);
+                    glDisableClientState(GL_VERTEX_ARRAY);
                     
                 glPopMatrix();
             }

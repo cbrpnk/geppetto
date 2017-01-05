@@ -23,7 +23,7 @@ up(Math::Vec3(0, 1, 0)),
 game(Game::GetInstance()),
 stage(*(Game::GetInstance().GetActiveStage())),
 camera(nullptr),
-geometry(nullptr),
+mesh(nullptr),
 physics(nullptr),
 shader(nullptr),
 userInput(nullptr)
@@ -37,8 +37,8 @@ Entity::~Entity()
     if(camera) {
         RemoveComponent(Component::Type::Camera);
     }
-    if(geometry) {
-        RemoveComponent(Component::Type::Geometry);
+    if(mesh) {
+        RemoveComponent(Component::Type::Mesh);
     }
     if(physics) {
         RemoveComponent(Component::Type::Physics);
@@ -63,8 +63,8 @@ void Entity::UpdateEntity()
     if(camera) {
         camera->Update();
     }
-    if(geometry) {
-        geometry->Update();
+    if(mesh) {
+        mesh->Update();
     }
     if(physics) {
         physics->Update();
@@ -137,8 +137,8 @@ void Entity::AddComponent(const Component::Type type)
     if(!HasComponent(type)) {
         if(type == Component::Type::Camera) {
             camera = new Component::Camera(*this);
-        } else if(type == Component::Type::Geometry) {
-            geometry = new Component::Geometry(*this);
+        } else if(type == Component::Type::Mesh) {
+            mesh = new Component::Mesh(*this);
         } else if(type == Component::Type::Physics) {
             physics = new Component::Physics(*this);
         } else if(type == Component::Type::Shader) {
@@ -154,7 +154,7 @@ bool Entity::HasComponent(const Component::Type type) const
 {
     if(type == Component::Type::Camera && camera) {
         return true;
-    } else if(type == Component::Type::Geometry && geometry) {
+    } else if(type == Component::Type::Mesh && mesh) {
         return true;
     } else if(type == Component::Type::Physics && physics) {
         return true;
@@ -173,9 +173,9 @@ void Entity::RemoveComponent(const Component::Type type)
     if(type == Component::Type::Camera && camera) {
         delete(camera);
         camera = nullptr;
-    } else if(type == Component::Type::Geometry && geometry) {
-        delete(geometry);
-        geometry = nullptr;
+    } else if(type == Component::Type::Mesh && mesh) {
+        delete(mesh);
+        mesh = nullptr;
     } else if(type == Component::Type::Physics && physics) {
         delete(physics);
         physics = nullptr;
@@ -198,10 +198,10 @@ Component::Camera* Entity::GetCamera() const
 }
 
 
-Component::Geometry* Entity::GetGeometry() const
+Component::Mesh* Entity::GetMesh() const
 {
-    if(geometry) {
-        return geometry;
+    if(mesh) {
+        return mesh;
     }
     return nullptr;
 }

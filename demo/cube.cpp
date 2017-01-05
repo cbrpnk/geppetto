@@ -18,9 +18,11 @@ zRotationSpeed(0)
     AddComponent(Geppetto::Component::Type::Physics);
     physics->SetFrictionCoefficient(0.15f);
     
-    AddComponent(Geppetto::Component::Type::Geometry);
-    geometry->LoadVertices(Geppetto::Component::Geometry::Cube);
-    geometry->SetType(Geppetto::Component::Geometry::Type::Quads);
+    AddComponent(Geppetto::Component::Type::Mesh);
+    mesh->Load(Geppetto::Component::Mesh::CubeIndex,
+               Geppetto::Component::Mesh::CubeVertices,
+               Geppetto::Component::Mesh::CubeNormals);
+    mesh->SetType(Geppetto::Component::Mesh::Type::Triangles);
     
     AddComponent(Geppetto::Component::Type::Shader);
     shader->CreateShader("shaders/cube.vertex", "shaders/cube.fragment");

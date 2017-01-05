@@ -20,7 +20,7 @@ cube.o \
 player.o \
 $(GEPPETTO)/components/component_base.o \
 $(GEPPETTO)/components/camera.o \
-$(GEPPETTO)/components/geometry.o \
+$(GEPPETTO)/components/mesh.o \
 $(GEPPETTO)/components/physics.o \
 $(GEPPETTO)/components/shader.o \
 $(GEPPETTO)/components/userinput.o \

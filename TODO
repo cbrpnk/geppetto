@@ -1,8 +1,3 @@
-Implement some shaders
-
-clean up the shader component + game render
-
-
-VAOs / VBOs
+Add color array to cube
 
 Load OBJ files

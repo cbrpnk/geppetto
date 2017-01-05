@@ -7,7 +7,7 @@
 
 #include "components/component_base.h"
 #include "components/camera.h"
-#include "components/geometry.h"
+#include "components/mesh.h"
 #include "components/physics.h"
 #include "components/shader.h"
 #include "components/userinput.h"
@@ -46,7 +46,7 @@ public:
     void RemoveComponent(const Component::Type type);
     
     Component::Camera*    GetCamera()    const;
-    Component::Geometry*  GetGeometry()  const;
+    Component::Mesh*      GetMesh()      const;
     Component::Physics*   GetPhysics()   const;
     Component::Shader*    GetShader()    const;
     Component::UserInput* GetUserInput() const;
@@ -59,7 +59,7 @@ protected:
     Stage&              stage;
     
     Component::Camera*    camera;
-    Component::Geometry*  geometry;
+    Component::Mesh*      mesh;
     Component::Physics*   physics;
     Component::Shader*    shader;
     Component::UserInput* userInput;

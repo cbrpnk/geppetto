@@ -14,7 +14,7 @@ namespace Component {
 
 enum class Type
 {
-    Camera, Geometry, Physics, Shader, UserInput
+    Camera, Mesh, Physics, Shader, UserInput
 };
 
 
