@@ -6,7 +6,7 @@
 #include "cube.h"
 
 
-const size_t Stage::NCubes = 100;
+const size_t Stage::NCubes = 1;
 
 
 Stage::Stage() : Geppetto::Stage("Stage")

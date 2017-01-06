@@ -2,6 +2,9 @@
 #define GLEW_STATIC
 #endif
 #include <GL/glew.h>
+#include <iostream>
+#include <fstream>
+#include <map>
 
 #include "mesh.h"
 
@@ -105,6 +108,11 @@ const std::vector<float> Mesh::CubeNormals = {
 
 
 Mesh::Mesh(Entity& e) : ComponentBase(e)
+    , type(Type::Triangles)
+    , vertexCount(0)
+    , indexBuffer(0)
+    , vertexBuffer(0)
+    , normalBuffer(0)
 {}
 
 
@@ -167,10 +175,170 @@ void Mesh::Load(const std::vector<unsigned short> index,
 }
 
 
+void Mesh::LoadOBJFile(const std::string& path, bool invert)
+{
+    OBJMesh objMesh = OBJMesh(path);
+    std::map<std::string, int> cache;
+    int currentIndex = 0;
+    
+    std::vector<unsigned short> index;
+    std::vector<float> vertices;
+    std::vector<float> normals;
+    
+    // Load the vertex and normals
+    for(size_t i=0; i<objMesh.faces.size(); ++i) {
+        for(size_t j=0; j<3; ++j) {
+            std::string vertexName = objMesh.faces[i].vertexNames[j];
+            auto targetIndex = cache.find(vertexName);
+            
+            if(targetIndex != cache.end()) {
+                // We already have a reference to that vertex
+                index.push_back(targetIndex->second);
+                
+            } else {
+                // New vertex
+                index.push_back(currentIndex);
+                
+                vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].x);
+                vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].y);
+                vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].z);
+                
+                normals.push_back(objMesh.vertices[objMesh.faces[i].n[j]].x);
+                normals.push_back(objMesh.vertices[objMesh.faces[i].n[j]].y);
+                normals.push_back(objMesh.vertices[objMesh.faces[i].n[j]].z);
+                
+                cache.insert(std::pair<std::string, int>(vertexName,
+                                                         currentIndex));
+                ++currentIndex;
+            }
+        }
+    }
+    
+    vertexCount = currentIndex;
+    
+    Load(index, vertices, normals);
+}
+
+
 void Mesh::SetType(Type t)
 {
     type = t;
 }
+
+
+//////////////////////////////////// OBJMesh //////////////////////////////////
+
+
+Mesh::OBJMesh::OBJMesh(const std::string& pathToFile)
+{
+    std::ifstream file(pathToFile);
+    std::string line;
+    
+    if(file.is_open()) {
+        while(getline(file, line)) {
+            ExecuteCommand(LineToCommand(line));
+        }
+        file.close();
+    }
+}
+
+
+Mesh::OBJMesh::~OBJMesh()
+{}
+
+
+Mesh::OBJMesh::Command Mesh::OBJMesh::LineToCommand(const std::string& line)
+{
+    Command command;
+    
+    if(line.length() > 2 && line[0] != '#') {
+        std::vector<std::string> split = SplitString(line, ' ');
+        command.action = split[0];
+        for(size_t i=1; i<split.size(); ++i) {
+            command.parameters.push_back(split[i]);
+        }
+    }
+    
+    return command;
+}
+
+
+void Mesh::OBJMesh::ExecuteCommand(const Command& command)
+{
+    if(command.action == "v") {
+        ExecV(command.parameters);
+    } else if(command.action == "vn") {
+        ExecVN(command.parameters);
+    } else if(command.action == "f") {
+        ExecF(command.parameters);
+    }
+}
+
+
+void Mesh::OBJMesh::ExecV(const std::vector<std::string>& params)
+{
+    vertices.push_back(Math::Vec3(std::atof(params[0].c_str()),
+                                  std::atof(params[1].c_str()),
+                                  std::atof(params[2].c_str())));
+}
+
+
+void Mesh::OBJMesh::ExecVN(const std::vector<std::string>& params)
+{
+    normals.push_back(Math::Vec3(std::atof(params[0].c_str()),
+                                 std::atof(params[1].c_str()),
+                                 std::atof(params[2].c_str())));
+}
+
+
+void Mesh::OBJMesh::ExecF(const std::vector<std::string>& params)
+{
+    Face face;
+    
+    for(int i=0; i<3; ++i) {
+        std::vector<std::string> split = SplitString(params[i], '/');
+        face.vertexNames[i] = params[i];
+        // The obj file specs says that face indexes start at 1
+        // but our interal representation starts at 0, thus the -1
+       
+        if(split[0].size()) {
+            face.v[i] = std::atoi(split[0].c_str())-1;
+        }
+        
+        if(split[0].size()) {
+            face.t[i] = std::atoi(split[1].c_str())-1;
+        }
+        
+        if(split[0].size()) {
+            face.n[i] = std::atoi(split[2].c_str())-1;
+        }
+    }
+    
+    faces.push_back(face);
+}
+
+
+std::vector<std::string> Mesh::OBJMesh::SplitString(const std::string& s,
+                                                    const char delim)
+{
+    std::vector<std::string> result;
+    std::string buf = "";
+    
+    for(size_t i=0; i<s.length(); ++i) {
+        if(s[i] == delim) {
+            result.push_back(buf);
+            buf = "";
+        } else {
+            buf += s[i];
+        }
+    }
+    if(buf.size() > 0) {
+        result.push_back(buf);
+    }
+    
+    return result;
+}
+
 
 
 } // namespace Component
