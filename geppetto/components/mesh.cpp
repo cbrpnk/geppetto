@@ -194,7 +194,6 @@ void Mesh::LoadOBJFile(const std::string& path, bool invert)
             if(targetIndex != cache.end()) {
                 // We already have a reference to that vertex
                 index.push_back(targetIndex->second);
-                
             } else {
                 // New vertex
                 index.push_back(currentIndex);
@@ -203,9 +202,9 @@ void Mesh::LoadOBJFile(const std::string& path, bool invert)
                 vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].y);
                 vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].z);
                 
-                normals.push_back(objMesh.vertices[objMesh.faces[i].n[j]].x);
-                normals.push_back(objMesh.vertices[objMesh.faces[i].n[j]].y);
-                normals.push_back(objMesh.vertices[objMesh.faces[i].n[j]].z);
+                normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].x);
+                normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].y);
+                normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].z);
                 
                 cache.insert(std::pair<std::string, int>(vertexName,
                                                          currentIndex));

@@ -11,15 +11,15 @@ zRotationSpeed(0)
     yRotationSpeed = Geppetto::Math::RandomFloat(-5.0f, 5.0f);
     zRotationSpeed = Geppetto::Math::RandomFloat(-5.0f, 5.0f);
     
-    //position.x = Geppetto::Math::RandomFloat(-50.0f, 50.0f);
-    //position.y = Geppetto::Math::RandomFloat(-5.0f, 5.0f);
-    //position.z = Geppetto::Math::RandomFloat(-50.0f, 50.0f);
+    position.x = Geppetto::Math::RandomFloat(-50.0f, 50.0f);
+    position.y = Geppetto::Math::RandomFloat(-5.0f, 5.0f);
+    position.z = Geppetto::Math::RandomFloat(-50.0f, 50.0f);
     
     AddComponent(Geppetto::Component::Type::Physics);
     physics->SetFrictionCoefficient(0.15f);
     
     AddComponent(Geppetto::Component::Type::Mesh);
-    mesh->LoadOBJFile("models/cube.obj", true);
+    mesh->LoadOBJFile("models/monkey.obj", true);
     //mesh->Load(Geppetto::Component::Mesh::CubeIndex,
     //           Geppetto::Component::Mesh::CubeVertices,
     //           Geppetto::Component::Mesh::CubeNormals);
