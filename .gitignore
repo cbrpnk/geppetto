@@ -1,4 +1,5 @@
 *.o
 *.refs
+*.deps
 demo/demo
 demo/demo_old

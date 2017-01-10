@@ -2,15 +2,21 @@ uniform vec3 pos;
 
 vec4 lightPos = vec4(0.0, 0.0, 100.0, 1.0);
 vec3 lightColor = vec3(1.0, 1.0, 1.0);
+
 vec3 color = vec3(1.0, 0.0, 0.0);
 
 void main(void)
 {
-    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+    vec3 worldCoord = (gl_Vertex * gl_ModelViewMatrix).xyz;
     
-    vec3 unitNormal = normalize(gl_NormalMatrix * gl_Normal);
-    vec3 unitLightDirection = normalize(lightPos.xyz - (gl_Vertex * gl_ModelViewMatrix).xyz);
-    vec3 diffuse = max(dot(unitNormal, unitLightDirection), 0.0) * color;
+    vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
+    vec3 light = normalize(lightPos.xyz - worldCoord);
+    vec3 halfLightView = normalize(light + normalize((vec3(0, 0, 0) - worldCoord)));
+    
+    vec3 diffuse = max(dot(normal, light), 0.0) * color * lightColor;
+    float specular = pow(max(dot(normal, halfLightView), 0.0), 256.0);
+    diffuse += specular;
     
     gl_FrontColor = vec4(diffuse.r, diffuse.g, diffuse.b, 1.0);
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 }

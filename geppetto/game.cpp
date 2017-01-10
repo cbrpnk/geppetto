@@ -88,7 +88,7 @@ bool Game::Init()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glShadeModel(GL_FLAT); // GL_FLAT or GL_SMOOTH
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
