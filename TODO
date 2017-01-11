@@ -1,6 +1,3 @@
-Implement Specular lighting in the vertex shader
-Add color / Texture to objects
-use strtok to tokenize obj line
-Make the mesh component have a static cache of every object it has seen
-and make the object reference the appropriate VBO
-
+Import other parameters from mtl files
+Textures
+Multiple lights support + pass light to the shader

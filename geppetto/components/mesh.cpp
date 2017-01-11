@@ -14,54 +14,39 @@ namespace Component {
 
 
 const std::vector<unsigned short> Mesh::CubeIndex = {
-    // Front
-    0, 1, 2, 2, 3, 0,
-    // Back
-    4, 5, 6, 6, 7, 4,
-    // Right
-    8, 9, 10, 10, 11, 8,
-    // Left
-    12, 13, 14, 14, 15, 12,
-    // Top
-    16, 17, 18, 18, 19, 16,
-    // Bottom
-    20, 21, 22, 22, 23, 20
+//  |  Tri 1  |   Tri 2  |
+    0,  1,  2,  2,  3,  0,  // Front
+    4,  5,  6,  6,  7,  4,  // Back
+    8,  9,  10, 10, 11, 8,  // Right
+    12, 13, 14, 14, 15, 12, // Left
+    16, 17, 18, 18, 19, 16, // Top
+    20, 21, 22, 22, 23, 20  // Bottom
 };
 
 
 const std::vector<float> Mesh::CubeVertices = {
-    // Front
-    -0.5,  0.5,  0.5,
+//    X     Y     Z
+    -0.5,  0.5,  0.5, // Front
     -0.5, -0.5,  0.5,
      0.5, -0.5,  0.5,
      0.5,  0.5,  0.5,
-
-    // Back
-     0.5,  0.5, -0.5,
+     0.5,  0.5, -0.5, // Back
      0.5, -0.5, -0.5,
     -0.5, -0.5, -0.5,
     -0.5,  0.5, -0.5,
-
-    // Right
-     0.5, -0.5,  0.5,
+     0.5, -0.5,  0.5, // Right
      0.5, -0.5, -0.5,
      0.5,  0.5, -0.5,
      0.5,  0.5,  0.5,
-
-    // Left
-    -0.5,  0.5,  0.5,
+    -0.5,  0.5,  0.5, // Left
     -0.5,  0.5, -0.5,
     -0.5, -0.5, -0.5,
     -0.5, -0.5,  0.5,
-
-    // Top
-    -0.5,  0.5,  0.5,
+    -0.5,  0.5,  0.5, // Top
      0.5,  0.5,  0.5,
      0.5,  0.5, -0.5,
     -0.5,  0.5, -0.5,
-
-    // Bottom
-    -0.5, -0.5, -0.5,
+    -0.5, -0.5, -0.5, // Bottom
      0.5, -0.5, -0.5,
      0.5, -0.5,  0.5,
     -0.5, -0.5,  0.5,
@@ -69,50 +54,69 @@ const std::vector<float> Mesh::CubeVertices = {
 
 
 const std::vector<float> Mesh::CubeNormals = {
-    // Front
+//    X      Y      Z
+     0.0f,  0.0f,  1.0f, // Front
      0.0f,  0.0f,  1.0f,
      0.0f,  0.0f,  1.0f,
      0.0f,  0.0f,  1.0f,
-     0.0f,  0.0f,  1.0f,
-    
-    // Back
+     0.0f,  0.0f, -1.0f, // Back
      0.0f,  0.0f, -1.0f,
      0.0f,  0.0f, -1.0f,
      0.0f,  0.0f, -1.0f,
-     0.0f,  0.0f, -1.0f,
-    
-    // Right
+     1.0f,  0.0f,  0.0f, // Right
      1.0f,  0.0f,  0.0f,
      1.0f,  0.0f,  0.0f,
      1.0f,  0.0f,  0.0f,
-     1.0f,  0.0f,  0.0f,
-    
-    // Left
+    -1.0f,  0.0f,  0.0f, // Left
     -1.0f,  0.0f,  0.0f,
     -1.0f,  0.0f,  0.0f,
     -1.0f,  0.0f,  0.0f,
-    -1.0f,  0.0f,  0.0f,
-    
-    // Top
+     0.0f,  1.0f,  0.0f, // Top
      0.0f,  1.0f,  0.0f,
      0.0f,  1.0f,  0.0f,
      0.0f,  1.0f,  0.0f,
-     0.0f,  1.0f,  0.0f,
-    
-    // Bottom
-     0.0f, -1.0f,  0.0f,
+     0.0f, -1.0f,  0.0f, // Bottom
      0.0f, -1.0f,  0.0f,
      0.0f, -1.0f,  0.0f,
      0.0f, -1.0f,  0.0f,
 };
 
 
+const std::vector<float> Mesh::CubeColors = {
+//    R      G      B  
+     1.0f,  0.0f,  0.0f, // Front
+     1.0f,  0.0f,  0.0f,
+     1.0f,  0.0f,  0.0f,
+     1.0f,  0.0f,  0.0f,
+     0.0f,  1.0f,  0.0f, // Back
+     0.0f,  1.0f,  0.0f,
+     0.0f,  1.0f,  0.0f,
+     0.0f,  1.0f,  0.0f,
+     0.0f,  0.0f,  1.0f, // Right
+     0.0f,  0.0f,  1.0f,
+     0.0f,  0.0f,  1.0f,
+     0.0f,  0.0f,  1.0f,
+     1.0f,  1.0f,  0.0f, // Left
+     1.0f,  1.0f,  0.0f,
+     1.0f,  1.0f,  0.0f,
+     1.0f,  1.0f,  0.0f,
+     0.0f,  1.0f,  1.0f, // Top
+     0.0f,  1.0f,  1.0f,
+     0.0f,  1.0f,  1.0f,
+     0.0f,  1.0f,  1.0f,
+     1.0f,  0.0f,  1.0f, // Bottom
+     1.0f,  0.0f,  1.0f,
+     1.0f,  0.0f,  1.0f,
+     1.0f,  0.0f,  1.0f,
+};
+
+
+// Static
+std::map<std::string, Mesh::ObjectInfo> Mesh::objectCache;
+
+
 Mesh::Mesh(Entity& e) : ComponentBase(e)
     , type(Type::Triangles)
-    , vertexCount(0)
-    , indexBuffer(0)
-    , vertexBuffer(0)
-    , normalBuffer(0)
 {}
 
 
@@ -128,94 +132,124 @@ Mesh::Type Mesh::GetType() const
 
 unsigned int Mesh::GetVertexCount() const
 {
-    return vertexCount;
+    return objectInfo.vertexCount;
 }
 
 
 unsigned int Mesh::GetIndexBuffer() const
 {
-    return indexBuffer;
+    return objectInfo.indexBuffer;
 }
 
 
 unsigned int Mesh::GetVertexBuffer() const
 {
-    return vertexBuffer;
+    return objectInfo.vertexBuffer;
 }
 
 
 unsigned int Mesh::GetNormalBuffer() const
 {
-    return normalBuffer;
+    return objectInfo.normalBuffer;
+}
+
+
+unsigned int Mesh::GetColorBuffer() const
+{
+    return objectInfo.colorBuffer;
 }
 
 
 void Mesh::Load(const std::vector<unsigned short> index,
                 const std::vector<float> vertices,
-                const std::vector<float> normals)
+                const std::vector<float> normals,
+                const std::vector<float> colors)
 {
-    vertexCount = index.size();
+    objectInfo.vertexCount = index.size();
     
     // Vertex Index
-    glGenBuffers(1, (GLuint*) &indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint) indexBuffer);
+    glGenBuffers(1, (GLuint*) &(objectInfo.indexBuffer));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint) objectInfo.indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, index.size() * sizeof(unsigned short),                 &index[0], GL_STATIC_DRAW);
     
     // Vertex Buffer
-    glGenBuffers(1, (GLuint*) &vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) vertexBuffer);
+    glGenBuffers(1, (GLuint*) &(objectInfo.vertexBuffer));
+    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) objectInfo.vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float),
                  &vertices[0], GL_STATIC_DRAW);
     
     // Normal Buffer
-    glGenBuffers(1, (GLuint*) &normalBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) normalBuffer);
+    glGenBuffers(1, (GLuint*) &(objectInfo.normalBuffer));
+    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) objectInfo.normalBuffer);
     glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float),
                  &normals[0], GL_STATIC_DRAW);
+    
+    
+    // Color Buffer
+    glGenBuffers(1, (GLuint*) &(objectInfo.colorBuffer));
+    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) objectInfo.colorBuffer);
+    glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(float),
+                 &colors[0], GL_STATIC_DRAW);
 }
 
 
-void Mesh::LoadOBJFile(const std::string& path, bool invert)
+void Mesh::LoadOBJFile(const std::string& pathToFile,
+                       const std::string& filename, bool invert)
 {
-    OBJMesh objMesh = OBJMesh(path);
-    std::map<std::string, int> cache;
-    int currentIndex = 0;
-    
-    std::vector<unsigned short> index;
-    std::vector<float> vertices;
-    std::vector<float> normals;
-    
-    // Load the vertex and normals
-    for(size_t i=0; i<objMesh.faces.size(); ++i) {
-        for(size_t j=0; j<3; ++j) {
-            std::string vertexName = objMesh.faces[i].vertexNames[j];
-            auto targetIndex = cache.find(vertexName);
-            
-            if(targetIndex != cache.end()) {
-                // We already have a reference to that vertex
-                index.push_back(targetIndex->second);
-            } else {
-                // New vertex
-                index.push_back(currentIndex);
+    // Check if objects is in cahce
+    if(objectCache.find(pathToFile + filename) != objectCache.end()) {
+        objectInfo = objectCache[pathToFile + filename];    
+    } else {
+        OBJMesh objMesh = OBJMesh(pathToFile, filename);
+        // This cache stores vertex id's from vertices whose name
+        // we've already seen
+        std::map<std::string, int> cache;
+        int currentIndex = 0;
+        
+        std::vector<unsigned short> index;
+        std::vector<float> vertices;
+        std::vector<float> normals;
+        std::vector<float> colors;
+        
+        // Load the vertex and normals
+        for(size_t i=0; i<objMesh.faces.size(); ++i) {
+            for(size_t j=0; j<3; ++j) {
+                std::string vertexName = objMesh.faces[i].vertexNames[j];
+                auto targetIndex = cache.find(vertexName);
                 
-                vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].x);
-                vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].y);
-                vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].z);
-                
-                normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].x);
-                normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].y);
-                normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].z);
-                
-                cache.insert(std::pair<std::string, int>(vertexName,
-                                                         currentIndex));
-                ++currentIndex;
+                if(targetIndex != cache.end()) {
+                    // We already have a reference to that vertex
+                    index.push_back(targetIndex->second);
+                } else {
+                    // New vertex
+                    index.push_back(currentIndex);
+                    
+                    vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].x);
+                    vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].y);
+                    vertices.push_back(objMesh.vertices[objMesh.faces[i].v[j]].z);
+                    
+                    normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].x);
+                    normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].y);
+                    normals.push_back(objMesh.normals[objMesh.faces[i].n[j]].z);
+                    
+                    colors.push_back(objMesh.materials[objMesh.faces[i].materialName].kd[0]);
+                    colors.push_back(objMesh.materials[objMesh.faces[i].materialName].kd[1]);
+                    colors.push_back(objMesh.materials[objMesh.faces[i].materialName].kd[2]);
+                    
+                    cache.insert(std::pair<std::string, int>(vertexName,
+                                                             currentIndex));
+                    ++currentIndex;
+                }
             }
         }
+        
+        
+        Load(index, vertices, normals, colors);
+        // Add to cache
+        objectCache.insert(std::pair<std::string,
+                                    ObjectInfo>(pathToFile + filename,
+                                                objectInfo));
     }
-    
-    vertexCount = currentIndex;
-    
-    Load(index, vertices, normals);
 }
 
 
@@ -225,10 +259,21 @@ void Mesh::SetType(Type t)
 }
 
 
+
+
+
+
+
+
+
 //////////////////////////////////// OBJMesh //////////////////////////////////
 
+Mesh::OBJMesh::OBJMesh(const std::string& pathToFile, const std::string& filename) {
+    currentWorkingPath = pathToFile;
+    ReadFile(pathToFile + filename);
+}
 
-Mesh::OBJMesh::OBJMesh(const std::string& pathToFile)
+void Mesh::OBJMesh::ReadFile(const std::string& pathToFile)
 {
     std::ifstream file(pathToFile);
     std::string line;
@@ -270,10 +315,19 @@ void Mesh::OBJMesh::ExecuteCommand(const Command& command)
         ExecVN(command.parameters);
     } else if(command.action == "f") {
         ExecF(command.parameters);
+    } else if(command.action == "mtllib") {
+        ExecMTLLIB(command.parameters);
+    } else if(command.action == "usemtl") {
+        ExecUSEMTL(command.parameters);
+    } else if(command.action == "newmtl") {
+        ExecNEWMTL(command.parameters);
+    } else if(command.action == "Kd") {
+        ExecKD(command.parameters);
     }
 }
 
 
+// Vertex
 void Mesh::OBJMesh::ExecV(const std::vector<std::string>& params)
 {
     vertices.push_back(Math::Vec3(std::atof(params[0].c_str()),
@@ -282,6 +336,7 @@ void Mesh::OBJMesh::ExecV(const std::vector<std::string>& params)
 }
 
 
+// Normal
 void Mesh::OBJMesh::ExecVN(const std::vector<std::string>& params)
 {
     normals.push_back(Math::Vec3(std::atof(params[0].c_str()),
@@ -290,6 +345,7 @@ void Mesh::OBJMesh::ExecVN(const std::vector<std::string>& params)
 }
 
 
+// Face
 void Mesh::OBJMesh::ExecF(const std::vector<std::string>& params)
 {
     Face face;
@@ -312,8 +368,42 @@ void Mesh::OBJMesh::ExecF(const std::vector<std::string>& params)
             face.n[i] = std::atoi(split[2].c_str())-1;
         }
     }
+    face.materialName = activeMaterial;
     
     faces.push_back(face);
+}
+
+
+// Include material file
+void Mesh::OBJMesh::ExecMTLLIB(const std::vector<std::string>& params)
+{
+    std::string path = currentWorkingPath + params[0];
+    ReadFile(path);
+}
+
+
+// Use material
+void Mesh::OBJMesh::ExecUSEMTL(const std::vector<std::string>& params)
+{
+    activeMaterial = params[0];
+}
+
+
+// Define a new material
+void Mesh::OBJMesh::ExecNEWMTL(const std::vector<std::string>& params)
+{
+    Material m;
+    materials.insert(std::pair<std::string, Material>(params[0], m));
+    activeMaterial = params[0];
+}
+
+
+// Material diffuse
+void Mesh::OBJMesh::ExecKD(const std::vector<std::string>& params)
+{
+    for(size_t i=0; i<3; ++i) {
+        materials[activeMaterial].kd[i] = std::atof(params[i].c_str());
+    }
 }
 
 

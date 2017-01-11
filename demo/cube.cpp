@@ -19,11 +19,11 @@ zRotationSpeed(0)
     physics->SetFrictionCoefficient(0.15f);
     
     AddComponent(Geppetto::Component::Type::Mesh);
-    mesh->LoadOBJFile("models/monkey.obj", true);
+    mesh->LoadOBJFile("models/", "monkey.obj", true);
     //mesh->Load(Geppetto::Component::Mesh::CubeIndex,
     //           Geppetto::Component::Mesh::CubeVertices,
-    //           Geppetto::Component::Mesh::CubeNormals);
-    mesh->SetType(Geppetto::Component::Mesh::Type::Triangles);
+    //           Geppetto::Component::Mesh::CubeNormals,
+    //           Geppetto::Component::Mesh::CubeColors);
     
     AddComponent(Geppetto::Component::Type::Shader);
     shader->CreateShader("shaders/cube.vertex", "shaders/cube.fragment");

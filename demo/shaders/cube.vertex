@@ -3,7 +3,7 @@ uniform vec3 pos;
 vec4 lightPos = vec4(0.0, 0.0, 100.0, 1.0);
 vec3 lightColor = vec3(1.0, 1.0, 1.0);
 
-vec3 color = vec3(1.0, 0.0, 0.0);
+vec4 color = gl_Color;
 
 void main(void)
 {
@@ -13,7 +13,7 @@ void main(void)
     vec3 light = normalize(lightPos.xyz - worldCoord);
     vec3 halfLightView = normalize(light + normalize((vec3(0, 0, 0) - worldCoord)));
     
-    vec3 diffuse = max(dot(normal, light), 0.0) * color * lightColor;
+    vec3 diffuse = max(dot(normal, light), 0.0) * color.xyz * lightColor;
     float specular = pow(max(dot(normal, halfLightView), 0.0), 256.0);
     diffuse += specular;
     

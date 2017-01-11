@@ -88,7 +88,7 @@ bool Game::Init()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glShadeModel(GL_FLAT); // GL_FLAT or GL_SMOOTH
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -174,6 +174,7 @@ void Game::Render()
                     
                     glEnableClientState(GL_VERTEX_ARRAY);
                     glEnableClientState(GL_NORMAL_ARRAY);
+                    glEnableClientState(GL_COLOR_ARRAY);
                     
                     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint) e->GetMesh()->GetIndexBuffer());
                     
@@ -183,11 +184,15 @@ void Game::Render()
                     glBindBuffer(GL_ARRAY_BUFFER, (GLuint) e->GetMesh()->GetNormalBuffer());
                     glNormalPointer(GL_FLOAT, 0, 0);
                     
+                    glBindBuffer(GL_ARRAY_BUFFER, (GLuint) e->GetMesh()->GetColorBuffer());
+                    glColorPointer(3, GL_FLOAT, 0, 0);
+                    
                     glDrawElements(type, e->GetMesh()->GetVertexCount(), GL_UNSIGNED_SHORT, 0);
                     glBindBuffer(GL_ARRAY_BUFFER, 0);
                     
-                    glDisableClientState(GL_NORMAL_ARRAY);
                     glDisableClientState(GL_VERTEX_ARRAY);
+                    glDisableClientState(GL_NORMAL_ARRAY);
+                    glDisableClientState(GL_COLOR_ARRAY);
                     
                 glPopMatrix();
             }
