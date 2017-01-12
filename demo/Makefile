@@ -17,6 +17,7 @@ OBJECTS= main.o \
 game.o \
 stage.o \
 cube.o \
+planet.o \
 player.o \
 $(GEPPETTO)/components/component_base.o \
 $(GEPPETTO)/components/camera.o \

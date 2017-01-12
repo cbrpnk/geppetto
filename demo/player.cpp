@@ -9,14 +9,16 @@ Entity::Entity("Player", "Player")
     rotation_speed = 0.09f;
     zoomLevel = 0;
     
-    position.y = 25;
+    position.x = 0.0f;
+    position.y = 5.0f;
+    position.z = 0.0f;
     Rotate(45.0f, 0.0f, 0.0f);
     
     AddComponent(Geppetto::Component::Type::Physics);
     physics->SetFrictionCoefficient(0.15f);
     
     AddComponent(Geppetto::Component::Type::Camera);
-    camera->SetPosition(Geppetto::Math::Vec3(0.0f, 2.0f, 0.0f));
+    camera->SetPosition(Geppetto::Math::Vec3(0.0f, 0.0f, 0.0f));
     
     AddComponent(Geppetto::Component::Type::UserInput);
     

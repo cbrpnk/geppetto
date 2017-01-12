@@ -3,10 +3,10 @@
 #include "../geppetto/geppetto.h"
 #include "stage.h"
 #include "player.h"
-#include "cube.h"
+#include "planet.h"
 
 
-const size_t Stage::NCubes = 50;
+const size_t Stage::NCubes = 1;
 
 
 Stage::Stage() : Geppetto::Stage("Stage")
@@ -14,9 +14,9 @@ Stage::Stage() : Geppetto::Stage("Stage")
     new Player();
     
     // Create cubes
-    for(size_t i=0; i<Stage::NCubes; ++i) {
-        new Cube("Cube" + std::to_string(i));
-    }
+    //for(size_t i=0; i<Stage::NCubes; ++i) {
+    new Planet("Panet");
+    //}
 }
 
 
